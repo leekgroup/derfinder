@@ -21,13 +21,13 @@ get.pvals = function(regions, dbfile, tablename, num.perms = 1, group, est.param
 	
 	for(i in 1:num.perms){
 		group.permute = sample(group)
-		print("getting limma input...")
+		#print("getting limma input...")
 		limma.input = getLimmaInput(dbfile = dbfile, tablename = tablename, group = group.permute, colsubset = colsubset)
-		print("finding t statistics...")
+		#print("finding t statistics...")
 		tstats = getTstats(fit = limma.input$ebobject, trend = TRUE)
 		tt = tstats$tt
 		logfchange = tstats$logfchange
-		print("getting regions...")
+		#print("getting regions...")
 		regions.null = getRegions(method = "HMM", chromosome = chromosome, pos = limma.input$pos, tstats = tt, stateprobs = est.params$stateprobs, params = est.params$params, includet = TRUE, includefchange = TRUE, fchange = logfchange)
 		nullstats = append(nullstats, regions.null$states$mean.t[regions.null$states$state==3|regions.null$states$state==4])
 	}
