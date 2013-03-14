@@ -34,7 +34,7 @@ get.pvals = function(regions, dbfile, tablename, num.perms = 1, group, est.param
 	
 	pvals = rep(NA,dim(regions)[1])
 	for(k in which(regions$state==3|regions$state==4)){
-		pvals[k] = (sum(abs(nullstats)>abs(regions$mean.t[k]))+1)/length(nullstats)
+		pvals[k] = (sum(abs(nullstats)>abs(regions$mean.t[k]))+1)/(length(nullstats)+1)
 	}
 
 	return(pvals)
