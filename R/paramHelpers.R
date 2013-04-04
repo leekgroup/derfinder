@@ -206,7 +206,7 @@ find.sd <- function(prev.p, found.mean, null.mean, null.sd, null.prop, vals, up=
 		if(!up) return(gp$DEdown.sd)
 	}
 	sigma = (cutoff.val - found.mean)/zstat
-    if(num.alts.above<=0 | sigma<=0) {
+    if(num.alts.above<=0 | sigma<=0) {
 		warning("Numerical standard deviation estimation failed. Defaulting to sd of estimated null distribution.")
 		gp = getParams.failsafe(null.mean, null.sd)
 		if(up) return(gp$DEup.sd)
