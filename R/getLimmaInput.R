@@ -1,3 +1,4 @@
+# Minor modification: do not read in all the medians from the columns that won't be used later on
 
 ## updated 7/23/12 AF
 ## database file (containing filtered coverage) --> precursors to eBayes/getting moderated t-statistics.
@@ -35,16 +36,19 @@ function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsub
 	# create model matrix:
 	ncol = length(tab[1,])
 	colmeds = NULL
-	for(i in 2:ncol){
+	
+	colsToCheck <- 2:ncol
+	if(length(colsubset) > 1) colsToCheck <- colsubset
+	for(i in colsToCheck){
 		if(nonzero){
 			eval(parse(text = paste("med = median(tab[,", i, "]$",names(tab[, i]),"[tab[,",i,"]$",names(tab[, i]),"!=0]", ")", sep = "")))
 		}
 		if(!nonzero){
 			eval(parse(text=paste("med = median(tab[,",i,"]$",names(tab[,i]),")",sep="")))
 		}
-		colmeds[i-1] = med
+		colmeds <- c(colmeds, med)
 	} #get median of each column to use as adjustment variable
-	if(length(colsubset)>1) colmeds = colmeds[colsubset-1]
+	#if(length(colsubset)>1) colmeds = colmeds[colsubset-1]
 	if(!is.null(adjustvars)){
 		string1 = ""
 		for(i in 1:dim(adjustvars)[2]){
@@ -55,7 +59,7 @@ function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsub
 	}else{x = model.matrix(~group+colmeds)}	
 	
 	# make sure colsubset will work in the next part:
-	if(colsubset==c(-1)) colsubset <- c(2:ncol)
+	if(colsubset[1]==c(-1) & length(colsubset) == 1) colsubset <- c(2:ncol)
 	
 	# define modeling function to apply to each chunk:
 	lmFit.apply = function(i){
