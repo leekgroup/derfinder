@@ -12,7 +12,7 @@
 ## return:  a vector of length = nrow(regions), giving a p-value for each region in regions that is of state 3 or 4 (DE).  (regions of state 1 or 2 are assigned NA)
 
 
-get.pvals = function(regions, dbfile, tablename, num.perms = 1, group, est.params, chromosome, colsubset = c(-1)){
+get.pvals = function(regions, dbfile, tablename, num.perms = 1, group, est.params, chromosome, colsubset = c(-1), adjustvars=NULL, nonzero=FALSE, scalefac=32, chunksize=1e+05){
 	# ... should indicate other arguments needed for:
 	# getLimmaInput, getTstats, getRegions
 	# FIX COLSUBSET + other non-required arguments...
@@ -22,7 +22,7 @@ get.pvals = function(regions, dbfile, tablename, num.perms = 1, group, est.param
 	for(i in 1:num.perms){
 		group.permute = sample(group)
 		#print("getting limma input...")
-		limma.input = getLimmaInput(dbfile = dbfile, tablename = tablename, group = group.permute, colsubset = colsubset)
+		limma.input = getLimmaInput(dbfile = dbfile, tablename = tablename, group = group.permute, colsubset=colsubset, adjustvars=adjustvars, nonzero=nonzero, scalefac=scalefac, chunksize=chunksize)
 		#print("finding t statistics...")
 		tstats = getTstats(fit = limma.input$ebobject, trend = TRUE)
 		tt = tstats$tt
@@ -34,7 +34,7 @@ get.pvals = function(regions, dbfile, tablename, num.perms = 1, group, est.param
 	
 	pvals = rep(NA,dim(regions)[1])
 	for(k in which(regions$state==3|regions$state==4)){
-		pvals[k] = (sum(abs(nullstats)>abs(regions$mean.t[k]))+1)/(length(nullstats)+1)
+		pvals[k] = (sum(abs(nullstats)>abs(regions$mean.t[k]))+1)/length(nullstats)
 	}
 
 	return(pvals)
