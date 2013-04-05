@@ -5,7 +5,7 @@ Version: 1.0.1
 Date: 2013-04-04
 Author: Alyssa Frazee, Leonardo Collado-Torres, Jeffrey Leek
 Maintainer: Who to complain to <yourfault@somewhere.net>
-Depends: R(>= 2.15.2), GenomicFeatures, Genominator, rtracklayer, limma, multicore, HiddenMarkov, DNAcopy, sva, genefilter, splines, locfdr, proto, DBI, chron, RSQlite, RSQLite.extfuns
+Depends: R(>= 2.15.2), GenomicFeatures, Genominator, rtracklayer, limma, multicore, HiddenMarkov, DNAcopy, sva, genefilter, splines, locfdr, proto, DBI, chron, RSQLite, RSQLite.extfuns
 Suggests: gsubfn
 Description: Differential expression analysis of RNA-seq data at base-pair resolution
 License: What license is it under?
