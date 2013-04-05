@@ -8,11 +8,16 @@
 ## est.params:  the return of getParams() on the original t-statistics
 ## chromosome:  which chromosome are you analyzing? 
 ## colsubset: optional, used if you aren't using all the samples in dbfile
+## adjustvars: if desired, an nxp matrix of adjustment variables (confounders, SVA output, etc.)
+## nonzero:  if TRUE, library size adjustment is median of nonzero counts.  If FALSE, library size adjustment is median of all counts.
+## scalefac: how much should counts in the table be offset by before taking the log (to avoid taking log(0))? Default 32.
+
+## colmeds: vector with the column medians or NULL if you want to calculate them this time around. To save computing time, you might want to calculate them once with getColmeds().
 
 ## return:  a vector of length = nrow(regions), giving a p-value for each region in regions that is of state 3 or 4 (DE).  (regions of state 1 or 2 are assigned NA)
 
 
-get.pvals = function(regions, dbfile, tablename, num.perms = 1, group, est.params, chromosome, colsubset = c(-1), adjustvars=NULL, nonzero=FALSE, scalefac=32, chunksize=1e+05){
+get.pvals = function(regions, dbfile, tablename, num.perms = 1, group, est.params, chromosome, colsubset = c(-1), adjustvars=NULL, nonzero=FALSE, scalefac=32, chunksize=1e+05, colmeds=NULL){
 	# ... should indicate other arguments needed for:
 	# getLimmaInput, getTstats, getRegions
 	# FIX COLSUBSET + other non-required arguments...
@@ -20,9 +25,16 @@ get.pvals = function(regions, dbfile, tablename, num.perms = 1, group, est.param
 	nullstats = NULL
 	
 	for(i in 1:num.perms){
-		group.permute = sample(group)
+		idx.permute <- sample(1:length(group))
+		group.permute = group[idx.permute]
+		if(!is.null(colmeds)) {
+			colmeds.permute <- colmeds[idx.permute]
+		} else {
+			colmeds.permute <- NULL
+		}
+		
 		#print("getting limma input...")
-		limma.input = getLimmaInput(dbfile = dbfile, tablename = tablename, group = group.permute, colsubset=colsubset, adjustvars=adjustvars, nonzero=nonzero, scalefac=scalefac, chunksize=chunksize)
+		limma.input = getLimmaInput(dbfile = dbfile, tablename = tablename, group = group.permute, colsubset=colsubset, adjustvars=adjustvars, nonzero=nonzero, scalefac=scalefac, chunksize=chunksize, colmeds=colmeds.permute)
 		#print("finding t statistics...")
 		tstats = getTstats(fit = limma.input$ebobject, trend = TRUE)
 		tt = tstats$tt

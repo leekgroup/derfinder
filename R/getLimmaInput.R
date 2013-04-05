@@ -14,6 +14,7 @@
 ## --colsubset: if desired, column indices of the input file of the samples you wish to include in analysis. Should NOT include 1 (pos).
 ## --scalefac: how much should counts in the table be offset by before taking the log (to avoid taking log(0))? Default 32.
 ## --nonzero:  if TRUE, library size adjustment is median of nonzero counts.  If FALSE, library size adjustment is median of all counts.
+## --colmeds: vector with the column medians or NULL if you want to calculate them this time around. To save computing time, you might want to calculate them once with getColmeds().
 ## return:
 ## a list containing elements $ebobject, which is a list mimicking the output of running lmFit on the whole dataset,
 ## and $pos, giving the row indices of all the positions on the chromosome passing the filtering criterion (i.e. bases with nontrivial coverage)
@@ -22,7 +23,7 @@
 
 
 getLimmaInput =
-function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsubset = c(-1), scalefac = 32, nonzero = FALSE){
+function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsubset = c(-1), scalefac = 32, nonzero = FALSE, colmeds=NULL){
 	require(limma)
 	require(multicore)
 	require(Genominator)
@@ -35,20 +36,12 @@ function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsub
 
 	# create model matrix:
 	ncol = length(tab[1,])
-	colmeds = NULL
+		
+	## Get the medians of the columns of interest if they are not given
+	if(is.null(colmeds)){
+		colmeds <- getColmeds(dbfile=dbfile, tablename=tablename, colsubset=colsubset, nonzero=nonzero)
+	}
 	
-	colsToCheck <- 2:ncol
-	if(length(colsubset) > 1) colsToCheck <- colsubset
-	for(i in colsToCheck){
-		if(nonzero){
-			eval(parse(text = paste("med = median(tab[,", i, "]$",names(tab[, i]),"[tab[,",i,"]$",names(tab[, i]),"!=0]", ")", sep = "")))
-		}
-		if(!nonzero){
-			eval(parse(text=paste("med = median(tab[,",i,"]$",names(tab[,i]),")",sep="")))
-		}
-		colmeds <- c(colmeds, med)
-	} #get median of each column to use as adjustment variable
-	#if(length(colsubset)>1) colmeds = colmeds[colsubset-1]
 	if(!is.null(adjustvars)){
 		string1 = ""
 		for(i in 1:dim(adjustvars)[2]){
@@ -56,7 +49,9 @@ function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsub
 			string1 = paste(string1, paste("av",i,sep=""),sep="+")
 		}
 		eval(parse(text=paste("x = model.matrix(~group+colmeds",string1,")",sep="")))
-	}else{x = model.matrix(~group+colmeds)}	
+	} else {
+		x = model.matrix(~group+colmeds)
+	}	
 	
 	# make sure colsubset will work in the next part:
 	if(colsubset[1]==c(-1) & length(colsubset) == 1) colsubset <- c(2:ncol)
