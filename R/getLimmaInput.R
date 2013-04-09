@@ -58,11 +58,11 @@ function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsub
 	
 	# define modeling function to apply to each chunk:
 	lmFit.apply = function(i){
-  		if(i!=lastloop) mymat <- tab[(chunksize*i+1):(chunksize*(i+1)),-1][,colsubset-1] 
-  		else mymat <- tab[(chunksize*i+1):N,-1][,colsubset-1] 
-  		mymat <- log2(mymat+scalefac)
+  		if(i!=lastloop) mymat <- tab[(chunksize * i + 1):(chunksize * (i + 1)), -1][, colsubset - 1] 
+  		else mymat <- tab[(chunksize * i + 1):N, -1][, colsubset - 1] 
+  		mymat <- log2(mymat + scalefac)
   		Amean <- rowMeans(mymat) 
-  		fit <- lmFit(mymat,x)
+  		fit <- lmFit(mymat, x)
   		return(list(fit=fit, Amean=Amean))
   		}
 	

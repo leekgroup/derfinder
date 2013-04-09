@@ -26,15 +26,29 @@ get.pvals = function(regions, dbfile, tablename, num.perms = 1, group, est.param
 	
 	for(i in 1:num.perms){
 		idx.permute <- sample(1:length(group))
-		group.permute = group[idx.permute]
+		group.permute <- group[idx.permute]
 		if(!is.null(colmeds)) {
 			colmeds.permute <- colmeds[idx.permute]
 		} else {
 			colmeds.permute <- NULL
 		}
 		
+		## Correctly use the adjusted vars and colsubset according ot the permutation if they were specified
+		if(!is.null(adjustvars)) {
+			adjustvars.permute <- adjustvars[idx.permute, ]
+		} else {
+			adjustvars.permute <- NULL
+		}
+		if(colsubset[1]==c(-1) & length(colsubset) == 1) {
+			## This is the case where the user wants to ignore the pos data (1st column), but we need to pass the permutation info to getLimmaInput()
+			colsubset.permute <- (1:length(group) + 1)[idx.permute]
+		} else {
+			colsubset.permute <- colsubset[idx.permute]	
+		}
+		
+		
 		#print("getting limma input...")
-		limma.input = getLimmaInput(dbfile = dbfile, tablename = tablename, group = group.permute, colsubset=colsubset, adjustvars=adjustvars, nonzero=nonzero, scalefac=scalefac, chunksize=chunksize, colmeds=colmeds.permute)
+		limma.input = getLimmaInput(dbfile = dbfile, tablename = tablename, group = group.permute, colsubset=colsubset.permute, adjustvars=adjustvars.permute, nonzero=nonzero, scalefac=scalefac, chunksize=chunksize, colmeds=colmeds.permute)
 		#print("finding t statistics...")
 		tstats = getTstats(fit = limma.input$ebobject, trend = TRUE)
 		tt = tstats$tt
