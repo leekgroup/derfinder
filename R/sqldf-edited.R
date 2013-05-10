@@ -2,6 +2,50 @@
 # arguments and return are exactly the same as read.csv.sql() in the sqldf package
 # the only difference is that Tcl/Tk is NOT ALLOWED.
 
+
+
+#'main workhorse of makeDb
+#'
+#'Edited version of \code{read.csv.sql} in the \code{sqldf} package
+#'(\code{tcltk} functionality removed), used mainly to create a SQLite database
+#'from a text file. The function \code{makeDb} wraps this function in the
+#'tornado package, so no need to execute this directly.
+#'
+#'This function is entirely wrapped by \code{makeDb} -- experienced users may
+#'use this for debugging, but otherwise not usually necessary to call directly.
+#'
+#'@param file A file path or a URL (beginning with \code{http://} or
+#'\code{ftp://}). If the \code{filter} argument is used and no file is to be
+#'input to the filter then \code{file} can be omitted, \code{NULL}, \code{NA}
+#'or \code{""}. The \code{textfile} argument from \code{makeDb} is used here.
+#'@param sql character string holding an SQL statement. The table representing
+#'the file should be referred to as \code{file}.
+#'@param header as in \code{read.csv}
+#'@param sep as in \code{read.csv}
+#'@param row.names as in \code{read.csv}
+#'@param eol Character that ends lines
+#'@param skip Skip indicated number of lines in input file.
+#'@param filter see \code{read.csv.sql} in \code{sqldf}
+#'@param nrows Number of rows used to determine column types. It defaults to
+#'50. Using -1 causes it to use all rows for determining column types. This
+#'argument is rarely needed.
+#'@param field.types A list whose names are the column names and whose contents
+#'are the SQLite types (not the R class names) of the columns. Specifying these
+#'types improves how fast it takes. Unless speed is very important this
+#'argument is not normally used.
+#'@param comment.char If specified this character and anything following it on
+#'any line of the input will be ignored.
+#'@param dbname As in \code{sqldf} except that the default is
+#'\code{tempfile()}. Specifying NULL will put the database in memory which may
+#'improve speed but will limit the size of the database by the available
+#'memory. When using tornado, \code{tempfile()} is not used: \code{dbname} must
+#'be provided as an argument to \code{makeDb}.
+#'@param drv ignored: the only drive used can be SQLite.
+#'@param \dots arguments passed to \code{sqldf}.
+#'@return If the sql statement is a select statement then a data frame is
+#'returned. In tornado, this is never the case.
+#'@seealso \code{\link{makeDb}}
+#'@references http://cran.r-project.org/web/packages/sqldf/sqldf.pdf
 read.csv.sql <- function (file, sql = "select * from file", header = TRUE, sep = ",", 
     row.names, eol, skip, filter, nrows, field.types, comment.char, 
     dbname = tempfile(), drv = "SQLite", ...) 
@@ -41,6 +85,46 @@ read.csv.sql <- function (file, sql = "select * from file", header = TRUE, sep =
 
 
 ####################################################################################
+
+
+#'helper function for read.csv.sql
+#'
+#'The same as \code{strapply} in the \code{gsubfn} package, but with
+#'\code{tcltk} capabilities removed.
+#'
+#'See details in \code{gsubfn} package.
+#'
+#'@param X list or (atomic) vector of character strings to be used
+#'@param pattern character string containing a regular (or character string for
+#'\code{fixed=TRUE} to be matched in the given character vector.
+#'@param FUN a function, formula, character string, list or proto object to be
+#'applied to each element of \code{X}. See discussion in \code{\link{gsubfn}.}
+#'@param backref see \code{gsubfn}
+#'@param \dots optional arguments to \code{gsubfn}
+#'@param empty If there is no match to a string return this value.
+#'@param ignore.case If TRUE then case is ignored in the \code{pattern}
+#'argument.
+#'@param perl If TRUE then \code{engine="R"} is used with perl regular
+#'expressions.  It is required to keep this argument at TRUE, since \code{tcl}
+#'engine capabilities have been removed from this function.
+#'@param engine Should always be set to \code{"R"}, since the \code{tcl} engine
+#'is not available in the tornado package.
+#'@param simplify logical or function. If logical, should the result be
+#'simpliﬁed to a vector or matrix, as in \code{sapply} if possible? If
+#'function, that function is applied to the result with each component of the
+#'result passed as a separate argument. Typically if the form is used it will
+#'typically be speciﬁed as rbind.
+#'@param USE.NAMES logical; if \code{TRUE} and if \code{X} is character, use
+#'\code{X} as ’names’ for the result unless it had names already.
+#'@param combine combine is a function applied to the components of the result
+#'of \code{FUN}. The default is \code{"c"}. \code{"list"} is another common
+#'choice. The default may change to be \code{"list"} in the future.
+#'@return A list of character strings
+#'@note Does not need to be used directly in tornado; \code{makeDb} wraps this
+#'entirely.
+#'@author G. Grothendieck
+#'@seealso \code{\link{makeDb}}
+#'@references http://cran.r-project.org/web/packages/gsubfn/gsubfn.pdf
 strapply <- function (X, pattern, FUN = function(x, ...) x, backref = NULL, 
     ..., empty = NULL, ignore.case = FALSE, perl = TRUE, engine = "R", 
     simplify = FALSE, USE.NAMES = FALSE, combine = c) 
@@ -93,6 +177,25 @@ strapply <- function (X, pattern, FUN = function(x, ...) x, backref = NULL,
 
 ################################################################################################
 
+
+
+#'Generic extended version of R match.fun
+#'
+#'A generic \code{match.fun}.
+#'
+#'The default method is the same as \code{match.fun} and the \code{formula}
+#'method is the same as \code{as.function.formula}.  This function can be used
+#'within the body of a function to convert a function specification whether its
+#'a function, character string or formula into an actual function.
+#'
+#'@param FUN Function, character name of function or formula describing
+#'function.
+#'@param descend logical; control whether to search past non-function objects.
+#'@return Returns a function.
+#'@note This is exactly the same as \code{match.funfn} in the \code{gsubfn}
+#'package.  Do not load the \code{gsubfn} package to use this function, as
+#'\code{gsubfn} loads \code{tcltk}, which is not advised.
+#'@author G. Grothendieck
 match.funfn <- function (FUN, descend = TRUE) 
 {
     if (is.function(FUN)) 
@@ -118,6 +221,40 @@ match.funfn <- function (FUN, descend = TRUE)
 
 ################################################################################################
 
+
+
+#'helper function for read.csv.sql
+#'
+#'Same as the \code{strapply} or \code{ostrapply} functions in \code{gsubfn}
+#'package, but with \code{tcltk} capabilities removed.
+#'
+#'See \code{strapply} in \code{gsubfn}.  In the tornado package this function
+#'should rarely be called on its own.  It is an internal process of
+#'\code{read.csv.sql}, which is an internal process of \code{makeDb}.
+#'
+#'@param X list or (atomic) vector of character strings to be used
+#'@param pattern character string containing a regular (or character string for
+#'\code{fixed=TRUE} to be matched in the given character vector.
+#'@param FUN a function, formula, character string, list or proto object to be
+#'applied to each element of \code{X}. See discussion in \code{\link{gsubfn}.}
+#'@param ignore.case If \code{TRUE} then case is ignored in the \code{pattern}
+#'argument.
+#'@param \dots optional arguments to \code{gsubfn}.
+#'@param empty If there is no match to a string return this value.
+#'@param simplify logical or function. If logical, should the result be
+#'simpliﬁed to a vector or matrix, as in \code{sapply} if possible? If
+#'function, that function is applied to the result with each component of the
+#'result passed as a separate argument. Typically if the form is used it will
+#'typically be speciﬁed as rbind.
+#'@param USE.NAMES logical; if \code{TRUE} and if \code{X} is character, use
+#'\code{X} as ’names’ for the result unless it had names already.
+#'@param combine combine is a function applied to the components of the result
+#'of \code{FUN}. The default is \code{"c"}. \code{"list"} is another common
+#'choice. The default may change to be \code{"list"} in the future.
+#'@return A list of character strings.
+#'@author G. Grothendieck
+#'@seealso \code{\link{makeDb}},\code{link{read.csv.sql}}
+#'@references http://cran.r-project.org/web/packages/gsubfn/gsubfn.pdf
 ostrapply <- function (X, pattern, FUN = function(x, ...) x, ignore.case = FALSE, 
     ..., empty = NULL, simplify = FALSE, USE.NAMES = FALSE, combine = c) 
 {
@@ -193,6 +330,70 @@ ostrapply <- function (X, pattern, FUN = function(x, ...) x, ignore.case = FALSE
 
 ################################################################################################
 
+
+
+#'helper function for read.csv.sql
+#'
+#'see \code{gsubfn} in \code{sqldf} package - this function is equivalent, but
+#'functionality requiring \code{tcltk} has been removed.
+#'
+#'If \code{replacement} is a string then it acts like \code{gsub}. If
+#'\code{replacement} is a function then each matched string is passed to the
+#'replacement function and the output of that function replaces the matched
+#'string in the result. The ﬁrst argument to the replacement function is the
+#'matched string and subsequent arguments are the backreferences, if any. If
+#'\code{replacement} is a list then the result of the regular expression match
+#'is, in turn, matched against the names of that list and the value
+#'corresponding to the ﬁrst name in the list that is match is returned. If
+#'there are no names matching then the ﬁrst unnamed component is returned and
+#'if there are no matches then the string to be matched is returned. If
+#'\code{backref} is not speciﬁed or is specified and is positive then the
+#'entire match is used to lookup the value in the list whereas if
+#'\code{backref} is negative then the identiﬁed backreference is used. If
+#'\code{replacement} is a formula instead of a function then a one line
+#'function is created whose body is the right hand side of the formula and
+#'whose arguments are the left hand side separated by + signs (or any other
+#'valid operator). The environment of the function is the environment of the
+#'formula. If the arguments are omitted then the free variables found on the
+#'right hand side are used in the order encountered. 0 can be used to indicate
+#'no arguments. \code{letters}, \code{LETTERS} and \code{pi} are never
+#'automatically used as arguments. If \code{replacement} is a proto object then
+#'it should have a \code{fun} method which is like the replacement function
+#'except its ﬁrst argument is the object and the remaining arguments are as in
+#'the replacement function and are affected by \code{backref} in the same way.
+#'\code{gsubfn} automatically inserts the named arguments in the call to
+#'\code{gsubfn} into the proto object and also maintains a \code{count}
+#'variable which counts matches within strings. The user may optionally specify
+#'\code{pre} and \code{post} methods in the proto object which are ﬁred at the
+#'beginning and end of each string (not each match). They each take one
+#'argument, the object. Note that if \code{backref} is non-negative then
+#'internally the pattern will be parenthesized. A utility function \code{cat0}
+#'is available. They are like \code{\link{cat}} and \code{\link{paste}} except
+#'that their default sep value is "".
+#'
+#'@param pattern Same as \code{pattern} in \code{gsub}
+#'@param replacement A character string, function, list, formula or proto
+#'object. See Details.
+#'@param x Same as \code{x} in \code{gsub}
+#'@param backref Number of backreferences to be passed to function. If zero or
+#'positive the match is passed as the ﬁrst argument to the replacement function
+#'followed by the indicated number of backreferences as subsequent arguments.
+#'If negative then only the that number of backreferences are passed but the
+#'match itself is not. If omitted it will be determined automatically, i.e. it
+#'will be 0 if there are no backreferences and otherwise it will equal negative
+#'the number of back references. It determines this by counting the number of
+#'non-escaped left parentheses in the pattern. Also if the function contains an
+#'ampersand as an argument then \code{backref} will be taken as non-negative
+#'and the ampersand argument will get the full match.
+#'@param USE.NAMES See \code{USE.NAMES} in \code{sapply}
+#'@param ignore.case If \code{TRUE} then case is ignored in the \code{pattern}
+#'argument.
+#'@param env Environment in which to evaluate the replacement function.
+#'Normally this is left at its default value.
+#'@param \dots Other \code{gsub} arguments
+#'@return as in \code{gsub}
+#'@author G. Grothendieck
+#'@seealso \code{\link{strapply}}
 gsubfn <- function (pattern, replacement, x, backref, USE.NAMES = FALSE, 
     ignore.case = FALSE, env = parent.frame(), ...) 
 {
@@ -300,6 +501,18 @@ gsubfn <- function (pattern, replacement, x, backref, USE.NAMES = FALSE,
 
 ################################################################################################
 
+
+
+#'helper function for read.csv.sql
+#'
+#'used internally by read.csv.sql, which drives the \code{makeDb} function. Not
+#'necessary to call this function directly when using the tornado package.
+#'
+#'For arguments, value, and other information, see \code{sqldf} - this function
+#'is a direct copy of that function.
+#'
+#'@seealso \code{makeDb}
+#'@references http://cran.r-project.org/web/packages/sqldf/sqldf.pdf
 sqldf <- function (x, stringsAsFactors = FALSE, row.names = FALSE, envir = parent.frame(), 
     method = getOption("sqldf.method"), file.format = list(), 
     dbname, drv = getOption("sqldf.driver"), user, password = "", 
