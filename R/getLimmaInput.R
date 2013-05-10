@@ -1,3 +1,5 @@
+# updated to allow for not just testing one coefficient (i.e., now can test for expression [test intercept] or test multiple groups [F statistic]).
+
 # Minor modification: do not read in all the medians from the columns that won't be used later on
 
 ## updated 7/23/12 AF
@@ -23,7 +25,7 @@
 
 
 getLimmaInput =
-function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsubset = c(-1), scalefac = 32, nonzero = FALSE, colmeds=NULL){
+function(dbfile, tablename, comparison = c("twogroup", "multigroup", "expression"), group = NULL, chunksize = 100000, adjustvars = NULL, colsubset = c(-1), scalefac = 32, nonzero = FALSE, colmeds=NULL){
 	require(limma)
 	require(multicore)
 	require(Genominator)
@@ -35,13 +37,15 @@ function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsub
 	lastloop = trunc(N/chunksize)
 
 	# create model matrix:
-	ncol = length(tab[1,])
+	numcol = length(tab[1,])
 		
-	## Get the medians of the columns of interest if they are not given
-	if(is.null(colmeds)){
+	## Get the medians of the columns of interest if they are not given, and if you are doing differential expression:
+	if(is.null(colmeds) & comparison!="expression"){
 		colmeds <- getColmeds(dbfile=dbfile, tablename=tablename, colsubset=colsubset, nonzero=nonzero)
 	}
 	
+  if(!is.null(adjustvars) & comparison=="expression") stop("expression-only test does not require adjustment variables - please set adjustvars = NULL when using comparison = \"expression\"")
+  
 	if(!is.null(adjustvars)){
 		string1 = ""
 		for(i in 1:dim(adjustvars)[2]){
@@ -50,11 +54,18 @@ function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsub
 		}
 		eval(parse(text=paste("x = model.matrix(~group+colmeds",string1,")",sep="")))
 	} else {
-		x = model.matrix(~group+colmeds)
+    if(comparison == "expression"){ 
+      numsamps = ifelse(is.null(colsubset), numcol-1, length(colsubset))
+      int = rep(1, numsamps)
+      x = model.matrix(~0+int) #intercept-only model, in model.matrix form.
+    }
+		if(comparsion == "twogroup" | comparison == "multigroup"){
+      x = model.matrix(~as.factor(group)+colmeds)
+		}
 	}	
 	
 	# make sure colsubset will work in the next part:
-	if(colsubset[1]==c(-1) & length(colsubset) == 1) colsubset <- c(2:ncol)
+	if(colsubset[1]==c(-1) & length(colsubset) == 1) colsubset <- c(2:numcol)
 	
 	# define modeling function to apply to each chunk:
 	lmFit.apply = function(i){
@@ -84,6 +95,6 @@ function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsub
   		dfres = append(dfres, lmFit.output[[i]]$fit$df.residual)
   		am = append(am, lmFit.output[[i]]$Amean)
 	}
-	return(list(ebobject = list(coefficients = as.numeric(coef), stdev.unscaled = as.numeric(stdev), sigma = sma, df.residual = dfres, Amean = am), pos = pos))
+	return(list(ebobject = list(coefficients = as.numeric(coef), stdev.unscaled = as.numeric(stdev), sigma = sma, df.residual = dfres, Amean = am), pos = pos, comparison = comparison))
 	
 }
