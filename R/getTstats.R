@@ -10,7 +10,7 @@
 
 
 
-#'calculate moderated t statistic for each nucleotide
+#'Calculate moderated t statistic for each nucleotide
 #'
 #'Modified (slimmed down) version of limma's eBayes, which uses a shrinkage
 #'approach to moderate t statistics from tests for differential expression
@@ -22,17 +22,17 @@
 #'$ebobject item), a more memory-efficient version of lmFit.
 #'@param trend as in eBayes, if TRUE, allow an intensity trend in the priors of
 #'variances (across genes/bps)
-#'@return list with elements
-#'@returnItem tt moderated t statistics for each gene/bp
-#'@returnItem logfchange estimated log2 fold change on coverage between the
-#'groups, as estimated by a linear model
+#'@return A list with elements
+#'\item{tt}{moderated t statistics for each gene/bp}
+#'\item{logfchange}{estimated log2 fold change on coverage between the groups, as estimated by a linear model}
 #'@author Alyssa Frazee
+#'@export
 #'@seealso \code{\link{getLimmaInput}}
 #'@references Smyth G (2004).  “Linear models and empirical Bayes methods for
 #'assessing differential expression in microarray experiments.” Statistical
 #'Applications in Genetics and Molecular Biology 3(1): Article 3.
-getTstats = 
-function(fit, trend = FALSE){
+
+getTstats <- function(fit, trend = FALSE){
 	require(limma)
 	# get d0 and s02 (prior parameters)
 	sg2 <- fit$sigma^2

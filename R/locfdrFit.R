@@ -10,7 +10,7 @@
 
 
 
-#'modified version of Efron's locfdr
+#'Modified version of Efron's locfdr
 #'
 #'Compute local false discovery rates, following the definitions and
 #'description in references listed below. Exactly the same as \code{locfdr},
@@ -69,48 +69,20 @@
 #'\code{getParams}.
 #'@return See the \code{locfdr} manual for returned values. \code{locfdrFit}
 #'returns the following additional elements:
-#'@returnItem yt bin heights
-#'@returnItem mlest.lo if a warning that \code{mlest} should be used in a
-#'re-run of \code{locfdrFit}, the suggested first element of \code{mlest}.
-#'@returnItem mlest.hi if a warning that \code{mlest} should be used in a
-#'re-run of \code{locfdrFit}, the suggested second element of \code{mlest}.
-#'@returnItem needsfix 0 if no warning to fix the run with \code{mlest}
-#'parameters, 1 otherwise
-#'@returnItem nulldens a rough estimate of y-axis values for f0(x)
-#'@returnItem fulldens a rough estimate of y-axis values for f(x)
+#'\item{yt }{bin heights}
+#'\item{mlest.lo }{if a warning that \code{mlest} should be used in a re-run of \code{locfdrFit}, the suggested first element of \code{mlest}.}
+#'\item{mlest.hi }{if a warning that \code{mlest} should be used in a re-run of \code{locfdrFit}, the suggested second element of \code{mlest}.}
+#'\item{needsfix }{0 if no warning to fix the run with \code{mlest} parameters, 1 otherwise}
+#'\item{nulldens }{a rough estimate of y-axis values for f0(x)}
+#'\item{fulldens }{a rough estimate of y-axis values for f(x)}
 #'@author Bradley Efron, slight modifications by Alyssa Frazee
+#'@export
 #'@seealso \code{getParams}
 #'@references http://cran.r-project.org/web/packages/locfdr/locfdr.pdf
-locfdrFit <-
-function (zz, bre = 120, df = 7, pct = 0, pct0 = 1/4, nulltype = 1, 
-    type = 0, plot = 1, mult, mlests, main = " ", sw = 0, verbose=T) 
-{
+locfdrFit <- function (zz, bre = 120, df = 7, pct = 0, pct0 = 1/4, nulltype = 1, type = 0, plot = 1, mult, mlests, main = " ", sw = 0, verbose=T) {
 	require(locfdr)
-
-
-#'helper function for locfdrFit
-#'
-#'used only internally in \code{locfdrFit}, equivalent to
-#'\code{locfdr:::locmle}
-#'
-#'This is an internal function of the \code{locfdr} package, so documentation
-#'is not available.
-#'
-#'@author Bradley Efron
-#'@seealso \code{\link{locfdr}}
-	locmle = locfdr:::locmle
-
-
-#'helper function for locfdrFit
-#'
-#'used only internally in \code{locfdrFit}, equivalent to
-#'\code{locfdr:::loccov2}
-#'
-#'This is an internal function of the \code{locfdr} package, so documentation
-#'is not available.
-#'
-#'@author Bradley Efron
-#'@seealso \code{\link{locfdr}}
+	
+	locmle = locfdr:::locmle	
 	loccov2 = locfdr:::loccov2
 	loccov = locfdr:::loccov 
 	mlest.lo <- mlest.hi <- yt <- x <- NULL

@@ -27,13 +27,14 @@
 #'@author Alyssa Frazee. Code split from getLimmaInput by Leonardo
 #'Collado-Torres.
 #'@seealso \code{\link{getLimmaInput}}
+#'@export
 #'@examples
 #'
 #'## add example here when we have a vignette
 #'
 getColmeds <- function(dbfile, tablename, colsubset=c(-1), nonzero=FALSE) {
 	## Load libraries
-	library(Genominator)
+	require(Genominator)
 	
 	## Define the database to use
 	tab <- ExpData(dbfile, tablename)

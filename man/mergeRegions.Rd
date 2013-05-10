@@ -1,29 +1,29 @@
 \name{mergeRegions}
 \alias{mergeRegions}
-\title{
-Merge close regions
-}
-\description{
-Regions of the same state that are fewer than 5bp apart from each other are merged.
-}
+\title{Merge close regions}
 \usage{
-mergeRegions(regions, cutoff = 6)
+  mergeRegions(regions, cutoff = 6)
 }
 \arguments{
-  \item{regions}{
-data frame of regions, usually the \code{$state} return of \code{getRegions}
-}
-  \item{cutoff}{
-How far apart do regions need to be in order to *not* be merged?  (Defaults to 6, meaning that regions fewer than 5bp apart *are* merged).
-}
+  \item{regions}{data frame of regions, usually the
+  \code{$state} return of \code{getRegions}}
+
+  \item{cutoff}{How far apart do regions need to be in
+  order to *not* be merged?  (Defaults to 6, meaning that
+  regions fewer than 5bp apart *are* merged).}
 }
 \value{
-data frame (comparable to \code{regions} input) with close regions merged.
+  data frame (comparable to \code{regions} input) with
+  close regions merged.
+}
+\description{
+  Regions of the same state that are fewer than 5bp apart
+  from each other are merged.
 }
 \author{
-Alyssa Frazee
+  Alyssa Frazee
+}
+\seealso{
+  \code{\link{getRegions}}
 }
 
-\seealso{
-\code{\link{getRegions}}
-}

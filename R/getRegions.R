@@ -24,7 +24,7 @@
 
 
 
-#'generate list of regions, classify each as differentially expressed or not
+#'Generate list of regions, classify each as differentially expressed or not
 #'
 #'Using one of three methods, divides the genome (or chromosome) into regions
 #'by putting each nucleotide into a state and grouping contiguous nucleotides
@@ -71,18 +71,14 @@
 #'changes from the linear models - should have length equal to that of
 #'\code{tstats}. Usually obtained from the \code{logfchange} element of the
 #'output of \code{getTstats}.
-#'@return a list with elements
-#'@returnItem states.norle data frame with one row per nucleotide, giving its
-#'genomic location and predicted hidden state
-#'@returnItem states data frame with one row per region, giving its genomic
-#'location, length, predicted hidden state, and (if applicable) average t
-#'statistic and/or fold change.
+#'@return A list with elements
+#'\item{states.norle }{data frame with one row per nucleotide, giving its genomic location and predicted hidden state}
+#'\item{states }{data frame with one row per region, giving its genomic location, length, predicted hidden state, and (if applicable) average t statistic and/or fold change.}
 #'@author Alyssa Frazee
+#'@export
 #'@seealso \code{\link{getTstats}}, \code{\link{getParams}}
-getRegions <-
-function(method, chromosome, pos, tstats, transprobs = c(0.999, 1e-12), stateprobs = NULL, 
-	params = NULL, K = 25, tcut = 2, includet=F, includefchange=F, fchange=NULL)
-{
+
+getRegions <- function(method, chromosome, pos, tstats, transprobs = c(0.999, 1e-12), stateprobs = NULL, params = NULL, K = 25, tcut = 2, includet=F, includefchange=F, fchange=NULL) {
   	if(method!="HMM" & method!="smoothcut" & method!="CBS") stop("Invalid method. Choices are HMM, smoothcut, or CBS")
   	if(sum(sort(pos)!=pos)>0) stop("pos (and probably t-statistics) improperly sorted")
     if (method == "HMM"){

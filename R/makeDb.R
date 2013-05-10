@@ -13,7 +13,7 @@
 
 
 
-#'create SQLite database from text file
+#'Create SQLite database from text file
 #'
 #'Dumps the contents of a table (saved as a text file) into a SQLite database,
 #'performing some filtering along the way.
@@ -35,8 +35,9 @@
 #'@note The workhorse of this function is a modified version of
 #'\code{\link{read.csv.sql}}, found in the \code{sqldf} package.
 #'@author Alyssa Frazee
-makeDb <- function(dbfile, textfile, tablename, sep = "\t", cutoff = 5){
+#'@export
 
+makeDb <- function(dbfile, textfile, tablename, sep = "\t", cutoff = 5){
 	cat(file=dbfile) #create empty file
 	column.names = as.character(as.matrix(read.table(textfile,sep=sep,nrows=1,header=F))) #get column names
 	#print(column.names)

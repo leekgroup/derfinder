@@ -52,11 +52,13 @@
 #'@param colmeds If NULL, the column medians are calculated using
 #'\code{\link{getColmeds}}. Otherwise, the output of \code{\link{getColmeds}}
 #'is expected.
-#'@return vector having length equal to the number of rows in \code{regions},
+#'@return A vector having length equal to the number of rows in \code{regions},
 #'giving a p-value for each region of state 3 or 4 in \code{regions}.
 #'@author Alyssa Frazee
+#'@export
 #'@seealso
 #'\code{\link{getLimmaInput}},\code{\link{getTstats}},\code{\link{getRegions}}
+
 get.pvals = function(regions, dbfile, tablename, num.perms = 1, group, est.params, chromosome, colsubset = c(-1), adjustvars=NULL, nonzero=FALSE, scalefac=32, chunksize=1e+05, colmeds=NULL){
 	# ... should indicate other arguments needed for:
 	# getLimmaInput, getTstats, getRegions

@@ -34,9 +34,9 @@
 
 
 
-#'plot pipeline data/results for a given gene
+#'Plot pipeline data/results for a given gene
 #'
-#'creates a 3-paneled plot of a selected gene: panel 1 = genomic position vs.
+#'Creates a 3-paneled plot of a selected gene: panel 1 = genomic position vs.
 #'raw coverage data, panel 2 = genomic position vs. moderated t statistic from
 #'linear model at that position, panel 3 = genomic position vs. predicted state
 #'for that position, with annotated exons overlaid.
@@ -115,10 +115,10 @@
 #'@note Provide exactly one of \code{ind} and \code{genename}. Recommendation
 #'is to provide \code{geneName}.
 #'@author Alyssa Frazee
+#'@export
 #'@seealso \code{\link{getRegions}}, \code{\link{makeDb}}
-plotGene =
-function(getRegionObject, ind=NULL, genename=NULL, tstats, pos, annotation, counts, group, bppad = 50, axpad = 50, prettyskips = T, skiplines = T, countsheader=F, countssep="\t", tabname = NULL, plotfile = NULL, width = 900, height = 750, plottitle = NULL, chromosome, legendloc="bottomleft", scalefac = 0.5, ylim = c(0,9))
-{
+
+plotGene <- function(getRegionObject, ind=NULL, genename=NULL, tstats, pos, annotation, counts, group, bppad = 50, axpad = 50, prettyskips = T, skiplines = T, countsheader=F, countssep="\t", tabname = NULL, plotfile = NULL, width = 900, height = 750, plottitle = NULL, chromosome, legendloc="bottomleft", scalefac = 0.5, ylim = c(0,9)) {
 	if(!all(c("states.norle","states") %in% names(getRegionObject))) stop("getRegionObject must be a list with elements \"states.norle\" and \"states\" - usually the return of getRegions()")
 	if(!all(c("chr","start","end") %in% names(getRegionObject$states))) stop("getRegionObject \"states\" component must contain chr, start, and end")
 	if(!all(c("chr","start","end")%in%colnames(annotation))) stop("annotation must contain columns named chr, start, and end")

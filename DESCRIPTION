@@ -2,11 +2,65 @@ Package: derfinder
 Type: Package
 Title: Differential expression analysis of RNA-seq data at base-pair resolution
 Version: 1.0.1
-Date: 2013-04-04
-Author: Alyssa Frazee, Jeffrey Leek
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Depends: R(>= 2.15.2), GenomicFeatures, Genominator, rtracklayer, limma, multicore, HiddenMarkov, DNAcopy, sva, genefilter, splines, locfdr, proto, DBI, chron, RSQLite, RSQLite.extfuns
-Suggests: gsubfn
-Description: Differential expression analysis of RNA-seq data at base-pair resolution
+Date: 2013-05-10
+Author: Alyssa Frazee, Leonardo Collado-Torres, Jeffrey Leek
+Maintainer: Alyssa Frazee <afrazee@jhsph.edu>
+Depends:
+    R(>= 2.15.2)
+Imports:
+    GenomicFeatures,
+    Genominator,
+    rtracklayer,
+    limma,
+    multicore,
+    HiddenMarkov,
+    DNAcopy,
+    sva,
+    genefilter,
+    splines,
+    locfdr,
+    proto,
+    DBI,
+    chron,
+    RSQLite,
+    RSQLite.extfuns
+Suggests:
+    gsubfn
+Description: Differential expression analysis of RNA-seq data at base-pair
+    resolution
 License: What license is it under?
 URL: https://github.com/alyssafrazee/derfinder
+Collate:
+    'derfinder.R'
+    'find.mean.R'
+    'find.mean.down.R'
+    'find.mean.up.R'
+    'find.sd.R'
+    'findclosest.ahead.R'
+    'findclosest.behind.R'
+    'get.numalts.R'
+    'get.pvals.R'
+    'getAnnotation.R'
+    'getColmeds.R'
+    'getExons.R'
+    'getFlags.R'
+    'getLimmaInput.R'
+    'getParams.R'
+    'getParams.failsafe.R'
+    'getRegions.R'
+    'getSvs.R'
+    'getTstats.R'
+    'gsubfn.R'
+    'last.R'
+    'locfdrFit.R'
+    'makeDb.R'
+    'match.funfn.R'
+    'mergeRegions.R'
+    'ostrapply.R'
+    'plotExon.R'
+    'plotGene.R'
+    'plotRegion.R'
+    'read.csv.sql.R'
+    'sqldf.R'
+    'strapply.R'
+    'supportedTables.R'

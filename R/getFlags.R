@@ -8,10 +8,9 @@
 
 
 
-
-#'flag regions with genomic events of interest
+#'Flag regions with genomic events of interest
 #'
-#'connects results of tornado pipeline to existing annotation as a way to
+#'Connects results of tornado pipeline to existing annotation as a way to
 #'determine which regions may point to interesting biological events.
 #'
 #'
@@ -30,13 +29,14 @@
 #'call that exon differentially expressed?  Default 0.8 (meaning 80%).
 #'@return List with elements having length equal to the number of rows in
 #'\code{regions}:
-#'@returnItem flags Event indicated by corresponding region
-#'@returnItem flag.info Genomic features (exons) associated with genomic events
-#'@returnItem percent.exon The percent of the exon (in flag.info) overlapped by
-#'this region
+#'\item{flags}{Event indicated by corresponding region}
+#'\item{flag.info}{Genomic features (exons) associated with genomic events}
+#'\item{percent.exon}{The percent of the exon (in flag.info) overlapped by this region}
 #'@author Alyssa Frazee
+#'@export
 #'@seealso \code{\link{getAnnotation}}
-getFlags = function (regions, exons, chromosome, nonDE = FALSE, pctcut = 0.8){
+
+getFlags <- function (regions, exons, chromosome, nonDE = FALSE, pctcut = 0.8){
      exons = subset(exons, chr == chromosome)
      exons = exons[order(exons$start), ]
      if(nonDE){ candidates = subset(regions, state==2) }

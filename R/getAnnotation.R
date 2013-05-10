@@ -9,9 +9,9 @@
 
 
 
-#'download exon information for a given genome
+#'Download exon information for a given genome
 #'
-#'using the \code{GenomicFeatures} package and the UCSC genome browser, creates
+#'Using the \code{GenomicFeatures} package and the UCSC genome browser, creates
 #'a data frame of exons (one exon per row) for the specified genome.
 #'
 #'
@@ -34,6 +34,7 @@
 #'internet connection is required to use this function, and connection speed
 #'affects function speed.
 #'@author Alyssa Frazee
+#'@export
 #'@references %% ~put references to the literature/web site here ~
 #'@examples
 #'

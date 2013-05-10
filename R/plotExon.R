@@ -35,9 +35,9 @@
 
 
 
-#'plot pipeline data/results for a given exon
+#'Plot pipeline data/results for a given exon
 #'
-#'creates a 3-paneled plot of a selected exon: panel 1 = genomic position vs.
+#'Creates a 3-paneled plot of a selected exon: panel 1 = genomic position vs.
 #'raw coverage data, panel 2 = genomic position vs. moderated t statistic from
 #'linear model at that position, panel 3 = genomic position vs. predicted state
 #'for that position, with annotated exons overlaid.
@@ -115,8 +115,10 @@
 #'in \code{getRegions}), green = underexpressed.
 #'@note Provide exactly one of \code{ind} and \code{exonname}.
 #'@author Alyssa Frazee
+#'@export
 #'@seealso \code{\link{getRegions}}, \code{\link{makeDb}}
-plotExon = function (getRegionObject, ind = NULL, exonname = NULL, tstats, 
+
+plotExon <- function (getRegionObject, ind = NULL, exonname = NULL, tstats, 
     pos, annotation, counts, group, bppad = 50, axpad = 50, prettyskips = T, 
     skiplines = T, countsheader = F, countssep = "\t", tabname = NULL, 
     plotfile = NULL, width = 900, height = 750, plottitle = NULL, 

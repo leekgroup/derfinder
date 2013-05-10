@@ -11,7 +11,7 @@
 
 
 
-#'find closest exon(s) to a genomic region
+#'Find closest exon(s) to a genomic region
 #'
 #'Given any genomic region (chromosome, start, end), return the closest known
 #'exon.
@@ -25,11 +25,12 @@
 #'and \code{end}.  It is recommended that \code{getAnnotation} be used to
 #'obtain an annotation data frame.
 #'@param verbose If TRUE, prints output messages when function finishes.
-#'@return a list with elements
-#'@returnItem region the region argument provided
-#'@returnItem closestExons the rows of \code{annotation} corresponding to the
+#'@return A list with elements
+#' \item{region }{the region argument provided}
+#' \item{closestExons }{the rows of \code{annotation} corresponding to the closest exon to \code{region}}
 #'closest exon to \code{region}
 #'@author Alyssa Frazee
+#'@export
 #'@seealso \code{\link{getAnnotation}}
 #'@examples
 #'
@@ -41,8 +42,8 @@
 #'foo
 #'foo$closestExons
 #'
-getExons <-
-function(region,annotation,verbose=TRUE) {
+
+getExons <- function(region,annotation,verbose=TRUE) {
 	if(!is.vector(region)) stop("region must be a vector (chr, start, end)")
 	if(length(region)!=3) stop("region must be a vector of length 3 (chr, start, end)")
 	chr = region[1]

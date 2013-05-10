@@ -2,64 +2,6 @@
 ## regions = data frame of regions, start, end, state.  (getRegions's "$states" output)
 ## cutoff:  how close together do regions need to be in order to be merged?
 
-
-
-
-#'Find closest long region upstream
-#'
-#'Helper function for \code{mergeRegions}
-#'
-#'
-#'@param ind index of regions data frame
-#'@param regions the $states data frame, as returned by \code{getRegions}
-#'@return index of closest large region upstream of a region that needs to be
-#'merged
-#'@note Not generally used alone - internal function for \code{mergeRegions}
-#'@author Alyssa Frazee
-#'@seealso \code{\link{mergeRegions}}
-findclosest.behind = function(ind,regions){
-	if(ind==1){
-		if(regions$length[ind]>5){return(ind)}
-		if(regions$length[ind]<6){
-			warning("no regions behind with length > 5")
-			return(ind)
-		}
-	}
-	length.of.next = regions$length[ind-1]
-	if(length.of.next>5) return(ind-1)
-	if(length.of.next<6) findclosest.behind(ind-1,regions)
-}
-
-
-
-
-#'Find closest long region downstream
-#'
-#'Helper function for \code{mergeRegions}
-#'
-#'
-#'@param ind index of regions data frame
-#'@param regions the $states data frame, as returned by \code{getRegions}
-#'@return index of closest large region downstream of a region that needs to be
-#'merged
-#'@note Not generally used alone - internal function for \code{mergeRegions}
-#'@author Alyssa Frazee
-#'@seealso \code{\link{mergeRegions}}
-findclosest.ahead = function(ind,regions){
-	if(ind==dim(regions)[1]){
-		if(regions$length[ind]>5){return(ind)}
-		if(regions$length[ind]<6){
-			warning("no regions ahead with length > 5")
-			return(ind)
-		}
-	}
-	length.of.next = regions$length[ind+1]
-	if(length.of.next>5) return(ind+1)
-	if(length.of.next<6) findclosest.ahead(ind+1,regions)
-}
-
-
-
 #'Merge close regions
 #'
 #'Regions of the same state that are fewer than 5bp apart from each other are
@@ -74,8 +16,10 @@ findclosest.ahead = function(ind,regions){
 #'@return data frame (comparable to \code{regions} input) with close regions
 #'merged.
 #'@author Alyssa Frazee
+#'@export
 #'@seealso \code{\link{getRegions}}
-mergeRegions = function(regions,cutoff=6){
+
+mergeRegions <- function(regions, cutoff=6){
 	ind = which(regions$length<cutoff)[1]
 	
 	while(ind<dim(regions)[1]){

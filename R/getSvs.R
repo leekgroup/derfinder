@@ -5,9 +5,9 @@
 
 
 
-#'do SVA on matrix stored in database
+#'Do SVA on matrix stored in database
 #'
-#'performs surrogate variable analysis on a matrix, usually base-pair by sample
+#'Performs surrogate variable analysis on a matrix, usually base-pair by sample
 #'coverage, so the surrogate variables can be adjusted for in later analysis
 #'steps.  SVA is meant to provide a method to adjust for unknown confounders.
 #'
@@ -22,9 +22,9 @@
 #'denote samples you wish to include in analysis. Should NEVER include 1
 #'(genomic position).
 #'@return An object of class sva - see help files for sva.
-#'@note
 #'@author Jeff Leek
-#'@references
+#'@export
+
 getSvs <- function(dbfile, tablename, group, chunksize = 100000,colsubset = c(-1)){
   require(limma)
   require(multicore)

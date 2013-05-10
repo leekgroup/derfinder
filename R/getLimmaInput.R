@@ -24,7 +24,7 @@
 
 
 
-#'fit a linear model to each nucleotide
+#'Fit a linear model to each nucleotide
 #'
 #'Fits the linear model log2(count+scalefac) = beta0 + beta1*group +
 #'beta2*library.size + [optional confounders] to each nucleotide.  From these
@@ -62,16 +62,11 @@
 #'@param colmeds If NULL, the column medians are calculated using
 #'\code{\link{getColmeds}}. Otherwise, the output of \code{\link{getColmeds}}
 #'is expected.
-#'@return a list with elements
-#'@returnItem ebobject A list of five vectors (\code{coefficients},
-#'\code{stdev.unscaled}, \code{sigma}, \code{df.residual}, and \code{Amean}),
-#'mimicking the \code{MArrayLM} class in \code{limma}.  Here,
-#'\code{coefficients} and \code{stdev.unscaled} are only returned for beta1,
-#'the coefficient for \code{group}, as it is assumed this is the only covariate
-#'of interest.
-#'@returnItem pos A vector of the same length as those contained in
-#'\code{ebobject}, giving the genomic positions of each linear model.
+#'@return A list with elements
+#'\item{ebobject }{A list of five vectors (\code{coefficients}, \code{stdev.unscaled}, \code{sigma}, \code{df.residual}, and \code{Amean}), mimicking the \code{MArrayLM} class in \code{limma}.  Here, \code{coefficients} and \code{stdev.unscaled} are only returned for beta1, the coefficient for \code{group}, as it is assumed this is the only covariate of interest.}
+#'\item{pos }{A vector of the same length as those contained in \code{ebobject}, giving the genomic positions of each linear model.}
 #'@author Alyssa Frazee
+#'@export
 #'@seealso \code{\link{getTstats}}, \code{\link{makeDb}}, \code{\link{lmFit}},
 #'\code{\link{MArrayLM-class}}
 #'@references Smyth G (2004).  “Linear models and empirical Bayes methods for
@@ -81,8 +76,7 @@
 #'
 #'## add example here when we have a vignette
 #'
-getLimmaInput =
-function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsubset = c(-1), scalefac = 32, nonzero = FALSE, colmeds=NULL){
+getLimmaInput <- function(dbfile, tablename, group, chunksize = 100000, adjustvars = NULL, colsubset = c(-1), scalefac = 32, nonzero = FALSE, colmeds=NULL){
 	require(limma)
 	require(multicore)
 	require(Genominator)
