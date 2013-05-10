@@ -59,7 +59,7 @@ function(dbfile, tablename, comparison = c("twogroup", "multigroup", "expression
       int = rep(1, numsamps)
       x = model.matrix(~0+int) #intercept-only model, in model.matrix form.
     }
-		if(comparsion == "twogroup" | comparison == "multigroup"){
+		if(comparison == "twogroup" | comparison == "multigroup"){
       x = model.matrix(~as.factor(group)+colmeds)
 		}
 	}	
