@@ -48,6 +48,7 @@
 #'@param dbfile Name/location (as character string) of database (usually ".db")
 #'file containing nucleotide by sample coverage.
 #'@param tablename Name of the table the database contains
+#'@param comparison Either \code{twogroup}, \code{multigroup} or \code{expression}. \code{multigroup} will use the F-statistic and \code{expression} tests the intercept-only model.
 #'@param group a 0/1 vector grouping the samples (columns) in the database.
 #'@param chunksize How many rows of the database should be processed at a time?
 #'@param adjustvars Optional matrix of adjustment variables (e.g. measured

@@ -2,8 +2,9 @@
 \alias{getLimmaInput}
 \title{Fit a linear model to each nucleotide}
 \usage{
-  getLimmaInput(dbfile, tablename, group,
-    chunksize = 1e+05, adjustvars = NULL,
+  getLimmaInput(dbfile, tablename,
+    comparison = c("twogroup", "multigroup", "expression"),
+    group = NULL, chunksize = 1e+05, adjustvars = NULL,
     colsubset = c(-1), scalefac = 32, nonzero = FALSE,
     colmeds = NULL)
 }
@@ -13,6 +14,11 @@
   sample coverage.}
 
   \item{tablename}{Name of the table the database contains}
+
+  \item{comparison}{Either \code{twogroup},
+  \code{multigroup} or \code{expression}. \code{multigroup}
+  will use the F-statistic and \code{expression} tests the
+  intercept-only model.}
 
   \item{group}{a 0/1 vector grouping the samples (columns)
   in the database.}
