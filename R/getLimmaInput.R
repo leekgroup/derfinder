@@ -109,7 +109,7 @@ getLimmaInput <- function(dbfile, tablename, comparison = c("twogroup", "multigr
 		eval(parse(text=paste("x = model.matrix(~group+colmeds",string1,")",sep="")))
 	} else {
     if(comparison == "expression"){ 
-      numsamps = ifelse(is.null(colsubset), numcol-1, length(colsubset))
+      numsamps = ifelse(colsubset[1]==c(-1), numcol-1, length(colsubset))
       int = rep(1, numsamps)
       x = model.matrix(~0+int) #intercept-only model, in model.matrix form.
     }
@@ -143,11 +143,22 @@ getLimmaInput <- function(dbfile, tablename, comparison = c("twogroup", "multigr
 	# gather results from all the models and return them:
 	coef = stdev = sma = dfres = am = NULL
 	for(i in 1:length(lmFit.output)){
-  		coef = append(coef,lmFit.output[[i]]$fit$coefficients[,2])
-  		stdev = append(stdev, lmFit.output[[i]]$fit$stdev.unscaled[,2])
+      if(comparison=="twogroup"){
+        coef = append(coef,lmFit.output[[i]]$fit$coefficients[,2])
+        stdev = append(stdev, lmFit.output[[i]]$fit$stdev.unscaled[,2])        
+        am = append(am, lmFit.output[[i]]$fit$Amean)
+      }
+      if(comparison=="expression"){
+        # subtract log2(scalefac) since we want to test beta_0 = 0, not beta_0 = log2(scalefac + 0), which is what we see with 0 expression under the transformation.
+        coef = append(coef, lmFit.output[[i]]$fit$coefficients - log2(scalefac))
+        stdev = append(stdev, lmFit.output[[i]]$fit$stdev.unscaled)
+        am = append(am, lmFit.output[[i]]$fit$Amean - log2(scalefac))
+      }
+      if(comparison=="multigroup"){
+        ### STILL NEED TO ADD
+      }
   		sma = append(sma, lmFit.output[[i]]$fit$sigma)
   		dfres = append(dfres, lmFit.output[[i]]$fit$df.residual)
-  		am = append(am, lmFit.output[[i]]$Amean)
 	}
 	return(list(ebobject = list(coefficients = as.numeric(coef), stdev.unscaled = as.numeric(stdev), sigma = sma, df.residual = dfres, Amean = am), pos = pos, comparison = comparison))
 	
