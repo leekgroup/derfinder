@@ -7,7 +7,36 @@
 ## pctcut:  what percent of an exon does a region need to overlap in order to have that region make a statement about the exon?  default 0.8 (80%)
 
 
-getFlags = function (regions, exons, chromosome, nonDE = FALSE, pctcut = 0.8){
+
+#'Flag regions with genomic events of interest
+#'
+#'Connects results of tornado pipeline to existing annotation as a way to
+#'determine which regions may point to interesting biological events.
+#'
+#'
+#'@param regions data frame of regions to consider, usually the \code{$states}
+#'output of \code{getRegions}
+#'@param exons data frame containing annotated exons you would like to
+#'consider.  Should have columns
+#'\code{chr},\code{start},\code{end},\code{exon_id}, and \code{gene}.  Can be
+#'created with \code{\link{getAnnotation}}.
+#'@param chromosome Chromosome you're considering.  Currently you can only do
+#'one chromosome at a time.
+#'@param nonDE Should we give you flags for only the equally expressed regions?
+#'(Usually we just want flags for differentially expressed regions, so in
+#'general this is FALSE).
+#'@param pctcut What percentage of an exon should a region overlap in order to
+#'call that exon differentially expressed?  Default 0.8 (meaning 80%).
+#'@return List with elements having length equal to the number of rows in
+#'\code{regions}:
+#'\item{flags}{Event indicated by corresponding region}
+#'\item{flag.info}{Genomic features (exons) associated with genomic events}
+#'\item{percent.exon}{The percent of the exon (in flag.info) overlapped by this region}
+#'@author Alyssa Frazee
+#'@export
+#'@seealso \code{\link{getAnnotation}}
+
+getFlags <- function (regions, exons, chromosome, nonDE = FALSE, pctcut = 0.8){
      exons = subset(exons, chr == chromosome)
      exons = exons[order(exons$start), ]
      if(nonDE){ candidates = subset(regions, state==2) }

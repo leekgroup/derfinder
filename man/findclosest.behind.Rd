@@ -1,33 +1,30 @@
 \name{findclosest.behind}
 \alias{findclosest.behind}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Find closest long region upstream}
-\description{
-Helper function for \code{mergeRegions}
-}
+\title{Find closest long region upstream}
 \usage{
-findclosest.behind(ind, regions)
+  findclosest.behind(ind, regions)
 }
 \arguments{
-  \item{ind}{
-index of regions data frame
-}
-  \item{regions}{
-the $states data frame, as returned by \code{getRegions}
-}
-}
+  \item{ind}{index of regions data frame}
 
-\value{
-index of closest large region upstream of a region that needs to be merged
+  \item{regions}{the $states data frame, as returned by
+  \code{getRegions}}
 }
-\author{
-Alyssa Frazee
+\value{
+  index of closest large region upstream of a region that
+  needs to be merged
+}
+\description{
+  Helper function for \code{mergeRegions}
 }
 \note{
-Not generally used alone - internal function for \code{mergeRegions}
+  Not generally used alone - internal function for
+  \code{mergeRegions}
+}
+\author{
+  Alyssa Frazee
+}
+\seealso{
+  \code{\link{mergeRegions}}
 }
 
-\seealso{
-\code{\link{mergeRegions}}
-}

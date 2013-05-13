@@ -11,8 +11,33 @@
 
 
 
-makeDb <- function(dbfile, textfile, tablename, sep = "\t", cutoff = 5){
 
+
+#'Create SQLite database from text file
+#'
+#'Dumps the contents of a table (saved as a text file) into a SQLite database,
+#'performing some filtering along the way.
+#'
+#'
+#'@param dbfile Character string giving the file name/location of the database
+#'to be created.  Generally ends in \code{.db}.
+#'@param textfile The text file containing the table to be dumped into
+#'\code{dbfile}.
+#'@param tablename Character string containing name to give the table inside
+#'\code{dbfile}.
+#'@param sep The separator used in \code{textfile}.  The tornado pipeline
+#'creates tab-separated text files, so \code{"\t"} is the default.
+#'@param cutoff Rows in \code{textfile} must have at least one entry (not
+#'counting the first column, which is assumed to hold genomic position) greater
+#'than \code{cutoff} to be included in \code{dbfile}.
+#'@return No return, but writes the file \code{dbfile} containing table
+#'\code{tablename} by filtering \code{textfile} according to \code{cutoff}.
+#'@note The workhorse of this function is a modified version of
+#'\code{\link{read.csv.sql}}, found in the \code{sqldf} package.
+#'@author Alyssa Frazee
+#'@export
+
+makeDb <- function(dbfile, textfile, tablename, sep = "\t", cutoff = 5){
 	cat(file=dbfile) #create empty file
 	column.names = as.character(as.matrix(read.table(textfile,sep=sep,nrows=1,header=F))) #get column names
 	#print(column.names)

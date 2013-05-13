@@ -1,31 +1,27 @@
 \name{last}
 \alias{last}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ get the last element
-%%  ~~function to do ... ~~
-}
-\description{
-return last element in a given object (any object with a \code{tail} method will work).
-}
+\title{Get the last element}
 \usage{
-last(x)
+  last(x)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-any object with a \code{tail} method
-}
+  \item{x}{any object with a \code{tail} method}
 }
 \value{
-same as \code{x[length(x)]}
+  same as \code{x[length(x)]}
 }
-\author{
-Alyssa Frazee
+\description{
+  The function returns the last element in a given object
+  (any object with a \code{tail} method will work).
 }
 \note{
-Helper function for \code{getParams}
+  Helper function for \code{getParams}
 }
 \examples{
 x = c(1:20)
-last(x) #returns 20
+last(x) == 20
 }
+\author{
+  Alyssa Frazee
+}
+

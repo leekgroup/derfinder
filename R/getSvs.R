@@ -3,6 +3,28 @@
 ### return: object of class sva
 ### this is used to get surrogate variables (in order to adjust for unmeasured confounders)
 
+
+
+#'Do SVA on matrix stored in database
+#'
+#'Performs surrogate variable analysis on a matrix, usually base-pair by sample
+#'coverage, so the surrogate variables can be adjusted for in later analysis
+#'steps.  SVA is meant to provide a method to adjust for unknown confounders.
+#'
+
+#'
+#'@param dbfile Name/location (as character string) of database (usually ".db")
+#'file containing nucleotide by sample coverage.
+#'@param tablename Name of the table the database contains
+#'@param group a 0/1 vector grouping the samples (columns) in the database.
+#'@param chunksize How many rows of the database should be processed at a time?
+#'@param colsubset Optional vector of column indices of the input file that
+#'denote samples you wish to include in analysis. Should NEVER include 1
+#'(genomic position).
+#'@return An object of class sva - see help files for sva.
+#'@author Jeff Leek
+#'@export
+
 getSvs <- function(dbfile, tablename, group, chunksize = 100000,colsubset = c(-1)){
   require(limma)
   require(multicore)

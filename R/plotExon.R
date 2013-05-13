@@ -33,7 +33,92 @@
 
 
 
-plotExon = function (getRegionObject, ind = NULL, exonname = NULL, tstats, 
+
+
+#'Plot pipeline data/results for a given exon
+#'
+#'Creates a 3-paneled plot of a selected exon: panel 1 = genomic position vs.
+#'raw coverage data, panel 2 = genomic position vs. moderated t statistic from
+#'linear model at that position, panel 3 = genomic position vs. predicted state
+#'for that position, with annotated exons overlaid.
+#'
+#'
+#'@param getRegionObject The name of an object created with
+#'\code{\link{getRegions}}.
+#'@param ind index in the provided \code{annotation} of the exon you wish to
+#'plot.
+#'@param exonname name of the exon (as listed in the provided
+#'\code{annotation}) you wish to plot
+#'@param tstats Vector of t-statistics that was used to create
+#'\code{getRegionObject}.
+#'@param pos vector of genomic positions corresponding to \code{tstats}
+#'@param annotation data frame containing exon annotation to use (see
+#'\code{\link{getAnnotation}}). Must contain a "name" column listing the exon
+#'names. (The column \code{exon_id} in a \code{getAnnotation} object can be
+#'re-named to \code{name}).
+#'@param counts Raw coverage data used to obtain \code{tstats}. This can be
+#'provided in one of three forms: (1) a string indicating the location/file
+#'name of a SQLite database containing the counts, usually created with
+#'\code{makeDb}; (2) a string indicating the location/file name of a text file
+#'containing coverage -- this will get loaded into memory!! -- or (3) an
+#'already-loaded matrix containing the raw data. Note that \code{counts} must
+#'have the same number of rows as \code{pos} and \code{tstats} have elements,
+#'and the rows must correspond to genomic position \code{pos}.
+#'@param group a vector containing the group labels for the columns of counts.
+#'Only 2 groups are permitted at this time. These labels are used in the plot's
+#'legend, so generally they are character strings (rather than, say, 0/1).
+#'@param bppad the number of bases to plot outside of the designated region
+#'(default 50).  Essentially, use this to "zoom" in (decrease bppad) or out
+#'(increase bppad) on the plotted region.
+#'@param axpad how much wider (in bases) you'd like the x-axis to be, compared
+#'to the plotted area
+#'@param prettyskips If TRUE, plot counts/states/t-statistics contiguously,
+#'even if there are zero entries between them (i.e., even though pos may not
+#'indicate that contiguous postions are being plotted). Note that in general,
+#'when plotting just one exon, this is not an issue as exons tend to contain
+#'contiguous data. So, \code{prettyskips} will only affect areas outside the
+#'exon, i.e., \code{prettyskips} has larger impact if bppad is large. Also,
+#'note that \code{prettyskips = FALSE} is not allowed at this time.
+#'@param skiplines if TRUE, add a light vertical line to the plot indicating an
+#'eliminated "low-coverage" nucleotide
+#'@param countsheader If TRUE, the \code{counts} matrix contains a header row.
+#'Not usually the case if counts is a database or already-loaded matrix.
+#'@param countssep If reading counts from a text file, the separator used in
+#'that file.
+#'@param tabname If counts is a database file, the name of the table that was
+#'dumped into that database. (See \code{tablename} in \code{makeDb})
+#'@param plotfile Optional string containing a file you'd like to put the plot
+#'into (if NULL, plot appears interactively). Should have a .jpg extension.
+#'@param width Only used when \code{plotfile} is non-null: width (in pixels) of
+#'resulting jpg.  Defaults to 900.
+#'@param height Only used when \code{plotfile} is non-null: width (in pixels)
+#'of resulting jpg.  Defaults to 750.
+#'@param plottitle Optional main title to use on your plot.  Defaults to
+#'chromosome: start-end (referring to plotted REGION)
+#'@param chromosome The chromosome corresponding to the exon being plotted, in
+#'the same format as chromosomes are listed in the supplied \code{annotation}.
+#'@param legendloc Can be one of "topright","bottomright","topleft",or
+#'"bottomleft" indicating where the legend (indicating group label on raw count
+#'plot) should be located. Defaults to "bottomleft."
+#'@param scalefac How should we offset counts (so that we can log-transform
+#'everything, even zero counts)?  Defaults to 0.5, derfinder uses an offset of
+#'32.
+#'@param ylim Equivalent to ylim argument in plot: what should the lower and
+#'upper limits be on the y-axis of the top panel of plot be?  Defaults to
+#'c(0,9).
+#'@return Plots (either on screen or in the supplied .jpg file) the following:
+#'top panel = genomic position vs. raw coverage data, middle panel = genomic
+#'position vs. moderated t statistic from linear model at that position, bottom
+#'panel = genomic position vs. predicted state for that position, with
+#'annotated exons overlaid. States are as follows: gray = not expressed, black
+#'= equally expressed, red = overexpressed (in whatever group = 1 represented
+#'in \code{getRegions}), green = underexpressed.
+#'@note Provide exactly one of \code{ind} and \code{exonname}.
+#'@author Alyssa Frazee
+#'@export
+#'@seealso \code{\link{getRegions}}, \code{\link{makeDb}}
+
+plotExon <- function (getRegionObject, ind = NULL, exonname = NULL, tstats, 
     pos, annotation, counts, group, bppad = 50, axpad = 50, prettyskips = T, 
     skiplines = T, countsheader = F, countssep = "\t", tabname = NULL, 
     plotfile = NULL, width = 900, height = 750, plottitle = NULL, 
