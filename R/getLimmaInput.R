@@ -103,13 +103,13 @@ getLimmaInput <- function(dbfile, tablename, comparison = c("twogroup", "multigr
 	if(!is.null(adjustvars)){
 		string1 = ""
 		for(i in 1:dim(adjustvars)[2]){
-			eval(parse(text=paste("av",i," <- adjustvars[,",i,"]",sep="")))
-			string1 = paste(string1, paste("av",i,sep=""),sep="+")
+			eval(parse(text=paste0("av",i," <- adjustvars[,",i,"]")))
+			string1 = paste(string1, paste0("av",i), sep="+")
 		}
-		eval(parse(text=paste("x = model.matrix(~group+colmeds",string1,")",sep="")))
+		eval(parse(text=paste0("x = model.matrix(~as.factor(group)+colmeds",string1,")")))
 	} else {
     if(comparison == "expression"){ 
-      numsamps = ifelse(is.null(colsubset), numcol-1, length(colsubset))
+      numsamps = ifelse(colsubset[1]==c(-1), numcol-1, length(colsubset))
       int = rep(1, numsamps)
       x = model.matrix(~0+int) #intercept-only model, in model.matrix form.
     }
@@ -123,8 +123,8 @@ getLimmaInput <- function(dbfile, tablename, comparison = c("twogroup", "multigr
 	
 	# define modeling function to apply to each chunk:
 	lmFit.apply = function(i){
-  		if(i!=lastloop) mymat <- tab[(chunksize * i + 1):(chunksize * (i + 1)), -1][, colsubset - 1] 
-  		else mymat <- tab[(chunksize * i + 1):N, -1][, colsubset - 1] 
+  		if(i!=lastloop) mymat <- tab[(chunksize*i+1):(chunksize*(i+1)),-1][,colsubset-1] 
+  		else mymat <- tab[(chunksize*i+1):N,-1][,colsubset-1] 
   		mymat <- log2(mymat + scalefac)
   		Amean <- rowMeans(mymat) 
   		fit <- lmFit(mymat, x)
@@ -132,23 +132,33 @@ getLimmaInput <- function(dbfile, tablename, comparison = c("twogroup", "multigr
   		}
 	
 	# fit a model to each row (chunk) of database:
-	if(interactive()) {
-		warning("Cannot use mclapply in interactive session; reverting to single-core lapply")
-		lmFit.output = lapply(0:lastloop, lmFit.apply)
-		}
-	if(!interactive()) {
-		warning("mclapply functionality not yet implemented: fitting models with one core.")
-		lmFit.output = lapply(0:lastloop, lmFit.apply)
-	}
-	# gather results from all the models and return them:
+	lmFit.output = lapply(0:lastloop, lmFit.apply)
+
+  # gather results from all the models and return them:
 	coef = stdev = sma = dfres = am = NULL
-	for(i in 1:length(lmFit.output)){
-  		coef = append(coef,lmFit.output[[i]]$fit$coefficients[,2])
-  		stdev = append(stdev, lmFit.output[[i]]$fit$stdev.unscaled[,2])
-  		sma = append(sma, lmFit.output[[i]]$fit$sigma)
-  		dfres = append(dfres, lmFit.output[[i]]$fit$df.residual)
-  		am = append(am, lmFit.output[[i]]$Amean)
-	}
+  if(comparison=="twogroup"){
+    for(i in 1:length(lmFit.output)){
+      coef = append(coef,lmFit.output[[i]]$fit$coefficients[,2])
+      stdev = append(stdev, lmFit.output[[i]]$fit$stdev.unscaled[,2])        
+      am = append(am, lmFit.output[[i]]$fit$Amean)
+      sma = append(sma, lmFit.output[[i]]$fit$sigma)
+      dfres = append(dfres, lmFit.output[[i]]$fit$df.residual)      
+    }
+  }
+  if(comparison=="expression"){
+    for(i in 1:length(lmFit.output)){
+      # subtract log2(scalefac) since we want to test beta_0 = 0, not beta_0 = log2(scalefac + 0), which is what we see with 0 expression under the transformation.
+      coef = append(coef, lmFit.output[[i]]$fit$coefficients - log2(scalefac))
+      stdev = append(stdev, lmFit.output[[i]]$fit$stdev.unscaled)
+      am = append(am, lmFit.output[[i]]$fit$Amean - log2(scalefac))
+      sma = append(sma, lmFit.output[[i]]$fit$sigma)
+      dfres = append(dfres, lmFit.output[[i]]$fit$df.residual)      
+    }
+  }
+  if(comparison=="multigroup"){
+    stop("multigroup functionality not implemented yet - check back soon!")
+    } #end block for multigroup comparison
+    
 	return(list(ebobject = list(coefficients = as.numeric(coef), stdev.unscaled = as.numeric(stdev), sigma = sma, df.residual = dfres, Amean = am), pos = pos, comparison = comparison))
 	
 }
