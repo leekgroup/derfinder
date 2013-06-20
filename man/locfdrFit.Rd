@@ -22,17 +22,17 @@
   \code{bre} to a number lower than the default of 120. The
   tornado package keeps this at its default.}
 
-  \item{df}{Degrees of freedom for ﬁtting the estimated
+  \item{df}{Degrees of freedom for fitting the estimated
   density f(z).  The tornado package keeps this at its
   default.}
 
-  \item{pct}{Excluded tail proportions of zz’s when ﬁtting
-  f(z). \code{pct=0} includes full range of zz’s.
-  \code{pct} can also be a 2-vector, describing the ﬁtting
+  \item{pct}{Excluded tail proportions of zz's when fitting
+  f(z). \code{pct=0} includes full range of zz's.
+  \code{pct} can also be a 2-vector, describing the fitting
   range. The tornado package keeps this at its default.}
 
   \item{pct0}{Proportion of the zz distribution used in
-  ﬁtting the null density f0(z) by central matching. If a
+  fitting the null density f0(z) by central matching. If a
   2-vector, e.g. \code{pct0=c(0.25,0.60)}, the range
   \code{[pct0[1], pct0[2]]} is used. If a scalar,
   \code{[pct0, 1-pct0]} is used. The tornado package keeps
@@ -45,18 +45,18 @@
   split normal version of 2. The tornado package fixes this
   at 1.}
 
-  \item{type}{Type of ﬁtting used for f; 0 is a natural
+  \item{type}{Type of fitting used for f; 0 is a natural
   spline, 1 is a polynomial, in either case with degrees of
   freedom \code{df} [so total degrees of freedom including
   the intercept is \code{df+1}.] The tornado package fixes
   this at 0.}
 
   \item{plot}{Plots desired. 0 gives no plots. 1 gives
-  single plot showing the histogram of zz and ﬁtted
-  densities f and p0  f0. 2 also gives plot of fdr, and
-  the right and left tail area Fdr curves. 3 gives instead
-  the f1 cdf of the estimated fdr curve; plot=4 gives all
-  three plots. The tornado package allows choices 0 and 1;
+  single plot showing the histogram of zz and fitted
+  densities f and p0 f0. 2 also gives plot of fdr, and the
+  right and left tail area Fdr curves. 3 gives instead the
+  f1 cdf of the estimated fdr curve; plot=4 gives all three
+  plots. The tornado package allows choices 0 and 1;
   equivalent to \code{plots = F} and \code{plots = T} in
   \code{getParams}.}
 
@@ -77,9 +77,9 @@
   \item{sw}{Determines the type of output desired. 2 gives
   a list consisting of the last 5 values listed under Value
   below. 3 gives the square matrix of dimension
-  \code{bre}-1 representing the inﬂuence function of
+  \code{bre}-1 representing the influence function of
   log(fdr). Any other value of sw returns a list consisting
-  of the ﬁrst 5 (6 if \code{mult} is supplied) values
+  of the first 5 (6 if \code{mult} is supplied) values
   listed below. The tornado package fixes this at 0.}
 
   \item{verbose}{if TRUE, various messages are printed

@@ -3,6 +3,22 @@
 #'Used internally by read.csv.sql, which drives the \code{makeDb} function. Not
 #'necessary to call this function directly when using the tornado package.
 #'
+#' @param x As in \code{sqldf}.
+#' @param stringsAsFactors As in \code{sqldf}.
+#' @param row.names As in \code{sqldf}.
+#' @param envir As in \code{sqldf}.
+#' @param method As in \code{sqldf}.
+#' @param file.format As in \code{sqldf}.
+#' @param dbname As in \code{sqldf}.
+#' @param drv As in \code{sqldf}.
+#' @param user As in \code{sqldf}.
+#' @param password As in \code{sqldf}.
+#' @param host As in \code{sqldf}.
+#' @param port As in \code{sqldf}.
+#' @param dll As in \code{sqldf}.
+#' @param connection As in \code{sqldf}.
+#' @param verbose As in \code{sqldf}.
+#'
 #'For arguments, value, and other information, see \code{sqldf} - this function
 #'is a direct copy of that function.
 #'
@@ -11,11 +27,11 @@
 #'@export
 
 sqldf <- function (x, stringsAsFactors = FALSE, row.names = FALSE, envir = parent.frame(), method = getOption("sqldf.method"), file.format = list(), dbname, drv = getOption("sqldf.driver"), user, password = "", host = "localhost", port, dll = getOption("sqldf.dll"), connection = getOption("sqldf.connection"),  verbose = isTRUE(getOption("sqldf.verbose"))) {
-	require(DBI)
+	require("DBI")
 	#require(gsubfn)
-	require(proto)
-	require(chron)
-	require(RSQLite)
+	require("proto")
+	require("chron")
+	require("RSQLite")
     as.POSIXct.numeric <- function(x, ...) structure(x, class = c("POSIXct", 
         "POSIXt"))
     as.POSIXct.character <- function(x) structure(as.numeric(x), 
@@ -158,25 +174,28 @@ sqldf <- function (x, stringsAsFactors = FALSE, row.names = FALSE, envir = paren
             drv <- if ("package:RPostgreSQL" %in% search()) {
                 "PostgreSQL"
             }
-            else if ("package:RpgSQL" %in% search()) {
-                "pgSQL"
-            }
             else if ("package:RMySQL" %in% search()) {
                 "MySQL"
             }
             else if ("package:RH2" %in% search()) {
                 "H2"
             }
-            else "SQLite"
+            else if ("package:RSQLite" %in% search()) {
+            	"SQLite"
+			}
+            else if ("package:RpgSQL" %in% search()) {
+                #"pgSQL"
+				stop("Package RpgSQL is no longer available. Check http://cran.r-project.org/web/packages/RpgSQL/index.html")
+            }
         }
         drv <- sub("^[Rr]", "", drv)
         pkg <- paste("R", drv, sep = "")
         if (verbose) {
             if (!is.loaded(pkg)) 
                 cat("sqldf: library(", pkg, ")\n", sep = "")
-            library(pkg, character.only = TRUE)
+            require(pkg, character.only = TRUE)
         }
-        else library(pkg, character.only = TRUE)
+        else require(pkg, character.only = TRUE)
         drv <- tolower(drv)
         if (drv == "mysql") {
             if (verbose) 
@@ -284,7 +303,7 @@ sqldf <- function (x, stringsAsFactors = FALSE, row.names = FALSE, envir = paren
                     "')\n", sep = "")
                 }
                 connection <- dbConnect(m, dbname = dbname, loadable.extensions = TRUE)
-                library("RSQLite.extfuns", character.only = TRUE)
+                require("RSQLite.extfuns", character.only = TRUE)
                 s <- sprintf("select load_extension('%s')", dll)
                 dbGetQuery(connection, s)
             }
@@ -297,7 +316,7 @@ sqldf <- function (x, stringsAsFactors = FALSE, row.names = FALSE, envir = paren
             }
             if (verbose) 
                 cat("sqldf: init_extensions(connection)\n")
-            library(RSQLite.extfuns)
+            require("RSQLite.extfuns")
             init_extensions(connection)
         }
         attr(connection, "dbPreExists") <- dbPreExists

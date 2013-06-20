@@ -43,7 +43,7 @@
 #'@export
 
 read.csv.sql <- function (file, sql = "select * from file", header = TRUE, sep = ",", row.names, eol, skip, filter, nrows, field.types, comment.char, dbname = tempfile(), drv = "SQLite", ...) {
-	require(proto)
+	require("proto")
     file.format <- list(header = header, sep = sep)
     if (!missing(eol)) 
         file.format <- append(file.format, list(eol = eol))

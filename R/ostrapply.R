@@ -17,12 +17,12 @@
 #'@param \dots optional arguments to \code{gsubfn}.
 #'@param empty If there is no match to a string return this value.
 #'@param simplify logical or function. If logical, should the result be
-#'simpliﬁed to a vector or matrix, as in \code{sapply} if possible? If
+#'simplified to a vector or matrix, as in \code{sapply} if possible? If
 #'function, that function is applied to the result with each component of the
 #'result passed as a separate argument. Typically if the form is used it will
-#'typically be speciﬁed as rbind.
+#'typically be specified as rbind.
 #'@param USE.NAMES logical; if \code{TRUE} and if \code{X} is character, use
-#'\code{X} as ’names’ for the result unless it had names already.
+#'\code{X} as 'names' for the result unless it had names already.
 #'@param combine combine is a function applied to the components of the result
 #'of \code{FUN}. The default is \code{"c"}. \code{"list"} is another common
 #'choice. The default may change to be \code{"list"} in the future.

@@ -13,7 +13,7 @@
 #'\code{plotExon}, \code{plotGene}).
 #'
 #'@name derfinder-package
-#'@aliases derfinder-package derfinder
+#'@aliases derfinder-package
 #'@docType package
 #'@author Alyssa Frazee <afrazee@@jhsph.edu>
 #'@references Paper coming soon.

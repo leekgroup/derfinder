@@ -1,6 +1,5 @@
 \docType{package}
 \name{derfinder-package}
-\alias{derfinder}
 \alias{derfinder-package}
 \title{Differential expression analysis of RNA-seq data at base-pair resolution}
 \description{

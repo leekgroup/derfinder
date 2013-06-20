@@ -158,7 +158,7 @@ plotExon <- function (getRegionObject, ind = NULL, exonname = NULL, tstats,
     if (is.character(counts)) {
         if (substr(counts, nchar(counts) - 2, nchar(counts)) == 
             ".db") {
-            require(Genominator)
+            require("Genominator")
             if (is.null(tabname)) 
                 stop("reading matrix from database requires table name")
             counts <- ExpData(dbFilename = counts, tablename = tabname)
@@ -175,7 +175,7 @@ plotExon <- function (getRegionObject, ind = NULL, exonname = NULL, tstats,
     plotlb = xaxinds[1] - axpad
     plotub = xaxinds[length(xaxinds)] + axpad
     if (!is.null(plotfile)) 
-        jpeg(file = plotfile, width = width, height = height)
+        jpeg(filename = plotfile, width = width, height = height)
     par(mar = c(1, 3.2, 2, 1), mgp = c(1.5, 0.5, 0), mfrow = c(3, 
         1), cex.lab = 1.5, omi = c(0.4, 0, 0, 0))
     groupsplit = split(1:length(group), group)

@@ -27,14 +27,14 @@
   value.}
 
   \item{simplify}{logical or function. If logical, should
-  the result be simpliﬁed to a vector or matrix, as in
+  the result be simplified to a vector or matrix, as in
   \code{sapply} if possible? If function, that function is
   applied to the result with each component of the result
   passed as a separate argument. Typically if the form is
-  used it will typically be speciﬁed as rbind.}
+  used it will typically be specified as rbind.}
 
   \item{USE.NAMES}{logical; if \code{TRUE} and if \code{X}
-  is character, use \code{X} as ’names’ for the result
+  is character, use \code{X} as 'names' for the result
   unless it had names already.}
 
   \item{combine}{combine is a function applied to the

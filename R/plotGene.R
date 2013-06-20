@@ -157,7 +157,7 @@ plotGene <- function(getRegionObject, ind=NULL, genename=NULL, tstats, pos, anno
 	plotlb = xaxinds[1]-axpad
 	plotub = xaxinds[length(xaxinds)]+axpad
 	
-	if(!is.null(plotfile)) jpeg(file=plotfile,width=width,height=height)
+	if(!is.null(plotfile)) jpeg(filename=plotfile,width=width,height=height)
 	
 	par(mar=c(1,3.2,2,1),mgp=c(1.5,0.5,0),mfrow=c(3,1),cex.lab=1.5,omi=c(0.4,0,0,0))
 	

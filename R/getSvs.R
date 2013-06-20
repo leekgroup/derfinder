@@ -26,11 +26,11 @@
 #'@export
 
 getSvs <- function(dbfile, tablename, group, chunksize = 100000,colsubset = c(-1)){
-  require(limma)
-  require(multicore)
-  require(Genominator)
-  require(sva)
-  require(genefilter)
+  require("limma")
+  require("multicore")
+  require("Genominator")
+  require("sva")
+  require("genefilter")
 	
   tab = ExpData(dbfile, tablename)
   pos = tab[,1]$pos

@@ -16,12 +16,14 @@
 #'@seealso \code{\link{getAnnotation}}
 #'@examples
 #'
-#'supportedTables("mm10")
-#'mouse.exons = getAnnotation("mm10","refGene") #refGene appears in printed output of supportedTables("mm10").
+#' \dontrun{
+#' supportedTables("mm10")
+#' mouse.exons = getAnnotation("mm10","refGene") #refGene appears in printed output of supportedTables("mm10").
+#' }
 #'
 supportedTables <- function(genome){
 	message("Getting supported tables; may take several minutes.")
-	require(GenomicFeatures)
+	require("GenomicFeatures")
 	genome.tracks = supportedUCSCFeatureDbTracks(genome)
 	intersect(genome.tracks,rownames(supportedUCSCtables()))
 }

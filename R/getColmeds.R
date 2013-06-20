@@ -34,7 +34,7 @@
 #'
 getColmeds <- function(dbfile, tablename, colsubset=c(-1), nonzero=FALSE) {
 	## Load libraries
-	require(Genominator)
+	require("Genominator")
 	
 	## Define the database to use
 	tab <- ExpData(dbfile, tablename)
@@ -49,6 +49,7 @@ getColmeds <- function(dbfile, tablename, colsubset=c(-1), nonzero=FALSE) {
 		
 	## Calculate the medians
 	colmeds <- NULL
+	med <- NULL
 	for(i in colsToCheck){
 		if(nonzero){
 			eval(parse(text=paste0("med = median(tab[,", i, "]$", names(tab[, i]), "[tab[,", i, "]$", names(tab[, i]), "!=0]", ")")))

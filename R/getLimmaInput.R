@@ -38,7 +38,7 @@
 #'\code{lmFit} as the main workhorse.
 #'
 #'It is assumed that the first column in the database is called \code{pos} and
-#'contains genomic position.  Note that "group" must have the one fewer entries
+#'contains genomic position.  Note that \code{group} must have the one fewer entries
 #'than the database denoted by \code{dbfile} has columns (or, if colsubset is
 #'used, one fewer entries than the length of colsubset). Also,
 #'\code{adjustvars} must have the same number of rows as \code{group} has
@@ -65,24 +65,24 @@
 #'@param colmeds If NULL, the column medians are calculated using
 #'\code{\link{getColmeds}}. Otherwise, the output of \code{\link{getColmeds}}
 #'is expected.
+#'
 #'@return A list with elements
 #'\item{ebobject }{A list of five vectors (\code{coefficients}, \code{stdev.unscaled}, \code{sigma}, \code{df.residual}, and \code{Amean}), mimicking the \code{MArrayLM} class in \code{limma}.  Here, \code{coefficients} and \code{stdev.unscaled} are only returned for beta1, the coefficient for \code{group}, as it is assumed this is the only covariate of interest.}
 #'\item{pos }{A vector of the same length as those contained in \code{ebobject}, giving the genomic positions of each linear model.}
 #'@author Alyssa Frazee
 #'@export
-#'@seealso \code{\link{getTstats}}, \code{\link{makeDb}}, \code{\link{lmFit}},
-#'\code{\link{MArrayLM-class}}
-#'@references Smyth G (2004).  “Linear models and empirical Bayes methods for
-#'assessing differential expression in microarray experiments.” Statistical
+#'@seealso \code{\link{getTstats}}, \code{\link{makeDb}}
+#'@references Smyth G (2004).  "Linear models and empirical Bayes methods for
+#'assessing differential expression in microarray experiments." Statistical
 #'Applications in Genetics and Molecular Biology 3(1): Article 3.
 #'@examples
 #'
 #'## add example here when we have a vignette
 #'
 getLimmaInput <- function(dbfile, tablename, comparison = c("twogroup", "multigroup", "expression"), group = NULL, chunksize = 100000, adjustvars = NULL, colsubset = c(-1), scalefac = 32, nonzero = FALSE, colmeds=NULL){
-	require(limma)
-	require(multicore)
-	require(Genominator)
+	require("limma")
+	require("multicore")
+	require("Genominator")
 	
 	# get ready to read from database:
 	tab = ExpData(dbfile, tablename)

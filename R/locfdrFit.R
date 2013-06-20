@@ -1,8 +1,8 @@
-## locfdrFit():
+## locfdrFit():'
 ## arguments: for description of arguments, see locfdr() - exactly the same.
 ## return:  see locfdr() for many of the return elements, but this function has additional ones:
 ## --yt: heights of pink histogram bars that appear on the plots (i.e., heights of alt. density's histogram)
-## --x: locations of pink histogram bars that appear on the plots (locations of alt. density's histogram)
+## --x: locations of pinkfl histogram bars that appear on the plots (locations of alt. density's histogram)
 ## --mlest.lo and mlest.hi: if the function outputs a warning message saying "please re-run with mlest parameters = ...", said parameters are returned in these variables
 ## --needsfix: should the function advise you to re-run with different mlest parameters, needsfix will be 1, otherwise needsfix = 0.
 ## --nulldens: y-values of estimated null distribution density
@@ -29,12 +29,12 @@
 #'small, such as when the number of cases is less than about 1000, set
 #'\code{bre} to a number lower than the default of 120. The tornado package
 #'keeps this at its default.
-#'@param df Degrees of freedom for ﬁtting the estimated density f(z).  The
+#'@param df Degrees of freedom for fitting the estimated density f(z).  The
 #'tornado package keeps this at its default.
-#'@param pct Excluded tail proportions of zz’s when ﬁtting f(z). \code{pct=0}
-#'includes full range of zz’s. \code{pct} can also be a 2-vector, describing
-#'the ﬁtting range. The tornado package keeps this at its default.
-#'@param pct0 Proportion of the zz distribution used in ﬁtting the null density
+#'@param pct Excluded tail proportions of zz's when fitting f(z). \code{pct=0}
+#'includes full range of zz's. \code{pct} can also be a 2-vector, describing
+#'the fitting range. The tornado package keeps this at its default.
+#'@param pct0 Proportion of the zz distribution used in fitting the null density
 #'f0(z) by central matching. If a 2-vector, e.g. \code{pct0=c(0.25,0.60)}, the
 #'range \code{[pct0[1], pct0[2]]} is used. If a scalar, \code{[pct0, 1-pct0]}
 #'is used. The tornado package keeps this at its default.
@@ -42,12 +42,12 @@
 #'in the fdr calculations. 0 is the theoretical null N(0; 1), 1 is maximum
 #'likelihood estimation, 2 is central matching estimation, 3 is a split normal
 #'version of 2. The tornado package fixes this at 1.
-#'@param type Type of ﬁtting used for f; 0 is a natural spline, 1 is a
+#'@param type Type of fitting used for f; 0 is a natural spline, 1 is a
 #'polynomial, in either case with degrees of freedom \code{df} [so total
 #'degrees of freedom including the intercept is \code{df+1}.] The tornado
 #'package fixes this at 0.
 #'@param plot Plots desired. 0 gives no plots. 1 gives single plot showing the
-#'histogram of zz and ﬁtted densities f and p0  f0. 2 also gives plot of fdr,
+#'histogram of zz and fitted densities f and p0 f0. 2 also gives plot of fdr,
 #'and the right and left tail area Fdr curves. 3 gives instead the f1 cdf of
 #'the estimated fdr curve; plot=4 gives all three plots. The tornado package
 #'allows choices 0 and 1; equivalent to \code{plots = F} and \code{plots = T}
@@ -62,8 +62,8 @@
 #'@param main Main heading for the histogram plot when \code{plot}>0.
 #'@param sw Determines the type of output desired. 2 gives a list consisting of
 #'the last 5 values listed under Value below. 3 gives the square matrix of
-#'dimension \code{bre}-1 representing the inﬂuence function of log(fdr). Any
-#'other value of sw returns a list consisting of the ﬁrst 5 (6 if \code{mult}
+#'dimension \code{bre}-1 representing the influence function of log(fdr). Any
+#'other value of sw returns a list consisting of the first 5 (6 if \code{mult}
 #'is supplied) values listed below. The tornado package fixes this at 0.
 #'@param verbose if TRUE, various messages are printed onscreen during
 #'\code{getParams}.

@@ -41,13 +41,12 @@
   function, and connection speed affects function speed.
 }
 \examples{
+\dontrun{
 mouse.exons <- getAnnotation("mm9","refGene")
 head(mouse.exons)
 }
+}
 \author{
   Alyssa Frazee
-}
-\references{
-  %% ~put references to the literature/web site here ~
 }
 

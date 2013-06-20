@@ -74,8 +74,8 @@
 \details{
   It is assumed that the first column in the database is
   called \code{pos} and contains genomic position.  Note
-  that "group" must have the one fewer entries than the
-  database denoted by \code{dbfile} has columns (or, if
+  that \code{group} must have the one fewer entries than
+  the database denoted by \code{dbfile} has columns (or, if
   colsubset is used, one fewer entries than the length of
   colsubset). Also, \code{adjustvars} must have the same
   number of rows as \code{group} has entries. Larger values
@@ -89,13 +89,12 @@
   Alyssa Frazee
 }
 \references{
-  Smyth G (2004).  “Linear models and empirical Bayes
+  Smyth G (2004).  "Linear models and empirical Bayes
   methods for assessing differential expression in
-  microarray experiments.” Statistical Applications in
+  microarray experiments." Statistical Applications in
   Genetics and Molecular Biology 3(1): Article 3.
 }
 \seealso{
-  \code{\link{getTstats}}, \code{\link{makeDb}},
-  \code{\link{lmFit}}, \code{\link{MArrayLM-class}}
+  \code{\link{getTstats}}, \code{\link{makeDb}}
 }
 

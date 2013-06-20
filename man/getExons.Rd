@@ -31,13 +31,14 @@
   the closest known exon.
 }
 \examples{
-## not run:
+\dontrun{
 exons = getAnnotation("hg19","knownGene")
 theRegion = c("chr22", 18216902, 18218350)
 getExons(theRegion, exons)
 foo = getExons(theRegion, exons)
 foo
 foo$closestExons
+}
 }
 \author{
   Alyssa Frazee

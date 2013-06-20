@@ -28,12 +28,12 @@
 #'@author Alyssa Frazee
 #'@export
 #'@seealso \code{\link{getLimmaInput}}
-#'@references Smyth G (2004).  “Linear models and empirical Bayes methods for
-#'assessing differential expression in microarray experiments.” Statistical
+#'@references Smyth G (2004).  "Linear models and empirical Bayes methods for
+#'assessing differential expression in microarray experiments." Statistical
 #'Applications in Genetics and Molecular Biology 3(1): Article 3.
 
 getTstats <- function(fit, trend = FALSE){
-	require(limma)
+	require("limma")
 	# get d0 and s02 (prior parameters)
 	sg2 <- fit$sigma^2
 	sg2 <- pmax(sg2,1e-05*median(sg2)) 
