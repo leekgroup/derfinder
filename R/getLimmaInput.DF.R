@@ -53,6 +53,8 @@ getLimmaInput.DF <- function(DF, comparison = c("twogroup", "multigroup", "expre
 	## Subset the DataFrame to use only the columns of interest
 	if(!is.null(colsubset)) {
 		data <- DF$DF[, colsubset]
+	} else {
+		data <- DF$DF
 	}
 	## Get the positions
 	pos <- which(DF$pos)
