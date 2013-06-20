@@ -16,7 +16,7 @@
 #'\item{f_pval }{p-value resulting from said test.}
 #'@author Andrew Jaffe
 #'@export
-#'@seealso \code{\link{getTstats}}, \code{\link{makeDb}}, \code{\link{lmFit}},
+#'@seealso \code{\link{getTstats}}, \code{\link{makeDb}}
 getF = function(fit, fit0, theData) {
   
   rss1 = rowSums((fitted(fit)-theData)^2)
