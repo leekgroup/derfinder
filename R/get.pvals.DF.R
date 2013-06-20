@@ -35,6 +35,7 @@
 #'giving a p-value for each region of state 3 or 4 in \code{regions}.
 #'@author Alyssa Frazee, Leonardo Collado-Torres
 #'@export
+#'@import IRanges
 #'@seealso
 #'\code{\link{getLimmaInput.DF}},\code{\link{getTstats}},\code{\link{getRegions}}
 

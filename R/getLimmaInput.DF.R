@@ -34,6 +34,7 @@
 #'\item{pos }{A vector of the same length as those contained in \code{ebobject}, giving the genomic positions of each linear model.}
 #'@author Alyssa Frazee, Leonardo Collado-Torres
 #'@export
+#'@import IRanges
 #'@seealso \code{\link{getTstats}}, \code{\link{makeDF}}
 #'@references Smyth G (2004).  "Linear models and empirical Bayes methods for
 #'assessing differential expression in microarray experiments." Statistical

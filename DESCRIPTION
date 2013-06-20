@@ -9,6 +9,8 @@ Authors@R: c(person("Alyssa", "Frazee", role = c("aut", "cre"), email =
     "ths"), email = "jtleek@gmail.com"))
 Depends:
     R(>= 2.15.2)
+Imports:
+    IRanges
 Suggests:
     GenomicFeatures,
     Genominator,
@@ -30,7 +32,6 @@ Suggests:
     RPostgreSQL,
     RMySQL,
     RH2,
-    IRanges,
     Rsamtools,
     BSgenome.Hsapiens.UCSC.hg19,
     BSgenome.Mmusculus.UCSC.mm10
