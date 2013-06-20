@@ -52,9 +52,12 @@
   be printed along the way.}
 }
 \value{
-  A DataFrame object where each column represents a sample.
+  A list with two objects. The first one, \code{DF}, is a
+  DataFrame object where each column represents a sample.
   The number of rows depends on the number of base pairs
-  that passed the cutoff.
+  that passed the cutoff. The second one, \code{pos}, is a
+  logical Rle with the positions of the chromosome that
+  passed the cutoff.
 }
 \description{
   For a group of samples this function reads the coverage

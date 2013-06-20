@@ -71,7 +71,7 @@
 #'\item{pos }{A vector of the same length as those contained in \code{ebobject}, giving the genomic positions of each linear model.}
 #'@author Alyssa Frazee
 #'@export
-#'@seealso \code{\link{getTstats}}, \code{\link{makeDb}}
+#'@seealso \code{\link{getTstats}}, \code{\link{makeDb}}, \code{\link{getColmeds}}
 #'@references Smyth G (2004).  "Linear models and empirical Bayes methods for
 #'assessing differential expression in microarray experiments." Statistical
 #'Applications in Genetics and Molecular Biology 3(1): Article 3.
@@ -81,7 +81,7 @@
 #'
 getLimmaInput <- function(dbfile, tablename, comparison = c("twogroup", "multigroup", "expression"), group = NULL, chunksize = 100000, adjustvars = NULL, colsubset = c(-1), scalefac = 32, nonzero = FALSE, colmeds=NULL){
 	require("limma")
-	require("multicore")
+	#require("multicore")
 	require("Genominator")
 	
 	# get ready to read from database:
@@ -89,6 +89,9 @@ getLimmaInput <- function(dbfile, tablename, comparison = c("twogroup", "multigr
 	pos = tab[,1]$pos
 	N = length(pos)
 	lastloop = trunc(N/chunksize)
+	
+	## Fix the lastloop in case that the N is a factor of chunksize
+	if(N %% chunksize == 0 & lastloop > 0)  lastloop <- lastloop - 1
 
 	# create model matrix:
 	numcol = length(tab[1,])
@@ -135,29 +138,23 @@ getLimmaInput <- function(dbfile, tablename, comparison = c("twogroup", "multigr
 	lmFit.output = lapply(0:lastloop, lmFit.apply)
 
   # gather results from all the models and return them:
-	coef = stdev = sma = dfres = am = NULL
-  if(comparison=="twogroup"){
-    for(i in 1:length(lmFit.output)){
-      coef = append(coef,lmFit.output[[i]]$fit$coefficients[,2])
-      stdev = append(stdev, lmFit.output[[i]]$fit$stdev.unscaled[,2])        
-      am = append(am, lmFit.output[[i]]$fit$Amean)
-      sma = append(sma, lmFit.output[[i]]$fit$sigma)
-      dfres = append(dfres, lmFit.output[[i]]$fit$df.residual)      
-    }
-  }
-  if(comparison=="expression"){
-    for(i in 1:length(lmFit.output)){
-      # subtract log2(scalefac) since we want to test beta_0 = 0, not beta_0 = log2(scalefac + 0), which is what we see with 0 expression under the transformation.
-      coef = append(coef, lmFit.output[[i]]$fit$coefficients - log2(scalefac))
-      stdev = append(stdev, lmFit.output[[i]]$fit$stdev.unscaled)
-      am = append(am, lmFit.output[[i]]$fit$Amean - log2(scalefac))
-      sma = append(sma, lmFit.output[[i]]$fit$sigma)
-      dfres = append(dfres, lmFit.output[[i]]$fit$df.residual)      
-    }
-  }
-  if(comparison=="multigroup"){
-    stop("multigroup functionality not implemented yet - check back soon!")
-    } #end block for multigroup comparison
+	if(comparison=="multigroup"){
+		stop("multigroup functionality not implemented yet - check back soon!")
+	} else if (comparison=="twogroup"){
+		coef <- unlist(lapply(lmFit.output, function(x) { x$fit$coefficients[, 2] }))
+		stdev <- unlist(lapply(lmFit.output, function(x) { x$fit$stdev.unscaled[, 2] }))    
+		am <- unlist(lapply(lmFit.output, function(x) { x$fit$Amean }))   
+		sma <- unlist(lapply(lmFit.output, function(x) { x$fit$sigma }))
+		dfres <- unlist(lapply(lmFit.output, function(x) { x$fit$df.residual }))    
+	} else if(comparison=="expression"){
+		## Subtract log2(scalefac) since we want to test beta_0 = 0, not beta_0 = log2(scalefac + 0), which is what we see with 0 expression under the transformation.
+		coef <- unlist(lapply(lmFit.output, function(x) { x$fit$coefficients })) - log2(scalefac)
+		stdev <- unlist(lapply(lmFit.output, function(x) { x$fit$stdev.unscaled }))
+		am <- unlist(lapply(lmFit.output, function(x) { x$fit$Amean })) - log2(scalefac)
+		sma  <- unlist(lapply(lmFit.output, function(x) { x$fit$sigma }))
+		dfres <- unlist(lapply(lmFit.output, function(x) { x$fit$df.residual }))    
+	}
+	
     
 	return(list(ebobject = list(coefficients = as.numeric(coef), stdev.unscaled = as.numeric(stdev), sigma = sma, df.residual = dfres, Amean = am), pos = pos, comparison = comparison))
 	

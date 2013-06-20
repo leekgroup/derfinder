@@ -74,3 +74,4 @@ Collate:
     'makeDF.R'
     'derfinder-package.R'
     'getF.R'
+    'getLimmaInput.DF.R'

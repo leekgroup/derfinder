@@ -13,7 +13,7 @@
 #' @param output If \code{NULL} then no output is saved in disk. If \code{auto} then an automatic name is constructed (chrXDF.Rdata for example). If another character is specified, then that name is used for the output file.
 #' @param verbose If \code{TRUE} basic status updates will be printed along the way.
 #'
-#' @return A DataFrame object where each column represents a sample. The number of rows depends on the number of base pairs that passed the cutoff.
+#' @return A list with two objects. The first one, \code{DF}, is a DataFrame object where each column represents a sample. The number of rows depends on the number of base pairs that passed the cutoff. The second one, \code{pos}, is a logical Rle with the positions of the chromosome that passed the cutoff.
 #'
 #' @author Leonardo Collado-Torres
 #' @export
@@ -96,11 +96,14 @@ makeDF <- function(chr, datadir=NULL, sampledirs=NULL, samplepatt=NULL, cutoff=5
 	DF <- DataFrame(data)
 	colnames(DF) <- names(dirs)
 	
+	## Make the final resulting object.
+	res <- list("DF"=DF, "pos"=index)
+	
 	## Save if output is specified
 	if(!is.null(output)) {
 		## Rename the object to a name that will make more sense later
 		varname <- paste0("chr", chr, "DF")
-		assign(varname, DF)
+		assign(varname, res)
 		
 		## Automatic output name
 		if(output=="auto") {
@@ -115,5 +118,5 @@ makeDF <- function(chr, datadir=NULL, sampledirs=NULL, samplepatt=NULL, cutoff=5
 	}
 	
 	## Done
-	return(DF)	
+	return(res)	
 }
