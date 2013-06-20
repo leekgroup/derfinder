@@ -17,7 +17,7 @@
 #'@param DF A list containing a \code{DF} DataFrame with the coverage data and a logical Rle with the positions that passed the cutoff. This object is generated using \code{\link{makeDF}}.
 #'@param comparison Either \code{twogroup}, \code{multigroup} or \code{expression}. \code{multigroup} will use the F-statistic and \code{expression} tests the intercept-only model.
 #'@param group a 0/1 vector grouping the samples (columns) in the database.
-#'@param chunksize How many rows of the database should be processed at a time?
+#'@param chunksize How many rows of the merged table should be processed at a time?
 #'@param adjustvars Optional matrix of adjustment variables (e.g. measured
 #'confounders, output from SVA, etc.) to use in fitting linear models to each
 #'nucleotide.
@@ -42,10 +42,11 @@
 #'
 #'## add example here when we have a vignette
 #'
-getLimmaInput.DF <- function(DF, comparison = c("twogroup", "multigroup", "expression"), group = NULL, chunksize = 100000, adjustvars = NULL, colsubset = NULL, scalefac = 32, nonzero = FALSE){
+getLimmaInput.DF <- function(DF, comparison = c("twogroup", "multigroup", "expression"), group, chunksize = 1e+05, adjustvars = NULL, colsubset = NULL, scalefac = 32, nonzero = FALSE){
 	
 	## Load required pkgs
 	require("limma")
+	require("IRanges")
 	#require("multicore") # To be implemented later
 	
 	## Subset the DataFrame to use only the columns of interest

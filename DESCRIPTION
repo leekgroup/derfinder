@@ -1,7 +1,7 @@
 Package: derfinder
 Type: Package
 Title: Differential expression analysis of RNA-seq data at base-pair resolution
-Version: 1.0.1
+Version: 1.0.2
 Date: 2013-06-19
 Authors@R: c(person("Alyssa", "Frazee", role = c("aut", "cre"), email =
     "afrazee@jhsph.edu"), person("Leonardo", "Collado-Torres", role = "aut",
@@ -75,3 +75,4 @@ Collate:
     'derfinder-package.R'
     'getF.R'
     'getLimmaInput.DF.R'
+    'get.pvals.DF.R'

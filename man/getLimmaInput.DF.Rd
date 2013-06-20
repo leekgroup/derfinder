@@ -4,7 +4,7 @@
 \usage{
   getLimmaInput.DF(DF,
     comparison = c("twogroup", "multigroup", "expression"),
-    group = NULL, chunksize = 1e+05, adjustvars = NULL,
+    group, chunksize = 1e+05, adjustvars = NULL,
     colsubset = NULL, scalefac = 32, nonzero = FALSE)
 }
 \arguments{
@@ -21,8 +21,8 @@
   \item{group}{a 0/1 vector grouping the samples (columns)
   in the database.}
 
-  \item{chunksize}{How many rows of the database should be
-  processed at a time?}
+  \item{chunksize}{How many rows of the merged table should
+  be processed at a time?}
 
   \item{adjustvars}{Optional matrix of adjustment variables
   (e.g. measured confounders, output from SVA, etc.) to use
