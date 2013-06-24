@@ -25,7 +25,7 @@
 
   \item{pctcut}{What percentage of an exon should a region
   overlap in order to call that exon differentially
-  expressed?  Default 0.8 (meaning 80%).}
+  expressed?  Default 0.8 (meaning 80\%).}
 }
 \value{
   List with elements having length equal to the number of

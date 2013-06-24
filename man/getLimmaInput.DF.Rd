@@ -1,19 +1,17 @@
-\name{getLimmaInput}
-\alias{getLimmaInput}
+\name{getLimmaInput.DF}
+\alias{getLimmaInput.DF}
 \title{Fit a linear model to each nucleotide}
 \usage{
-  getLimmaInput(dbfile, tablename,
+  getLimmaInput.DF(DF,
     comparison = c("twogroup", "multigroup", "expression"),
-    group = NULL, chunksize = 1e+05, adjustvars = NULL,
-    colsubset = c(-1), scalefac = 32, nonzero = FALSE,
-    colmeds = NULL)
+    group, chunksize = 1e+05, adjustvars = NULL,
+    colsubset = NULL, scalefac = 32, nonzero = FALSE)
 }
 \arguments{
-  \item{dbfile}{Name/location (as character string) of
-  database (usually ".db") file containing nucleotide by
-  sample coverage.}
-
-  \item{tablename}{Name of the table the database contains}
+  \item{DF}{A list containing a \code{DF} DataFrame with
+  the coverage data and a logical Rle with the positions
+  that passed the cutoff. This object is generated using
+  \code{\link{makeDF}}.}
 
   \item{comparison}{Either \code{twogroup},
   \code{multigroup} or \code{expression}. \code{multigroup}
@@ -23,8 +21,8 @@
   \item{group}{a 0/1 vector grouping the samples (columns)
   in the database.}
 
-  \item{chunksize}{How many rows of the database should be
-  processed at a time?}
+  \item{chunksize}{How many rows of the merged table should
+  be processed at a time?}
 
   \item{adjustvars}{Optional matrix of adjustment variables
   (e.g. measured confounders, output from SVA, etc.) to use
@@ -32,7 +30,7 @@
 
   \item{colsubset}{Optional vector of column indices of the
   input file that denote samples you wish to include in
-  analysis. Should NEVER include 1 (genomic position).}
+  analysis.}
 
   \item{scalefac}{A log transformation is used on the count
   tables, so zero counts present a problem.  What number
@@ -41,10 +39,6 @@
 
   \item{nonzero}{If TRUE, use the median of only the
   nonzero counts as the library size adjustment.}
-
-  \item{colmeds}{If NULL, the column medians are calculated
-  using \code{\link{getColmeds}}. Otherwise, the output of
-  \code{\link{getColmeds}} is expected.}
 }
 \value{
   A list with elements \item{ebobject }{A list of five
@@ -66,27 +60,22 @@
   \code{getTstats} to obtain \code{limma}'s moderated t
   statistics for each nucleotide, which we use as a measure
   of strength of association between group and count
-  (expression). Reads coverage file from a SQLite database
-  (see \code{makeDb}) and relies heavily on the
-  \code{limma} package, using \code{lmFit} as the main
+  (expression). Reads coverage from a DataFrame which can
+  be generated using \code{makeDF} and relies heavily on
+  the \code{limma} package, using \code{lmFit} as the main
   workhorse.
 }
 \details{
-  It is assumed that the first column in the database is
-  called \code{pos} and contains genomic position.  Note
-  that \code{group} must have the one fewer entries than
-  the database denoted by \code{dbfile} has columns (or, if
-  colsubset is used, one fewer entries than the length of
-  colsubset). Also, \code{adjustvars} must have the same
-  number of rows as \code{group} has entries. Larger values
-  of \code{chunksize} require more memory; smaller values
-  of \code{chunksize} require more computation time.
+  Note \code{adjustvars} must have the same number of rows
+  as \code{group} has entries. Larger values of
+  \code{chunksize} require more memory; smaller values of
+  \code{chunksize} require more computation time.
 }
 \examples{
 ## add example here when we have a vignette
 }
 \author{
-  Alyssa Frazee
+  Alyssa Frazee, Leonardo Collado-Torres
 }
 \references{
   Smyth G (2004).  "Linear models and empirical Bayes
@@ -95,7 +84,6 @@
   Genetics and Molecular Biology 3(1): Article 3.
 }
 \seealso{
-  \code{\link{getTstats}}, \code{\link{makeDb}},
-  \code{\link{getColmeds}}
+  \code{\link{getTstats}}, \code{\link{makeDF}}
 }
 

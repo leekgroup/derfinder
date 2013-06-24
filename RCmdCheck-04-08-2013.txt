@@ -1,0 +1,292 @@
+$ R CMD check derfinder
+* using log directory ‘/Users/lcollado/enigma2/derfinder.Rcheck’
+* using R version 2.15.3 (2013-03-01)
+* using platform: x86_64-apple-darwin9.8.0 (64-bit)
+* using session charset: UTF-8
+* checking for file ‘derfinder/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘derfinder’ version ‘1.0.1’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... WARNING
+Found the following executable file(s):
+  .git/objects/01/a04ac850389773b7bac098b69aacb8c9195f87
+  .git/objects/06/9043b3ab8f7dd7ea4552faeeef4e90fb0431be
+  .git/objects/0a/5b53e2ff93bb30092e142228cb8c89fc0e85a4
+  .git/objects/0f/94c15a2be968c965f310fd4150b39eae0483f0
+  .git/objects/12/a7268655b2db118c29f0eebcb24b7499ef44ad
+  .git/objects/14/adcaaafafab03de00148655595f01c474d2e7e
+  .git/objects/1a/25c3f5f0a69c5e9de11eba642dd589c79f5f96
+  .git/objects/1d/8ff4687e96613e9fc2cd3be323c15bc0c1e561
+  .git/objects/20/18746394e149cb72f902e9089b48e206304670
+  .git/objects/22/d08c098f3c6d7a809e401debd039fba3d5828d
+  .git/objects/23/f0c35687fe732addae5e9a1492733ac63118b1
+  .git/objects/27/06e40c35501cdf1f6bf82e301fad5c12513cb4
+  .git/objects/2c/3f71d66ffe2d2bb4f1cfa08420e05d36235c7d
+  .git/objects/2c/f36b56830a3844446d2244c16f731368df5ae6
+  .git/objects/32/113cc87f2d0d9e53237f214fed33db7d958012
+  .git/objects/32/70e49d0475e63bc42657b4f9eb4433f25e719b
+  .git/objects/35/d752862edc8c1f758f69308616ce2e76907d34
+  .git/objects/37/402d6a4a6594305371130e382ebbe3d1b91cb6
+  .git/objects/37/abf4b9105aa1c6cc13bea920c54f761a4e5103
+  .git/objects/39/f6e33252467a3074fb3164b425c9d3741a70bc
+  .git/objects/3a/9f8940313d4150c437d06fe46bb83c5d3558ba
+  .git/objects/3c/414231cda604a438d12e03032c920bab1e96d4
+  .git/objects/3e/477f31b74db189894facd1e1b02858e5ac7c71
+  .git/objects/3f/e825350c1cb8596eb29e1036e48083cbdad14b
+  .git/objects/43/fcf130ac7e1d4c4df5fca3e8ff9cec42e3b071
+  .git/objects/47/8059f7582566b698990a6c776d0d62247e6c28
+  .git/objects/48/d67423530f389db0345f7f0b34f1acd62a97b9
+  .git/objects/55/2c3418dd82d10a2befbcb0c0fb058982b5fe8c
+  .git/objects/66/f20aad4fe18fb887f4360d58c12bd23213db3d
+  .git/objects/6b/6186faadd55d63038c4c222cc4edab0b0747e4
+  .git/objects/6d/463d3405f7babdb5ee3e0b8ec6633a0d40cd7a
+  .git/objects/71/df916456080cf3107550df9ad508ff6274344e
+  .git/objects/75/ce72a9d92916d5d18b340488b54f0758906129
+  .git/objects/77/8a1caf1f08fffa614cb6abc5078fe0536de2cc
+  .git/objects/80/1cd84c7e88bb7ca5623ef62a81b79c226552b3
+  .git/objects/87/0419ff91571f7ecea7a181844f69681ac49c32
+  .git/objects/9a/3489d08b965bc8aab002ed723c32af8d0ecd63
+  .git/objects/a5/4a403937d29468cfa3fd05e1b102b2d09b7b1a
+  .git/objects/a5/a0d2f960ceb3d1d7184827dbf16d9d153dc0dd
+  .git/objects/a5/e3ab18fe98c316a0d2952da09ff1a683e78fa5
+  .git/objects/a9/499e89457860b355aed8590da6ae9ef7c663ee
+  .git/objects/a9/bc9c0d9ae668917ad802b3f20724edb33164fa
+  .git/objects/ac/d4df57c42cbb8d364bd8ada337b35ac4e88c23
+  .git/objects/ae/a837234e9c8f7a6b3eb9f73132ea8da6fea612
+  .git/objects/af/86160d940b436c5ec19151f8bce1e8cd47652e
+  .git/objects/af/925c052fb8d5d976b49d9d1cb3c4d3c93c36ec
+  .git/objects/b4/c714fac649e97206cf62cf07ad2ce025926dfd
+  .git/objects/b4/ea15c3e9ec1958fe48f44bd517508c71c79a24
+  .git/objects/b5/11815fde12d5a6968e1c0efb5fcc3c845c31fa
+  .git/objects/b5/fe979fec528ce68c127234d9e757bf55c020e0
+  .git/objects/b6/b9104528b07ed66ea24f9ad179a4c6a7602f12
+  .git/objects/b8/111732003cbe4d7e0c4f7049f2ce17435da98f
+  .git/objects/bb/b56ca988a6af1fab67002c3b8fcedd5f9d0b22
+  .git/objects/bf/1e0984c24de051d88622a65f3ba6c531b5ab8c
+  .git/objects/bf/65f227e2abff47a3846d1fc24ac6a5bc1acc35
+  .git/objects/c0/f614cf85acde014eb6b0f1e5850eb57ca5e45f
+  .git/objects/c6/ec40e379d779e0af8466e4bbe7fc85cf24a2b6
+  .git/objects/cc/2cf5561f7b513b91e0bd72e45c8973ad542f94
+  .git/objects/cd/262418e429b38c73f11a87e1c7d8b01db575cc
+  .git/objects/d2/879fab3fde059c2bde69e1dff3e8f8bd274ecf
+  .git/objects/d7/5f824ec6278db24891505b14ab3d915514dba7
+  .git/objects/da/97b4d56f4165f81bd613a22ac3bc971ef4c8bc
+  .git/objects/dc/d27b6df1b759d9f74e1b58ad25cf53b39abc6d
+  .git/objects/e2/9cdb8378d96ac1ebc0c28c770db0ced83ec7e3
+  .git/objects/e2/bbed90dfa3e51353707575c3b2c83dead8331f
+  .git/objects/e6/b88f3366e403879cdfffdac17c5ae3fa4b1da1
+  .git/objects/e6/dbcf89f346de68187d9c3ec6af91366797c67d
+  .git/objects/e8/50c0df9e90b4d695578e1102b7f1ad70dba71b
+  .git/objects/f0/def17da1a860509b88ac130488fc2c09001b43
+  .git/objects/f3/08a94603e2497dfb1ed498750312939db0817b
+  .git/objects/f4/419de4957f14b3ce0df86e78a45b54f0367bed
+  .git/objects/fb/0798499d1ec6242cb758e30e7c308921379be4
+  .git/objects/fb/8c30c70da8cf1f83ea005e04ce744e18894a7b
+Source packages should not contain undeclared executable files.
+See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
+* checking whether package ‘derfinder’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking DESCRIPTION meta-information ... WARNING
+Non-standard license specification:
+  What license is it under?
+Standardizable: FALSE
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking for unstated dependencies in R code ... WARNING
+‘::’ or ‘:::’ import not declared from: ‘IRanges’
+See the information on DESCRIPTION files in the chapter ‘Creating R
+packages’ of the ‘Writing R Extensions’ manual.
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+getParams: warning in locfdrFit(nzt, mlest =
+  c(fdrmodel.defaults$mlest.lo, fdrmodel.defaults$mlest.hi), verbose =
+  F, plot = plotarg, main = "locfdr, incorporating mlest", nulltype =
+  0): partial argument match of 'mlest' to 'mlests'
+plotExon: warning in jpeg(file = plotfile, width = width, height =
+  height): partial argument match of 'file' to 'filename'
+plotGene: warning in jpeg(file = plotfile, width = width, height =
+  height): partial argument match of 'file' to 'filename'
+plotRegion: warning in jpeg(file = plotfile, width = width, height =
+  height): partial argument match of 'file' to 'filename'
+getColmeds: no visible binding for global variable ‘med’
+getFlags: no visible binding for global variable ‘chr’
+getFlags: no visible binding for global variable ‘state’
+sqldf: no visible global function definition for ‘dbSendUpdate’
+* checking Rd files ... WARNING
+prepare_Rd: getAnnotation.Rd:30-32: Dropping empty section \references
+Error : getLimmaInput.Rd: non-ASCII input and no declared encoding
+
+prepare_Rd: getSvs.Rd:29-30: Dropping empty section \details
+prepare_Rd: getSvs.Rd:39-40: Dropping empty section \note
+prepare_Rd: getSvs.Rd:34-35: Dropping empty section \references
+Error : getTstats.Rd: non-ASCII input and no declared encoding
+
+Error : gsubfn.Rd: non-ASCII input and no declared encoding
+
+Error : locfdrFit.Rd: non-ASCII input and no declared encoding
+
+Error : ostrapply.Rd: non-ASCII input and no declared encoding
+
+Error : strapply.Rd: non-ASCII input and no declared encoding
+
+problems found in ‘getLimmaInput.Rd’, ‘getTstats.Rd’, ‘gsubfn.Rd’, ‘locfdrFit.Rd’, ‘ostrapply.Rd’, ‘strapply.Rd’
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... WARNING
+Functions/methods with usage in documentation object 'loccov2' but not in code:
+  loccov2
+
+Functions/methods with usage in documentation object 'locmle' but not in code:
+  locmle
+
+* checking Rd \usage sections ... WARNING
+Undocumented arguments in documentation object 'loccov2'
+  ‘X’ ‘X0’ ‘i0’ ‘f’ ‘ests’ ‘N’
+
+Undocumented arguments in documentation object 'locmle'
+  ‘z’ ‘xlim’ ‘Jmle’ ‘d’ ‘s’ ‘ep’ ‘sw’ ‘Cov.in’
+
+Undocumented arguments in documentation object 'sqldf'
+  ‘x’ ‘stringsAsFactors’ ‘row.names’ ‘envir’ ‘method’ ‘file.format’
+  ‘dbname’ ‘drv’ ‘user’ ‘password’ ‘host’ ‘port’ ‘dll’ ‘connection’
+  ‘verbose’
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See the chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking sizes of PDF files under ‘inst/doc’ ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking examples ... OK
+* checking PDF version of manual ... WARNING
+LaTeX errors when creating PDF version.
+This typically indicates Rd problems.
+LaTeX errors found:
+3b127de/Rd2.tex:1041: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1067: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1068: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1068: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1068: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1068: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1070: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1070: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1170: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1173: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1174: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1177: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1184: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1187: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1187: Package inputenc Error: Keyboard character used is undefi
+ned
+(inputenc)                in inputencoding `utf8'.
+
+See the inputenc package documentation for explanation.
+3b127de/Rd2.tex:1198: Package inputenc Error: Unicode char \u8:ﬂ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1198: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1408: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1408: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1878: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+3b127de/Rd2.tex:1878: Package inputenc Error: Unicode char \u8:ﬁ not set up f
+or use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+* checking PDF version of manual without hyperrefs or index ... ERROR

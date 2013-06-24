@@ -82,7 +82,7 @@ getRegions <- function(method, chromosome, pos, tstats, transprobs = c(0.999, 1e
   	if(method!="HMM" & method!="smoothcut" & method!="CBS") stop("Invalid method. Choices are HMM, smoothcut, or CBS")
   	if(sum(sort(pos)!=pos)>0) stop("pos (and probably t-statistics) improperly sorted")
     if (method == "HMM"){
-		require(HiddenMarkov)
+		require("HiddenMarkov")
 		if(is.null(params)) stop("HMM method requires parameter estimation - please provide theoretical values or estimate with getParams")
 		stayprob = transprobs[1]
     	EtoDE = transprobs[2]

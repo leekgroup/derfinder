@@ -35,16 +35,18 @@
 #'affects function speed.
 #'@author Alyssa Frazee
 #'@export
-#'@references %% ~put references to the literature/web site here ~
 #'@examples
 #'
+#' \dontrun{
 #'mouse.exons <- getAnnotation("mm9","refGene")
 #'head(mouse.exons)
+#' }
 #'
 getAnnotation <-
 function(genome, tablename, genes = TRUE, verbose = TRUE){
-	require(GenomicFeatures)
-	require(rtracklayer)
+	require("GenomicFeatures")
+	require("rtracklayer")
+	require("IRanges")
 	a <- try(makeTranscriptDbFromUCSC(genome=genome, tablename=tablename))
 	if(class(a)=="try-error") stop("Problem accessing requested UCSC annotation - likely there is a problem with genome or tablename arguments. Use ucscGenomes() to see acceptable genomes; use supportedTables(genome) to see acceptable tablenames for your genome.")
 	

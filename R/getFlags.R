@@ -26,7 +26,7 @@
 #'(Usually we just want flags for differentially expressed regions, so in
 #'general this is FALSE).
 #'@param pctcut What percentage of an exon should a region overlap in order to
-#'call that exon differentially expressed?  Default 0.8 (meaning 80%).
+#'call that exon differentially expressed?  Default 0.8 (meaning 80\%).
 #'@return List with elements having length equal to the number of rows in
 #'\code{regions}:
 #'\item{flags}{Event indicated by corresponding region}
@@ -37,6 +37,10 @@
 #'@seealso \code{\link{getAnnotation}}
 
 getFlags <- function (regions, exons, chromosome, nonDE = FALSE, pctcut = 0.8){
+	## Appeasing R CMD check
+	## More info at http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
+	chr <- state <- NULL
+	
      exons = subset(exons, chr == chromosome)
      exons = exons[order(exons$start), ]
      if(nonDE){ candidates = subset(regions, state==2) }

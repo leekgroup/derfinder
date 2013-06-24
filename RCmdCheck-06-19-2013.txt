@@ -1,0 +1,73 @@
+Updating derfinder documentation
+Loading derfinder
+pdflatex not found. Not building PDF vignettes.
+'/Library/Frameworks/R.framework/Resources/bin/R' --vanilla CMD build '/Users/lcollado/enigma2/derfinder' --no-manual --no-resave-data --no-vignettes 
+
+* checking for file '/Users/lcollado/enigma2/derfinder/DESCRIPTION' ... OK
+* preparing 'derfinder':
+* checking DESCRIPTION meta-information ... OK
+* checking for LF line-endings in source and make files
+* checking for empty or unneeded directories
+* building 'derfinder_1.0.1.tar.gz'
+pdflatex not found! Not building PDF manual or vignettes.
+If you are planning to release this package, please run a check with manual and vignettes beforehand.
+
+'/Library/Frameworks/R.framework/Resources/bin/R' --vanilla CMD check '/var/folders/cx/n9s558kx6fb7jf5z_pgszgb80000gn/T//RtmptjoxQM/derfinder_1.0.1.tar.gz' --timings  \
+  --no-rebuild-vignettes --no-manual 
+
+* using log directory '/private/var/folders/cx/n9s558kx6fb7jf5z_pgszgb80000gn/T/RtmptjoxQM/derfinder.Rcheck'
+* using R version 3.0.0 (2013-04-03)
+* using platform: x86_64-apple-darwin10.8.0 (64-bit)
+* using session charset: ASCII
+* using option '--no-build-vignettes'
+* checking for file 'derfinder/DESCRIPTION' ... OK
+* checking extension type ... Package
+* this is package 'derfinder' version '1.0.1'
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package 'derfinder' can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... WARNING
+Non-standard license specification:
+  What license is it under?
+Standardizable: FALSE
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking for unstated dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking installed files from 'inst/doc' ... OK
+* checking examples ... OK
+WARNING: There was 1 warning.
+See
+  '/private/var/folders/cx/n9s558kx6fb7jf5z_pgszgb80000gn/T/RtmptjoxQM/derfinder.Rcheck/00check.log'
+for details.
+Checking derfinder with devtools
+Checking for any extra files in built .tar.gz file... OK

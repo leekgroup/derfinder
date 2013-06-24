@@ -1,13 +1,17 @@
 Package: derfinder
 Type: Package
 Title: Differential expression analysis of RNA-seq data at base-pair resolution
-Version: 1.0.1
-Date: 2013-05-10
-Author: Alyssa Frazee, Leonardo Collado-Torres, Jeffrey Leek
-Maintainer: Alyssa Frazee <afrazee@jhsph.edu>
+Version: 1.0.2
+Date: 2013-06-19
+Authors@R: c(person("Alyssa", "Frazee", role = c("aut", "cre"), email =
+    "afrazee@jhsph.edu"), person("Leonardo", "Collado-Torres", role = "aut",
+    email = "lcollado@jhsph.edu"), person("Jeffrey", "Leek", role = c("aut",
+    "ths"), email = "jtleek@gmail.com"))
 Depends:
     R(>= 2.15.2)
 Imports:
+    IRanges
+Suggests:
     GenomicFeatures,
     Genominator,
     rtracklayer,
@@ -22,16 +26,20 @@ Imports:
     proto,
     DBI,
     chron,
+    gsubfn,
     RSQLite,
-    RSQLite.extfuns
-Suggests:
-    gsubfn
+    RSQLite.extfuns,
+    RPostgreSQL,
+    RMySQL,
+    RH2,
+    Rsamtools,
+    BSgenome.Hsapiens.UCSC.hg19,
+    BSgenome.Mmusculus.UCSC.mm10
 Description: Differential expression analysis of RNA-seq data at base-pair
     resolution
 License: What license is it under?
 URL: https://github.com/alyssafrazee/derfinder
 Collate:
-    'derfinder.R'
     'find.mean.R'
     'find.mean.down.R'
     'find.mean.up.R'
@@ -64,3 +72,8 @@ Collate:
     'sqldf.R'
     'strapply.R'
     'supportedTables.R'
+    'makeDF.R'
+    'derfinder-package.R'
+    'getF.R'
+    'getLimmaInput.DF.R'
+    'get.pvals.DF.R'

@@ -1,6 +1,5 @@
 \docType{package}
 \name{derfinder-package}
-\alias{derfinder}
 \alias{derfinder-package}
 \title{Differential expression analysis of RNA-seq data at base-pair resolution}
 \description{
@@ -9,7 +8,7 @@
 }
 \details{
   \tabular{ll}{ Package: \tab derfinder\cr Type: \tab
-  Package\cr Version: \tab 1.0.1\cr Date: \tab
+  Package\cr Version: \tab 1.0.2\cr Date: \tab
   2013-04-04\cr License: \tab What license is it under?\cr
   } Creates SQLite database of per-nucleotide coverage
   files (\code{makeDb}), fits linear model to each

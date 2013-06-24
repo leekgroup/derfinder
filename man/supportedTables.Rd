@@ -17,8 +17,10 @@
   available tables from UCSC for any given genome.
 }
 \examples{
+\dontrun{
 supportedTables("mm10")
 mouse.exons = getAnnotation("mm10","refGene") #refGene appears in printed output of supportedTables("mm10").
+}
 }
 \author{
   Alyssa Frazee

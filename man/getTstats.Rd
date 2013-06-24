@@ -29,9 +29,9 @@
   Alyssa Frazee
 }
 \references{
-  Smyth G (2004).  “Linear models and empirical Bayes
+  Smyth G (2004).  "Linear models and empirical Bayes
   methods for assessing differential expression in
-  microarray experiments.” Statistical Applications in
+  microarray experiments." Statistical Applications in
   Genetics and Molecular Biology 3(1): Article 3.
 }
 \seealso{

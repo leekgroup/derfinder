@@ -65,9 +65,9 @@ getParams <- function(tstats, plots = FALSE, plotfile = NULL, verbose = F){
 	   return(out)
 	}
 	if (fdrmodel.defaults$needsfix == 1) {
-	 fdrmodel <- locfdrFit(nzt, mlest = c(fdrmodel.defaults$mlest.lo,fdrmodel.defaults$mlest.hi), verbose = F, plot = plotarg,
-	       main = "locfdr, incorporating mlest",nulltype=0)
-	 if (fdrmodel$needsfix == 1) stop("problem with mlest parameters in locfdr")
+	 fdrmodel <- locfdrFit(nzt, mlests = c(fdrmodel.defaults$mlest.lo,fdrmodel.defaults$mlest.hi), verbose = F, plot = plotarg,
+	       main = "locfdr, incorporating mlests",nulltype=0)
+	 if (fdrmodel$needsfix == 1) stop("problem with mlests parameters in locfdr")
 	}
 	if (fdrmodel.defaults$needsfix == 0) fdrmodel <- fdrmodel.defaults
 	pi.0.tmp = fdrmodel$fp0[3, 3]

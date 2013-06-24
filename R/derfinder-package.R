@@ -3,7 +3,7 @@
 #'Differential expression analysis of per-nucleotide coverage tables.
 #'
 #'\tabular{ll}{ Package: \tab derfinder\cr Type: \tab Package\cr Version: \tab
-#'1.0.1\cr Date: \tab 2013-04-04\cr License: \tab What license is it under?\cr
+#'1.0.2\cr Date: \tab 2013-04-04\cr License: \tab What license is it under?\cr
 #'} Creates SQLite database of per-nucleotide coverage files (\code{makeDb}),
 #'fits linear model to each nucleotide to determine differential expression
 #'(\code{getLimmaInput},\code{getTstats}), fits Hidden Markov Model using
@@ -13,7 +13,7 @@
 #'\code{plotExon}, \code{plotGene}).
 #'
 #'@name derfinder-package
-#'@aliases derfinder-package derfinder
+#'@aliases derfinder-package
 #'@docType package
 #'@author Alyssa Frazee <afrazee@@jhsph.edu>
 #'@references Paper coming soon.
