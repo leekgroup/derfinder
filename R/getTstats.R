@@ -45,9 +45,8 @@ getTstats <- function(fit, trend = FALSE){
 	      G <- length(fit$sigma)
       	  d0 <- 2*trigammaInverse(mean((eg-ebar)^2*(G/(G-1)) - trigamma(fit$df.residual/2)))
 	      s02 <- exp(ebar+digamma(d0/2)-log(d0/2))
-  	}
-	if(trend){
-	      require(splines)
+  	} else if(trend){
+	      require("splines")
       	  design <- try(ns(fit$Amean, df = 4, intercept = TRUE), silent = TRUE)
           if (is(design, "try-error")) stop("Problem with Amean covariate; perhaps too few distinct values")
     	  fit1 <- lm.fit(design, eg)
@@ -67,8 +66,10 @@ getTstats <- function(fit, trend = FALSE){
     }
 	if(!is.finite(d0)){
 		sgtilde <- s02
-	}else{sgtilde <- (d0*s02+fit$df.residual*sg2)/(d0+fit$df.residual)}
-	tt <- fit$coefficients/(sqrt(sgtilde)*fit$stdev.unscaled)
-	logfchange = fit$coefficients
-	return(list(tt=tt,logfchange=logfchange))
+	} else {
+		sgtilde <- (d0 * s02 + fit$df.residual * sg2) / (d0 + fit$df.residual)
+	}
+	tt <- fit$coefficients / (sqrt(sgtilde) * fit$stdev.unscaled)
+	logfchange <- fit$coefficients
+	return(list(tt=tt, logfchange=logfchange))
 }

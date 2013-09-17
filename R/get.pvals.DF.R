@@ -68,10 +68,6 @@ get.pvals.DF <- function(regions, num.perms = 1, est.params, chromosome, verbose
 		idx.permute <- sample(1:length(group))
 		group.permute <- group[idx.permute]
 		
-		## Permute the data by keeping only the columns of initial interest and applying the permutation to them
-		DF.permute <- data
-		DF.permute$DF <- DF.permute$DF[, idx.permute]
-		
 		## Correctly use the adjusted vars according to the permutation if they were specified
 		if(!is.null(adjustvars)) {
 			adjustvars.permute <- adjustvars[idx.permute, ]
@@ -81,7 +77,7 @@ get.pvals.DF <- function(regions, num.perms = 1, est.params, chromosome, verbose
 		
 		
 		if(verbose) print(paste("Getting limma input for permutation", i))
-		limma.input <- getLimmaInput.DF(DF=DF.permute, comparison=comparison, group=group.permute, chunksize=chunksize, adjustvars=adjustvars.permute, colsubset=NULL, nonzero=nonzero, scalefac=scalefac)
+		limma.input <- getLimmaInput.DF(DF=DF, comparison=comparison, group=group.permute, chunksize=chunksize, adjustvars=adjustvars.permute, colsubset=NULL, nonzero=nonzero, scalefac=scalefac)
 		
 		if(verbose) print(paste("Finding t statistics for permutation", i))
 		tstats <- getTstats(fit = limma.input$ebobject, trend = TRUE)
@@ -97,7 +93,7 @@ get.pvals.DF <- function(regions, num.perms = 1, est.params, chromosome, verbose
 	if(verbose) print("Constructing p-values result vector")
 	pvals <- rep(NA, dim(regions)[1])
 	for(k in which(regions$state==3 | regions$state==4)){
-		pvals[k] <- (sum(abs(nullstats) > abs(regions$mean.t[k])) + 1) / length(nullstats)
+		pvals[k] <- (sum(abs(nullstats) > abs(regions$mean.t[k])) + 1) / (length(nullstats) + 1)
 	}
 
 	## Done!
