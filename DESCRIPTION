@@ -9,20 +9,20 @@ Authors@R: c(person("Alyssa", "Frazee", role = c("aut", "cre"), email =
     "ths"), email = "jtleek@gmail.com"))
 Depends:
     R(>= 2.15.2)
+    Genominator
+    limma
+    HiddenMarkov
+    splines
+    locfdr
 Imports:
     IRanges
 Suggests:
     GenomicFeatures,
-    Genominator,
     rtracklayer,
-    limma,
     multicore,
-    HiddenMarkov,
     DNAcopy,
     sva,
     genefilter,
-    splines,
-    locfdr,
     proto,
     DBI,
     chron,
