@@ -1,14 +1,3 @@
-## arguments - 
-## --genome: UCSC genome name (in string format)
-## --tablename: the table to download from UCSC.  Can see supported tables from a given genome using supportedTables()
-## --genes: if TRUE, exons in the output are labeled by gene, otherwise exons are labeled by transcript
-## --verbose: if TRUE, messages are printed as the function runs.
-## output - if genes is TRUE, a data frame containing one row per exon with exon information for the given genome
-## output - if genes is FALSE, a list with elements $datf (the exon table, same as if genes is TRUE)
-## and $transcript.names, a named character vector where the names are internal transcript IDs and the elements are external transcript names
-
-
-
 #'Download exon information for a given genome
 #'
 #'Using the \code{GenomicFeatures} package and the UCSC genome browser, creates
@@ -55,7 +44,7 @@ function(genome, tablename, genes = TRUE, verbose = TRUE){
 		if(verbose) print("Labeling exons by gene...")
 		grl <- exonsBy(a,"gene")		
 		if(length(grl)==0) stop("cannot list exons by gene using this table. please try another table or specify genes = FALSE to list exons by transcript.")
-		datf <- IRanges:::as.data.frame(grl)
+		datf <- as.data.frame(grl)
 		names(datf)[1] <- "gene"
 	}
 	if(!genes){
