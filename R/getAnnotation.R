@@ -50,7 +50,7 @@ function(genome, tablename, genes = TRUE, verbose = TRUE){
 	if(!genes){
 		if(verbose) print("Labeling exons by transcript...")
 		grl <- exonsBy(a,"tx")
-		datf <- IRanges:::as.data.frame(grl)
+		datf <- as.data.frame(grl)
 		names(datf)[1] <- "transcript"
 		nametable <- id2name(a,feature.type = "tx")
 	}
