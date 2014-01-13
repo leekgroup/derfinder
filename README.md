@@ -26,6 +26,8 @@ python countReads.py --file accepted_hits.bam --output <OUTFILE> --kmer <READ_LE
 ```
 where `accepted_hits.bam` is the file of read alignments for the sample (this is the default output name from TopHat, but if you used a different aligner, this filename might be different), `<OUTFILE>` is the name of the fill that will contain the per-nt counts, `<READ_LENGTH>` is the length of the RNA-seq reads in your sample, and `<CHROMOSOME>` is the chromosome you want to count. The chromosome name should match the chromosome names in `accepted_hits.bam`.
 
+`countReads.py` depends on the [pysam](https://code.google.com/p/pysam/) module, which requires a Python version >2.4 and <3.0.
+
 `<OUTFILE>` will be a 2-column tab-delimited text file, with genomic position in the first column and coverage in the second column.
 
 ### merging coverage files
