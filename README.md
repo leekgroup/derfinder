@@ -22,13 +22,13 @@ We use [TopHat](http://tophat.cbcb.umd.edu/) to align reads, but any junction-aw
 ### coverage calculation
 DER Finder operates at single-base resolution, so we need per-nucleotide read coverage for every genomic position. We provide a Python script, `countReads.py`, that does this on a per-chromosome basis. For each sample, and for each chromosome you would like per-base counts for, you need to run:
 ```
-python countReads.py --file accepted_hits.bam --output <OUTFILE> --kmer <READ_LENGTH> --chrom <CHROMOSOME>
+python countReads.py --file accepted_hits.bam --output <OUTFILE> --kmer <READ_LENGTH> --chrom <CHROMOSOME> --stranded <IS_STRANDED>
 ```
-where `accepted_hits.bam` is the file of read alignments for the sample (this is the default output name from TopHat, but if you used a different aligner, this filename might be different), `<OUTFILE>` is the name of the fill that will contain the per-nt counts, `<READ_LENGTH>` is the length of the RNA-seq reads in your sample, and `<CHROMOSOME>` is the chromosome you want to count. The chromosome name should match the chromosome names in `accepted_hits.bam`.
+where `accepted_hits.bam` is the file of read alignments for the sample (this is the default output name from TopHat, but if you used a different aligner, this filename might be different), `<OUTFILE>` is the name of the fill that will contain the per-nt counts, `<READ_LENGTH>` is the length of the RNA-seq reads in your sample, and `<CHROMOSOME>` is the chromosome you want to count. The chromosome name should match the chromosome names in `accepted_hits.bam`. If you used a stranded protocol, `<IS_STRANDED>` should be `TRUE`. If not, you can eliminate this option (it's `FALSE` by default).
 
 `countReads.py` depends on the [pysam](https://code.google.com/p/pysam/) module, which requires a Python version >2.4 and <3.0.
 
-`<OUTFILE>` will be a 2-column tab-delimited text file, with genomic position in the first column and coverage in the second column.
+`<OUTFILE>` will be a 2-column tab-delimited text file, with genomic position in the first column and coverage in the second column. If `--stranded` is `TRUE`, two output files, called `OUTFILE_plus` and `OUTFILE_minus`, will be produced (one for each strand). If you used a stranded protocol and would like to find separate DERs for each strand, you will need to run the pipeline twice, starting here (once on each of the resulting coverage matrices).
 
 ### merging coverage files
 The `<OUTFILES>` for each sample will need to be merged to create a nucleotide-by-sample matrix for analysis. If you have a giant computer (i.e., if you can hold this matrix in memory), you can do this in with some code like this: 
