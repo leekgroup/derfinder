@@ -26,7 +26,7 @@ def getlastindex(L,st,value):
 def to_bin(n):
     return bin(n)[2:].zfill(11)
 
-def countReadlets(fname, outfname, k, chromosome, stranded):
+def countReadlets(fname, outfname, k, chromosome, stranded, rev):
     import pysam
     #from datetime import datetime #for debugging
     samfile = pysam.Samfile(fname,"rb")
@@ -35,10 +35,14 @@ def countReadlets(fname, outfname, k, chromosome, stranded):
     maxpos = 0
     minpos = 3000000000
     for read in samfile.fetch(chromosome):
-        if to_bin(read.flag)[6] == '1':
+        if to_bin(read.flag)[6] == '1' and not rev:
             strand = "-"
-        else:
+        elif to_bin(read.flag)[6] == '1' and rev:
             strand = "+"
+        elif to_bin(read.flag)[6] == '0' and not rev:
+            strand = "+"
+        else:
+            strand = "-"
         readstart = read.pos+1
         readend = read.aend
         if len(read.cigar)>1:
@@ -133,12 +137,19 @@ opts.add_option("--file","-f",type="string",help="input file name (must be .bam)
 opts.add_option("--output","-o",type="string",help="output file name")
 opts.add_option("--kmer","-k",type="int",help="kmer length")
 opts.add_option("--chrom","-c",type="string",help="chromosome to parse")
-opts.add_option("--stranded","-s",type="string",help="stranded protocol?",default="FALSE")
+opts.add_option("--stranded","-s",type="string",help="stranded or reverse-stranded protocol?",default="FALSE")
 options,arguments = opts.parse_args()
 
 if options.stranded == "TRUE":
     stranded = True
+    rev = False
+elif options.stranded == "REVERSE":
+    stranded = True
+    rev = True
+elif options.stranded != "FALSE":
+    ValueError('stranded must either be TRUE, REVERSE, or FALSE')
 else:
     stranded = False
+    rev = False
 
-countReadlets(options.file, options.output, options.kmer, options.chrom, stranded)
+countReadlets(options.file, options.output, options.kmer, options.chrom, stranded, rev)
