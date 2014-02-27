@@ -30,7 +30,7 @@ def countReadlets(fname, outfname, k, chromosome, stranded):
     import pysam
     #from datetime import datetime #for debugging
     samfile = pysam.Samfile(fname,"rb")
-    id_start_end_strand = []
+    id_start_end = []
     cigar = []
     maxpos = 0
     minpos = 3000000000
