@@ -26,7 +26,7 @@ def getlastindex(L,st,value):
 def to_bin(n):
     return bin(n)[2:].zfill(11)
 
-def countReadlets(fname,outfname,k,chromosome):
+def countReadlets(fname, outfname, k, chromosome, stranded):
     import pysam
     #from datetime import datetime #for debugging
     samfile = pysam.Samfile(fname,"rb")
