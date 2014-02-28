@@ -17,7 +17,9 @@ You may also need to install `Genominator`, `limma`, `HiddenMarkov`, `splines`, 
 Before using the `derfinder` R package, raw RNA-seq data should be processed as follows:
 
 ### read alignment
-We use [TopHat](http://tophat.cbcb.umd.edu/) to align reads, but any junction-aware aligner is appropriate. 
+We use [TopHat](http://tophat.cbcb.umd.edu/) to align reads, but any junction-aware aligner that writes alignments in `.bam` format is appropriate. 
+
+After aligning reads, `.bam` files need to be indexed with `samtools index`. (See the [SAMtools page](http://samtools.sourceforge.net/) for information about using and installing SAMtools.)
 
 ### coverage calculation
 DER Finder operates at single-base resolution, so we need per-nucleotide read coverage for every genomic position. We provide a Python script, `countReads.py`, that does this on a per-chromosome basis. For each sample, and for each chromosome you would like per-base counts for, you need to run:
