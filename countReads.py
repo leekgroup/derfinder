@@ -49,12 +49,12 @@ def countReadlets(fname, outfname, k, chromosome, stranded, rev):
             currentloc = readstart
             for a in range(len(read.cigar)):
                 if read.cigar[a][0] == 0: #match: count this segment as covered, obviously
-                    id_start_end.append([read.qname, currentloc, currentloc+read.cigar[a][1]-1])
+                    id_start_end.append([read.qname, currentloc, currentloc+read.cigar[a][1]-1, strand])
                     currentloc = currentloc + read.cigar[a][1]
                 if read.cigar[a][0] == 1: #insertion - not in reference, so our location doesn't move
                     continue
                 if read.cigar[a][0] == 2: #deletion - count this segment as covered, since a read overlaps it.
-                    id_start_end.append([read.qname, currentloc, currentloc+read.cigar[a][1]-1])
+                    id_start_end.append([read.qname, currentloc, currentloc+read.cigar[a][1]-1, strand])
                     currentloc = currentloc + read.cigar[a][1]
                 if read.cigar[a][0] == 3: #skipped region: don't count and move the location
                     currentloc = currentloc + read.cigar[a][1]
