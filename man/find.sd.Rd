@@ -2,8 +2,7 @@
 \alias{find.sd}
 \title{Helper function for getParams}
 \usage{
-  find.sd(prev.p, found.mean, null.mean, null.sd,
-    null.prop, vals, up = T)
+find.sd(prev.p, found.mean, null.mean, null.sd, null.prop, vals, up = T)
 }
 \arguments{
   \item{prev.p}{percentile of null distribution used to
@@ -32,23 +31,23 @@
   deviation of underexpressed statistics}
 }
 \value{
-  The estimated standard deviation of the over- or
-  underexpressed statistics
+The estimated standard deviation of the over- or
+underexpressed statistics
 }
 \description{
-  Find standard deviation of distribution of over- or
-  underexpressed statistics
+Find standard deviation of distribution of over- or
+underexpressed statistics
 }
 \details{
-  This function is for experienced users or debugging only
-  - all other users should use \code{getParams}, which
-  calls this function.
+This function is for experienced users or debugging only -
+all other users should use \code{getParams}, which calls
+this function.
 }
 \author{
-  Alyssa Frazee
+Alyssa Frazee
 }
 \seealso{
-  \code{\link{getParams}}, \code{\link{find.mean.up}},
-  \code{\link{find.mean.down}}
+\code{\link{getParams}}, \code{\link{find.mean.up}},
+\code{\link{find.mean.down}}
 }
 

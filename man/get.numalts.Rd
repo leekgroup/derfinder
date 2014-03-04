@@ -2,8 +2,7 @@
 \alias{get.numalts}
 \title{Helper function for getParams}
 \usage{
-  get.numalts(pctil, null.mean, null.sd, null.prop, vals,
-    up = TRUE)
+get.numalts(pctil, null.mean, null.sd, null.prop, vals, up = TRUE)
 }
 \arguments{
   \item{pctil}{percentile, in (0,1), of the null
@@ -30,24 +29,24 @@
   null distribution}
 }
 \value{
-  A list with elements \item{num }{the estimated number of
-  alternative values above/below \code{val} (see \code{val}
-  below)} \item{val }{the 100\code{pctil}-th percentile of
-  the null distribution}
+A list with elements \item{num }{the estimated number of
+alternative values above/below \code{val} (see \code{val}
+below)} \item{val }{the 100\code{pctil}-th percentile of
+the null distribution}
 }
 \description{
-  Find estimated number of alternative statistics above a
-  set percentile of the estimated null distribution
+Find estimated number of alternative statistics above a set
+percentile of the estimated null distribution
 }
 \details{
-  This function is for experienced users or debugging only
-  - all other users should use \code{getParams}, which
-  calls this function.
+This function is for experienced users or debugging only -
+all other users should use \code{getParams}, which calls
+this function.
 }
 \author{
-  Alyssa Frazee
+Alyssa Frazee
 }
 \seealso{
-  \code{\link{getParams}}
+\code{\link{getParams}}
 }
 

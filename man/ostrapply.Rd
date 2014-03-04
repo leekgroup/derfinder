@@ -2,9 +2,8 @@
 \alias{ostrapply}
 \title{Helper function for read.csv.sql}
 \usage{
-  ostrapply(X, pattern, FUN = function(x, ...) x,
-    ignore.case = FALSE, ..., empty = NULL,
-    simplify = FALSE, USE.NAMES = FALSE, combine = c)
+ostrapply(X, pattern, FUN = function(x, ...) x, ignore.case = FALSE, ...,
+  empty = NULL, simplify = FALSE, USE.NAMES = FALSE, combine = c)
 }
 \arguments{
   \item{X}{list or (atomic) vector of character strings to
@@ -43,26 +42,26 @@
   default may change to be \code{"list"} in the future.}
 }
 \value{
-  A list of character strings.
+A list of character strings.
 }
 \description{
-  Same as the \code{strapply} or \code{ostrapply} functions
-  in \code{gsubfn} package, but with \code{tcltk}
-  capabilities removed.
+Same as the \code{strapply} or \code{ostrapply} functions
+in \code{gsubfn} package, but with \code{tcltk}
+capabilities removed.
 }
 \details{
-  See \code{strapply} in \code{gsubfn}.  In the tornado
-  package this function should rarely be called on its own.
-  It is an internal process of \code{read.csv.sql}, which
-  is an internal process of \code{makeDb}.
+See \code{strapply} in \code{gsubfn}.  In the tornado
+package this function should rarely be called on its own.
+It is an internal process of \code{read.csv.sql}, which is
+an internal process of \code{makeDb}.
 }
 \author{
-  G. Grothendieck
+G. Grothendieck
 }
 \references{
-  http://cran.r-project.org/web/packages/gsubfn/gsubfn.pdf
+http://cran.r-project.org/web/packages/gsubfn/gsubfn.pdf
 }
 \seealso{
-  \code{\link{makeDb}},\code{link{read.csv.sql}}
+\code{\link{makeDb}},\code{link{read.csv.sql}}
 }
 

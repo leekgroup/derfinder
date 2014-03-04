@@ -2,13 +2,11 @@
 \alias{plotGene}
 \title{Plot pipeline data/results for a given gene}
 \usage{
-  plotGene(getRegionObject, ind = NULL, genename = NULL,
-    tstats, pos, annotation, counts, group, bppad = 50,
-    axpad = 50, prettyskips = T, skiplines = T,
-    countsheader = F, countssep = "\t", tabname = NULL,
-    plotfile = NULL, width = 900, height = 750,
-    plottitle = NULL, chromosome, legendloc = "bottomleft",
-    scalefac = 0.5, ylim = c(0, 9))
+plotGene(getRegionObject, ind = NULL, genename = NULL, tstats, pos,
+  annotation, counts, group, bppad = 50, axpad = 50, prettyskips = T,
+  skiplines = T, countsheader = F, countssep = "\\t", tabname = NULL,
+  plotfile = NULL, width = 900, height = 750, plottitle = NULL,
+  chromosome, legendloc = "bottomleft", scalefac = 0.5, ylim = c(0, 9))
 }
 \arguments{
   \item{getRegionObject}{The name of an object created with
@@ -117,31 +115,31 @@
   top panel of plot be?  Defaults to c(0,9).}
 }
 \value{
-  Plots (either on screen or in the supplied .jpg file) the
-  following: top panel = genomic position vs. raw coverage
-  data, middle panel = genomic position vs. moderated t
-  statistic from linear model at that position, bottom
-  panel = genomic position vs. predicted state for that
-  position, with annotated exons overlaid. States are as
-  follows: gray = not expressed, black = equally expressed,
-  red = overexpressed (in whatever group = 1 represented in
-  \code{getRegions}), green = underexpressed.
+Plots (either on screen or in the supplied .jpg file) the
+following: top panel = genomic position vs. raw coverage
+data, middle panel = genomic position vs. moderated t
+statistic from linear model at that position, bottom panel
+= genomic position vs. predicted state for that position,
+with annotated exons overlaid. States are as follows: gray
+= not expressed, black = equally expressed, red =
+overexpressed (in whatever group = 1 represented in
+\code{getRegions}), green = underexpressed.
 }
 \description{
-  Creates a 3-paneled plot of a selected gene: panel 1 =
-  genomic position vs. raw coverage data, panel 2 = genomic
-  position vs. moderated t statistic from linear model at
-  that position, panel 3 = genomic position vs. predicted
-  state for that position, with annotated exons overlaid.
+Creates a 3-paneled plot of a selected gene: panel 1 =
+genomic position vs. raw coverage data, panel 2 = genomic
+position vs. moderated t statistic from linear model at
+that position, panel 3 = genomic position vs. predicted
+state for that position, with annotated exons overlaid.
 }
 \note{
-  Provide exactly one of \code{ind} and \code{genename}.
-  Recommendation is to provide \code{geneName}.
+Provide exactly one of \code{ind} and \code{genename}.
+Recommendation is to provide \code{geneName}.
 }
 \author{
-  Alyssa Frazee
+Alyssa Frazee
 }
 \seealso{
-  \code{\link{getRegions}}, \code{\link{makeDb}}
+\code{\link{getRegions}}, \code{\link{makeDb}}
 }
 

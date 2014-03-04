@@ -2,7 +2,7 @@
 \alias{findclosest.ahead}
 \title{Find closest long region downstream}
 \usage{
-  findclosest.ahead(ind, regions)
+findclosest.ahead(ind, regions)
 }
 \arguments{
   \item{ind}{index of regions data frame}
@@ -11,20 +11,20 @@
   \code{getRegions}}
 }
 \value{
-  index of closest large region downstream of a region that
-  needs to be merged
+index of closest large region downstream of a region that
+needs to be merged
 }
 \description{
-  Helper function for \code{mergeRegions}
+Helper function for \code{mergeRegions}
 }
 \note{
-  Not generally used alone - internal function for
-  \code{mergeRegions}
+Not generally used alone - internal function for
+\code{mergeRegions}
 }
 \author{
-  Alyssa Frazee
+Alyssa Frazee
 }
 \seealso{
-  \code{\link{mergeRegions}}
+\code{\link{mergeRegions}}
 }
 

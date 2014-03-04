@@ -2,8 +2,7 @@
 \alias{makeDb}
 \title{Create SQLite database from text file}
 \usage{
-  makeDb(dbfile, textfile, tablename, sep = "\t",
-    cutoff = 5)
+makeDb(dbfile, textfile, tablename, sep = "\\t", cutoff = 5)
 }
 \arguments{
   \item{dbfile}{Character string giving the file
@@ -26,21 +25,20 @@
   \code{cutoff} to be included in \code{dbfile}.}
 }
 \value{
-  No return, but writes the file \code{dbfile} containing
-  table \code{tablename} by filtering \code{textfile}
-  according to \code{cutoff}.
+No return, but writes the file \code{dbfile} containing
+table \code{tablename} by filtering \code{textfile}
+according to \code{cutoff}.
 }
 \description{
-  Dumps the contents of a table (saved as a text file) into
-  a SQLite database, performing some filtering along the
-  way.
+Dumps the contents of a table (saved as a text file) into a
+SQLite database, performing some filtering along the way.
 }
 \note{
-  The workhorse of this function is a modified version of
-  \code{\link{read.csv.sql}}, found in the \code{sqldf}
-  package.
+The workhorse of this function is a modified version of
+\code{\link{read.csv.sql}}, found in the \code{sqldf}
+package.
 }
 \author{
-  Alyssa Frazee
+Alyssa Frazee
 }
 

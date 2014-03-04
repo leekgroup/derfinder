@@ -2,11 +2,10 @@
 \alias{get.pvals.DF}
 \title{Permutation-based significance tests for differentially expressed regions}
 \usage{
-  get.pvals.DF(regions, num.perms = 1, est.params,
-    chromosome, verbose = FALSE, DF,
-    comparison = c("twogroup", "multigroup", "expression"),
-    group, chunksize = 1e+05, adjustvars = NULL,
-    colsubset = NULL, scalefac = 32, nonzero = FALSE)
+get.pvals.DF(regions, num.perms = 1, est.params, chromosome,
+  verbose = FALSE, DF, comparison = c("twogroup", "multigroup",
+  "expression"), group, chunksize = 1e+05, adjustvars = NULL,
+  colsubset = NULL, scalefac = 32, nonzero = FALSE)
 }
 \arguments{
   \item{regions}{data frame of regions to obtain p-values
@@ -60,20 +59,20 @@
   nonzero counts as the library size adjustment.}
 }
 \value{
-  A vector having length equal to the number of rows in
-  \code{regions}, giving a p-value for each region of state
-  3 or 4 in \code{regions}.
+A vector having length equal to the number of rows in
+\code{regions}, giving a p-value for each region of state 3
+or 4 in \code{regions}.
 }
 \description{
-  Creates simulated null distribution of average t
-  statistics for regions classified as over- or
-  underexpressed, and obtains p-values for observed over-
-  and underexpressed regions based on this simulated null.
+Creates simulated null distribution of average t statistics
+for regions classified as over- or underexpressed, and
+obtains p-values for observed over- and underexpressed
+regions based on this simulated null.
 }
 \author{
-  Alyssa Frazee, Leonardo Collado-Torres
+Alyssa Frazee, Leonardo Collado-Torres
 }
 \seealso{
-  \code{\link{getLimmaInput.DF}},\code{\link{getTstats}},\code{\link{getRegions}}
+\code{\link{getLimmaInput.DF}},\code{\link{getTstats}},\code{\link{getRegions}}
 }
 

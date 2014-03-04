@@ -2,7 +2,7 @@
 \alias{mergeRegions}
 \title{Merge close regions}
 \usage{
-  mergeRegions(regions, cutoff = 6)
+mergeRegions(regions, cutoff = 6)
 }
 \arguments{
   \item{regions}{data frame of regions, usually the
@@ -13,17 +13,17 @@
   regions fewer than 5bp apart *are* merged).}
 }
 \value{
-  data frame (comparable to \code{regions} input) with
-  close regions merged.
+data frame (comparable to \code{regions} input) with close
+regions merged.
 }
 \description{
-  Regions of the same state that are fewer than 5bp apart
-  from each other are merged.
+Regions of the same state that are fewer than 5bp apart
+from each other are merged.
 }
 \author{
-  Alyssa Frazee
+Alyssa Frazee
 }
 \seealso{
-  \code{\link{getRegions}}
+\code{\link{getRegions}}
 }
 

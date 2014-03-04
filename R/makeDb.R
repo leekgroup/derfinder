@@ -1,18 +1,3 @@
-## makeDb():
-## arguments:
-## --dbfile: character string giving the name/location of the database file you want to create
-## --textfile: character string giving the name/location of the tab-separated coverage table (output of preprocessing pipeline)
-## --tablename: character string giving the name of the table that will be created within dbfile
-## --sep: the separator used in textfile.  (our software gives tab-separated coverage files).
-## --cutoff: only rows of textfile with at least one sample having coverage bigger than cutoff will be dumped into dbfile.
-## return:
-## --no return, but creates an sql database dbfile containing table tablename from textfile, including only rows meeting the condition specifed by cutoff
-## --the database created can be used by genominator so you don't have to load a giant table into memory.
-
-
-
-
-
 #'Create SQLite database from text file
 #'
 #'Dumps the contents of a table (saved as a text file) into a SQLite database,

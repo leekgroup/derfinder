@@ -2,9 +2,8 @@
 \alias{locfdrFit}
 \title{Modified version of Efron's locfdr}
 \usage{
-  locfdrFit(zz, bre = 120, df = 7, pct = 0, pct0 = 1/4,
-    nulltype = 1, type = 0, plot = 1, mult, mlests,
-    main = " ", sw = 0, verbose = T)
+locfdrFit(zz, bre = 120, df = 7, pct = 0, pct0 = 1/4, nulltype = 1,
+  type = 0, plot = 1, mult, mlests, main = " ", sw = 0, verbose = T)
 }
 \arguments{
   \item{zz}{A vector of summary statistics, one for each
@@ -86,37 +85,37 @@
   onscreen during \code{getParams}.}
 }
 \value{
-  See the \code{locfdr} manual for returned values.
-  \code{locfdrFit} returns the following additional
-  elements: \item{yt }{bin heights} \item{mlest.lo }{if a
-  warning that \code{mlest} should be used in a re-run of
-  \code{locfdrFit}, the suggested first element of
-  \code{mlest}.} \item{mlest.hi }{if a warning that
-  \code{mlest} should be used in a re-run of
-  \code{locfdrFit}, the suggested second element of
-  \code{mlest}.} \item{needsfix }{0 if no warning to fix
-  the run with \code{mlest} parameters, 1 otherwise}
-  \item{nulldens }{a rough estimate of y-axis values for
-  f0(x)} \item{fulldens }{a rough estimate of y-axis values
-  for f(x)}
+See the \code{locfdr} manual for returned values.
+\code{locfdrFit} returns the following additional elements:
+\item{yt }{bin heights} \item{mlest.lo }{if a warning that
+\code{mlest} should be used in a re-run of
+\code{locfdrFit}, the suggested first element of
+\code{mlest}.} \item{mlest.hi }{if a warning that
+\code{mlest} should be used in a re-run of
+\code{locfdrFit}, the suggested second element of
+\code{mlest}.} \item{needsfix }{0 if no warning to fix the
+run with \code{mlest} parameters, 1 otherwise}
+\item{nulldens }{a rough estimate of y-axis values for
+f0(x)} \item{fulldens }{a rough estimate of y-axis values
+for f(x)}
 }
 \description{
-  Compute local false discovery rates, following the
-  definitions and description in references listed below.
-  Exactly the same as \code{locfdr}, but returns extra
-  information.
+Compute local false discovery rates, following the
+definitions and description in references listed below.
+Exactly the same as \code{locfdr}, but returns extra
+information.
 }
 \details{
-  Generally not used directly in the tornado package, but
-  is a workhorse for \code{getParams}.
+Generally not used directly in the tornado package, but is
+a workhorse for \code{getParams}.
 }
 \author{
-  Bradley Efron, slight modifications by Alyssa Frazee
+Bradley Efron, slight modifications by Alyssa Frazee
 }
 \references{
-  http://cran.r-project.org/web/packages/locfdr/locfdr.pdf
+http://cran.r-project.org/web/packages/locfdr/locfdr.pdf
 }
 \seealso{
-  \code{getParams}
+\code{getParams}
 }
 

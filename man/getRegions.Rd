@@ -2,10 +2,9 @@
 \alias{getRegions}
 \title{Generate list of regions, classify each as differentially expressed or not}
 \usage{
-  getRegions(method, chromosome, pos, tstats,
-    transprobs = c(0.999, 1e-12), stateprobs = NULL,
-    params = NULL, K = 25, tcut = 2, includet = F,
-    includefchange = F, fchange = NULL)
+getRegions(method, chromosome, pos, tstats, transprobs = c(0.999, 1e-12),
+  stateprobs = NULL, params = NULL, K = 25, tcut = 2, includet = F,
+  includefchange = F, fchange = NULL)
 }
 \arguments{
   \item{method}{Can be one of "HMM" (Hidden Markov Model),
@@ -69,29 +68,29 @@
   the output of \code{getTstats}.}
 }
 \value{
-  A list with elements \item{states.norle }{data frame with
-  one row per nucleotide, giving its genomic location and
-  predicted hidden state} \item{states }{data frame with
-  one row per region, giving its genomic location, length,
-  predicted hidden state, and (if applicable) average t
-  statistic and/or fold change.}
+A list with elements \item{states.norle }{data frame with
+one row per nucleotide, giving its genomic location and
+predicted hidden state} \item{states }{data frame with one
+row per region, giving its genomic location, length,
+predicted hidden state, and (if applicable) average t
+statistic and/or fold change.}
 }
 \description{
-  Using one of three methods, divides the genome (or
-  chromosome) into regions by putting each nucleotide into
-  a state and grouping contiguous nucleotides of the same
-  state into "regions."  Regions of states 3 and 4 are
-  "differentially expressed."
+Using one of three methods, divides the genome (or
+chromosome) into regions by putting each nucleotide into a
+state and grouping contiguous nucleotides of the same state
+into "regions."  Regions of states 3 and 4 are
+"differentially expressed."
 }
 \details{
-  States are labeled numerically in the output as follows:
-  1="not expressed," 2="equally expressed,"
-  3="overexpressed," 4="underexpressed."
+States are labeled numerically in the output as follows:
+1="not expressed," 2="equally expressed,"
+3="overexpressed," 4="underexpressed."
 }
 \author{
-  Alyssa Frazee
+Alyssa Frazee
 }
 \seealso{
-  \code{\link{getTstats}}, \code{\link{getParams}}
+\code{\link{getTstats}}, \code{\link{getParams}}
 }
 

@@ -2,7 +2,7 @@
 \alias{getExons}
 \title{Find closest exon(s) to a genomic region}
 \usage{
-  getExons(region, annotation, verbose = TRUE)
+getExons(region, annotation, verbose = TRUE)
 }
 \arguments{
   \item{region}{length-3 vector \code{(chromosome, start
@@ -21,14 +21,14 @@
   function finishes.}
 }
 \value{
-  A list with elements \item{region }{the region argument
-  provided} \item{closestExons }{the rows of
-  \code{annotation} corresponding to the closest exon to
-  \code{region}} closest exon to \code{region}
+A list with elements \item{region }{the region argument
+provided} \item{closestExons }{the rows of
+\code{annotation} corresponding to the closest exon to
+\code{region}} closest exon to \code{region}
 }
 \description{
-  Given any genomic region (chromosome, start, end), return
-  the closest known exon.
+Given any genomic region (chromosome, start, end), return
+the closest known exon.
 }
 \examples{
 \dontrun{
@@ -41,9 +41,9 @@ foo$closestExons
 }
 }
 \author{
-  Alyssa Frazee
+Alyssa Frazee
 }
 \seealso{
-  \code{\link{getAnnotation}}
+\code{\link{getAnnotation}}
 }
 

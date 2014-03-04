@@ -2,7 +2,7 @@
 \alias{supportedTables}
 \title{Print list of supported (downloadable) tables for a given genome}
 \usage{
-  supportedTables(genome)
+supportedTables(genome)
 }
 \arguments{
   \item{genome}{Character string giving the genome of
@@ -10,11 +10,11 @@
   \code{rtracklayer:::ucscGenomes()[,"db"]}.}
 }
 \value{
-  prints a list of available tables for \code{genome}.
+prints a list of available tables for \code{genome}.
 }
 \description{
-  To be used with \code{getAnnotation}: provides a list of
-  available tables from UCSC for any given genome.
+To be used with \code{getAnnotation}: provides a list of
+available tables from UCSC for any given genome.
 }
 \examples{
 \dontrun{
@@ -23,9 +23,9 @@ mouse.exons = getAnnotation("mm10","refGene") #refGene appears in printed output
 }
 }
 \author{
-  Alyssa Frazee
+Alyssa Frazee
 }
 \seealso{
-  \code{\link{getAnnotation}}
+\code{\link{getAnnotation}}
 }
 

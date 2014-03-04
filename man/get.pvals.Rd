@@ -2,10 +2,9 @@
 \alias{get.pvals}
 \title{Permutation-based significance tests for differentially expressed regions}
 \usage{
-  get.pvals(regions, dbfile, tablename, num.perms = 1,
-    group, est.params, chromosome, colsubset = c(-1),
-    adjustvars = NULL, nonzero = FALSE, scalefac = 32,
-    chunksize = 1e+05, colmeds = NULL)
+get.pvals(regions, dbfile, tablename, num.perms = 1, group, est.params,
+  chromosome, colsubset = c(-1), adjustvars = NULL, nonzero = FALSE,
+  scalefac = 32, chunksize = 1e+05, colmeds = NULL)
 }
 \arguments{
   \item{regions}{data frame of regions to obtain p-values
@@ -53,20 +52,20 @@
   \code{\link{getColmeds}} is expected.}
 }
 \value{
-  A vector having length equal to the number of rows in
-  \code{regions}, giving a p-value for each region of state
-  3 or 4 in \code{regions}.
+A vector having length equal to the number of rows in
+\code{regions}, giving a p-value for each region of state 3
+or 4 in \code{regions}.
 }
 \description{
-  Creates simulated null distribution of average t
-  statistics for regions classified as over- or
-  underexpressed, and obtains p-values for observed over-
-  and underexpressed regions based on this simulated null.
+Creates simulated null distribution of average t statistics
+for regions classified as over- or underexpressed, and
+obtains p-values for observed over- and underexpressed
+regions based on this simulated null.
 }
 \author{
-  Alyssa Frazee
+Alyssa Frazee
 }
 \seealso{
-  \code{\link{getLimmaInput}},\code{\link{getTstats}},\code{\link{getRegions}}
+\code{\link{getLimmaInput}},\code{\link{getTstats}},\code{\link{getRegions}}
 }
 

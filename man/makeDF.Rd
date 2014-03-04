@@ -2,11 +2,9 @@
 \alias{makeDF}
 \title{Merge the coverage information for a group of samples}
 \usage{
-  makeDF(chr, datadir = NULL, sampledirs = NULL,
-    samplepatt = NULL, cutoff = 5, chrlen = NULL,
-    org = "BSgenome.Hsapiens.UCSC.hg19",
-    bamterm = "accepted_hits.bam", output = NULL,
-    verbose = TRUE)
+makeDF(chr, datadir = NULL, sampledirs = NULL, samplepatt = NULL,
+  cutoff = 5, chrlen = NULL, org = "BSgenome.Hsapiens.UCSC.hg19",
+  bamterm = "accepted_hits.bam", output = NULL, verbose = TRUE)
 }
 \arguments{
   \item{chr}{Chromosome to read. Should be in simple
@@ -52,20 +50,20 @@
   be printed along the way.}
 }
 \value{
-  A list with two objects. The first one, \code{DF}, is a
-  DataFrame object where each column represents a sample.
-  The number of rows depends on the number of base pairs
-  that passed the cutoff. The second one, \code{pos}, is a
-  logical Rle with the positions of the chromosome that
-  passed the cutoff.
+A list with two objects. The first one, \code{DF}, is a
+DataFrame object where each column represents a sample. The
+number of rows depends on the number of base pairs that
+passed the cutoff. The second one, \code{pos}, is a logical
+Rle with the positions of the chromosome that passed the
+cutoff.
 }
 \description{
-  For a group of samples this function reads the coverage
-  information for a specific chromosome directly from the
-  BAM files. It then merges them into a DataFrame and
-  removes the bases that do not pass the cutoff.
+For a group of samples this function reads the coverage
+information for a specific chromosome directly from the BAM
+files. It then merges them into a DataFrame and removes the
+bases that do not pass the cutoff.
 }
 \author{
-  Leonardo Collado-Torres
+Leonardo Collado-Torres
 }
 

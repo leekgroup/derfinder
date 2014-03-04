@@ -2,10 +2,9 @@
 \alias{read.csv.sql}
 \title{Main workhorse of makeDb}
 \usage{
-  read.csv.sql(file, sql = "select * from file",
-    header = TRUE, sep = ",", row.names, eol, skip, filter,
-    nrows, field.types, comment.char, dbname = tempfile(),
-    drv = "SQLite", ...)
+read.csv.sql(file, sql = "select * from file", header = TRUE, sep = ",",
+  row.names, eol, skip, filter, nrows, field.types, comment.char,
+  dbname = tempfile(), drv = "SQLite", ...)
 }
 \arguments{
   \item{file}{A file path or a URL (beginning with
@@ -60,25 +59,25 @@
   \item{\dots}{arguments passed to \code{sqldf}.}
 }
 \value{
-  If the sql statement is a select statement then a data
-  frame is returned. In tornado, this is never the case.
+If the sql statement is a select statement then a data
+frame is returned. In tornado, this is never the case.
 }
 \description{
-  Edited version of \code{read.csv.sql} in the \code{sqldf}
-  package (\code{tcltk} functionality removed), used mainly
-  to create a SQLite database from a text file. The
-  function \code{makeDb} wraps this function in the tornado
-  package, so no need to execute this directly.
+Edited version of \code{read.csv.sql} in the \code{sqldf}
+package (\code{tcltk} functionality removed), used mainly
+to create a SQLite database from a text file. The function
+\code{makeDb} wraps this function in the tornado package,
+so no need to execute this directly.
 }
 \details{
-  This function is entirely wrapped by \code{makeDb} --
-  experienced users may use this for debugging, but
-  otherwise not usually necessary to call directly.
+This function is entirely wrapped by \code{makeDb} --
+experienced users may use this for debugging, but otherwise
+not usually necessary to call directly.
 }
 \references{
-  http://cran.r-project.org/web/packages/sqldf/sqldf.pdf
+http://cran.r-project.org/web/packages/sqldf/sqldf.pdf
 }
 \seealso{
-  \code{\link{makeDb}}
+\code{\link{makeDb}}
 }
 

@@ -2,8 +2,7 @@
 \alias{getSvs}
 \title{Do SVA on matrix stored in database}
 \usage{
-  getSvs(dbfile, tablename, group, chunksize = 1e+05,
-    colsubset = c(-1))
+getSvs(dbfile, tablename, group, chunksize = 1e+05, colsubset = c(-1))
 }
 \arguments{
   \item{dbfile}{Name/location (as character string) of
@@ -23,16 +22,15 @@
   analysis. Should NEVER include 1 (genomic position).}
 }
 \value{
-  An object of class sva - see help files for sva.
+An object of class sva - see help files for sva.
 }
 \description{
-  Performs surrogate variable analysis on a matrix, usually
-  base-pair by sample coverage, so the surrogate variables
-  can be adjusted for in later analysis steps.  SVA is
-  meant to provide a method to adjust for unknown
-  confounders.
+Performs surrogate variable analysis on a matrix, usually
+base-pair by sample coverage, so the surrogate variables
+can be adjusted for in later analysis steps.  SVA is meant
+to provide a method to adjust for unknown confounders.
 }
 \author{
-  Jeff Leek
+Jeff Leek
 }
 

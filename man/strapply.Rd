@@ -2,10 +2,9 @@
 \alias{strapply}
 \title{Helper function for read.csv.sql}
 \usage{
-  strapply(X, pattern, FUN = function(x, ...) x,
-    backref = NULL, ..., empty = NULL, ignore.case = FALSE,
-    perl = TRUE, engine = "R", simplify = FALSE,
-    USE.NAMES = FALSE, combine = c)
+strapply(X, pattern, FUN = function(x, ...) x, backref = NULL, ...,
+  empty = NULL, ignore.case = FALSE, perl = TRUE, engine = "R",
+  simplify = FALSE, USE.NAMES = FALSE, combine = c)
 }
 \arguments{
   \item{X}{list or (atomic) vector of character strings to
@@ -55,26 +54,26 @@
   default may change to be \code{"list"} in the future.}
 }
 \value{
-  A list of character strings
+A list of character strings
 }
 \description{
-  The same as \code{strapply} in the \code{gsubfn} package,
-  but with \code{tcltk} capabilities removed.
+The same as \code{strapply} in the \code{gsubfn} package,
+but with \code{tcltk} capabilities removed.
 }
 \details{
-  See details in \code{gsubfn} package.
+See details in \code{gsubfn} package.
 }
 \note{
-  Does not need to be used directly in tornado;
-  \code{makeDb} wraps this entirely.
+Does not need to be used directly in tornado; \code{makeDb}
+wraps this entirely.
 }
 \author{
-  G. Grothendieck
+G. Grothendieck
 }
 \references{
-  http://cran.r-project.org/web/packages/gsubfn/gsubfn.pdf
+http://cran.r-project.org/web/packages/gsubfn/gsubfn.pdf
 }
 \seealso{
-  \code{\link{makeDb}}
+\code{\link{makeDb}}
 }
 

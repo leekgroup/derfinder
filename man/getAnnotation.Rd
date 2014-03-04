@@ -2,8 +2,7 @@
 \alias{getAnnotation}
 \title{Download exon information for a given genome}
 \usage{
-  getAnnotation(genome, tablename, genes = TRUE,
-    verbose = TRUE)
+getAnnotation(genome, tablename, genes = TRUE, verbose = TRUE)
 }
 \arguments{
   \item{genome}{Genome (species) for which annotation is
@@ -26,19 +25,19 @@
   annotation download progresses.}
 }
 \value{
-  A data frame (one row per exon) giving the exon's gene or
-  transcript, location (start/end), and possibly other
-  information.
+A data frame (one row per exon) giving the exon's gene or
+transcript, location (start/end), and possibly other
+information.
 }
 \description{
-  Using the \code{GenomicFeatures} package and the UCSC
-  genome browser, creates a data frame of exons (one exon
-  per row) for the specified genome.
+Using the \code{GenomicFeatures} package and the UCSC
+genome browser, creates a data frame of exons (one exon per
+row) for the specified genome.
 }
 \note{
-  This function interacts with the online UCSC Genome
-  Browser, so internet connection is required to use this
-  function, and connection speed affects function speed.
+This function interacts with the online UCSC Genome
+Browser, so internet connection is required to use this
+function, and connection speed affects function speed.
 }
 \examples{
 \dontrun{
@@ -47,6 +46,6 @@ head(mouse.exons)
 }
 }
 \author{
-  Alyssa Frazee
+Alyssa Frazee
 }
 
