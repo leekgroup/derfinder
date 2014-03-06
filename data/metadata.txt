@@ -1,0 +1,16 @@
+sample  sex
+orbFrontalF1    M
+orbFrontalF11    M
+orbFrontalF2    F
+orbFrontalF23   F
+orbFrontalF3    M
+orbFrontalF32   M
+orbFrontalF33   F
+orbFrontalF40   F
+orbFrontalF42   M
+orbFrontalF43   M
+orbFrontalF47   M
+orbFrontalF53   M
+orbFrontalF55   F
+orbFrontalF56   F
+orbFrontalF58   M
