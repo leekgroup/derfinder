@@ -4,7 +4,7 @@ Title: Differential expression analysis of RNA-seq data at base-pair resolution
 Version: 1.0.2
 Date: 2013-06-19
 Authors@R: c(person("Alyssa", "Frazee", role = c("aut", "cre"), email =
-    "afrazee@jhsph.edu"), person("Leonardo", "Collado-Torres", role = "aut",
+    "alyssa.frazee@gmail.com"), person("Leonardo", "Collado-Torres", role = "aut",
     email = "lcollado@jhsph.edu"), person("Jeffrey", "Leek", role = c("aut",
     "ths"), email = "jtleek@gmail.com"))
 Depends:
@@ -37,5 +37,5 @@ Suggests:
     BSgenome.Mmusculus.UCSC.mm10
 Description: Differential expression analysis of RNA-seq data at base-pair
     resolution
-License: What license is it under?
+License: MIT + file LICENSE
 URL: https://github.com/alyssafrazee/derfinder
