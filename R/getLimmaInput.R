@@ -79,83 +79,100 @@
 #'
 #'## add example here when we have a vignette
 #'
-getLimmaInput <- function(dbfile, tablename, comparison = c("twogroup", "multigroup", "expression"), group = NULL, chunksize = 100000, adjustvars = NULL, colsubset = c(-1), scalefac = 32, nonzero = FALSE, colmeds=NULL){
-	require("limma")
-	#require("multicore")
-	require("Genominator")
-	
-	# get ready to read from database:
-	tab = ExpData(dbfile, tablename)
-	pos = tab[,1]$pos
-	N = length(pos)
-	lastloop = trunc(N/chunksize)
-	
-	## Fix the lastloop in case that the N is a factor of chunksize
-	if(N %% chunksize == 0 & lastloop > 0)  lastloop <- lastloop - 1
+getLimmaInput <- function(dbfile, tablename, comparison='twogroup', 
+    group=NULL, chunksize=100000, adjustvars=NULL, 
+    colsubset=c(-1), scalefac=32, nonzero=FALSE, colmeds=NULL){
 
-	# create model matrix:
-	numcol = length(tab[1,])
-		
-	## Get the medians of the columns of interest if they are not given, and if you are doing differential expression:
-	if(is.null(colmeds) & comparison!="expression"){
-		colmeds <- getColmeds(dbfile=dbfile, tablename=tablename, colsubset=colsubset, nonzero=nonzero)
-	}
-	
-  if(!is.null(adjustvars) & comparison=="expression") stop("expression-only test does not require adjustment variables - please set adjustvars = NULL when using comparison = \"expression\"")
-  
-	if(!is.null(adjustvars)){
-		string1 = ""
-		for(i in 1:dim(adjustvars)[2]){
-			eval(parse(text=paste0("av",i," <- adjustvars[,",i,"]")))
-			string1 = paste(string1, paste0("av",i), sep="+")
-		}
-		eval(parse(text=paste0("x = model.matrix(~as.factor(group)+colmeds",string1,")")))
-	} else {
-    if(comparison == "expression"){ 
-      numsamps = ifelse(colsubset[1]==c(-1), numcol-1, length(colsubset))
-      int = rep(1, numsamps)
-      x = model.matrix(~0+int) #intercept-only model, in model.matrix form.
-    }
-		if(comparison == "twogroup" | comparison == "multigroup"){
-      x = model.matrix(~as.factor(group)+colmeds)
-		}
-	}	
-	
-	# make sure colsubset will work in the next part:
-	if(colsubset[1]==c(-1) & length(colsubset) == 1) colsubset <- c(2:numcol)
-	
-	# define modeling function to apply to each chunk:
-	lmFit.apply = function(i){
-  		if(i!=lastloop) mymat <- tab[(chunksize*i+1):(chunksize*(i+1)),-1][,colsubset-1] 
-  		else mymat <- tab[(chunksize*i+1):N,-1][,colsubset-1] 
-  		mymat <- log2(mymat + scalefac)
-  		Amean <- rowMeans(mymat) 
-  		fit <- lmFit(mymat, x)
-  		return(list(fit=fit, Amean=Amean))
-  		}
-	
-	# fit a model to each row (chunk) of database:
-	lmFit.output = lapply(0:lastloop, lmFit.apply)
+    require("limma")
+    require("Genominator")
 
-  # gather results from all the models and return them:
-	if(comparison=="multigroup"){
-		stop("multigroup functionality not implemented yet - check back soon!")
-	} else if (comparison=="twogroup"){
-		coef <- unlist(lapply(lmFit.output, function(x) { x$fit$coefficients[, 2] }))
-		stdev <- unlist(lapply(lmFit.output, function(x) { x$fit$stdev.unscaled[, 2] }))    
-		am <- unlist(lapply(lmFit.output, function(x) { x$fit$Amean }))   
-		sma <- unlist(lapply(lmFit.output, function(x) { x$fit$sigma }))
-		dfres <- unlist(lapply(lmFit.output, function(x) { x$fit$df.residual }))    
-	} else if(comparison=="expression"){
-		## Subtract log2(scalefac) since we want to test beta_0 = 0, not beta_0 = log2(scalefac + 0), which is what we see with 0 expression under the transformation.
-		coef <- unlist(lapply(lmFit.output, function(x) { x$fit$coefficients })) - log2(scalefac)
-		stdev <- unlist(lapply(lmFit.output, function(x) { x$fit$stdev.unscaled }))
-		am <- unlist(lapply(lmFit.output, function(x) { x$fit$Amean })) - log2(scalefac)
-		sma  <- unlist(lapply(lmFit.output, function(x) { x$fit$sigma }))
-		dfres <- unlist(lapply(lmFit.output, function(x) { x$fit$df.residual }))    
-	}
-	
+    comparison = match.arg(comparison, c("twogroup", "multigroup", "expression"))
+
+    # get ready to read from database:
+    tab = ExpData(dbfile, tablename)
+    pos = tab[,1]$pos
+    N = length(pos)
+    lastloop = trunc(N/chunksize)
     
-	return(list(ebobject = list(coefficients = as.numeric(coef), stdev.unscaled = as.numeric(stdev), sigma = sma, df.residual = dfres, Amean = am), pos = pos, comparison = comparison))
-	
+    ## Fix the lastloop in case that the N is a factor of chunksize
+    if(N %% chunksize == 0 & lastloop > 0){
+        lastloop <- lastloop - 1
+    }
+
+    # create model matrix:
+    numcol = length(tab[1,])
+
+    ## Get the medians of the columns of interest if they are not given, and if you are doing differential expression:
+    if(is.null(colmeds) & comparison!="expression"){
+        colmeds <- getColmeds(dbfile=dbfile, tablename=tablename, 
+            colsubset=colsubset, nonzero=nonzero)
+    }
+
+    if(!is.null(adjustvars) & comparison=="expression"){
+        stop("expression-only test does not require adjustment variables - please set adjustvars = NULL when using comparison = \"expression\"")
+    }
+  
+    if(!is.null(adjustvars)){
+        string1 = ""
+        for(i in 1:dim(adjustvars)[2]){
+            eval(parse(text=paste0("av",i," <- adjustvars[,",i,"]")))
+            string1 = paste(string1, paste0("av",i), sep="+")
+        }
+        eval(parse(text=paste0("x = model.matrix(~as.factor(group)+colmeds",string1,")")))
+    } else {
+        if(comparison == "expression"){ 
+            numsamps = ifelse(colsubset[1]==c(-1), numcol-1, length(colsubset))
+            int = rep(1, numsamps)
+            x = model.matrix(~ 0 + int) #intercept-only model, in model.matrix form.
+        }
+        if(comparison == "twogroup" | comparison == "multigroup"){
+            x = model.matrix(~as.factor(group)+colmeds)
+        }
+    }
+
+    # make sure colsubset will work in the next part:
+    if(colsubset[1]==c(-1) & length(colsubset) == 1){
+        colsubset <- c(2:numcol)
+    }
+
+    # define modeling function to apply to each chunk:
+    lmFit.apply = function(i){
+        if(i!=lastloop){
+            mymat <- tab[(chunksize*i+1):(chunksize*(i+1)),-1][,colsubset-1] 
+        }
+        else{
+            mymat <- tab[(chunksize*i+1):N,-1][,colsubset-1] 
+        }
+        mymat <- log2(mymat + scalefac)
+        Amean <- rowMeans(mymat) 
+        fit <- lmFit(mymat, x)
+        return(list(fit=fit, Amean=Amean))
+    }
+
+    # fit a model to each row (chunk) of database:
+    lmFit.output = lapply(0:lastloop, lmFit.apply)
+
+    # gather results from all the models and return them:
+    if(comparison=="multigroup"){
+        stop("multigroup functionality not implemented yet - check back soon!")
+    } else if (comparison=="twogroup"){
+        coef <- unlist(lapply(lmFit.output, function(x) { x$fit$coefficients[, 2] }))
+        stdev <- unlist(lapply(lmFit.output, function(x) { x$fit$stdev.unscaled[, 2] }))    
+        am <- unlist(lapply(lmFit.output, function(x) { x$fit$Amean }))   
+        sma <- unlist(lapply(lmFit.output, function(x) { x$fit$sigma }))
+        dfres <- unlist(lapply(lmFit.output, function(x) { x$fit$df.residual }))    
+    } else if(comparison=="expression"){
+        ## Subtract log2(scalefac) since we want to test beta_0 = 0, not beta_0 = log2(scalefac + 0), which is what we see with 0 expression under the transformation.
+        coef <- unlist(lapply(lmFit.output, function(x) { x$fit$coefficients })) - log2(scalefac)
+        stdev <- unlist(lapply(lmFit.output, function(x) { x$fit$stdev.unscaled }))
+        am <- unlist(lapply(lmFit.output, function(x) { x$fit$Amean })) - log2(scalefac)
+        sma  <- unlist(lapply(lmFit.output, function(x) { x$fit$sigma }))
+        dfres <- unlist(lapply(lmFit.output, function(x) { x$fit$df.residual }))    
+    }
+    return(list(
+        ebobject=list(coefficients = as.numeric(coef), 
+            stdev.unscaled = as.numeric(stdev), sigma = sma, 
+            df.residual = dfres, Amean = am), 
+        pos = pos, 
+        comparison = comparison))	
 }
