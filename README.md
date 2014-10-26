@@ -1,9 +1,9 @@
-DER Finder
+DER Finder Beta
 =========
 
 This is the beta version of the R package for DER Finder, a method for analyzing differential expression with RNA-seq data.  DER Finder is described in detail in the paper [Differential expression analysis of RNA-seq data at single-base resolution](http://biostatistics.oxfordjournals.org/content/early/2014/01/06/biostatistics.kxt053.full). Code for the analysis used in the paper is in `analysis_code.R`. 
 
-The package in this repository is an exact implementation of the methods described in the DER Finder manuscript. A more-efficient but less-statistically-sophisticated version of DER Finder can be found at https://github.com/lcolladotor/derfinder. We plan to submit the efficient version to [Bioconductor](http://bioconductor.org/), so watch for an official release.
+The package in this repository is an exact implementation of the methods described in the DER Finder manuscript. The final version of the software is significantly more efficient than this version and is [available on Bioconductor](http://www.bioconductor.org/packages/release/bioc/html/derfinder.html). For research projects, **please use the Bioconductor package** instead of the package in this repository, which mostly exists for historical/reproducibility reasons. The official package is written and maintained by Leonardo Collado Torres, and issues can be submitted [to its GitHub repository](https://github.com/lcolladotor/derfinder). 
 
 # installation
 You can install this package directly from GitHub using the `install_github` function from the `devtools` package:
@@ -139,16 +139,5 @@ plotRegion(regions, ind=2, tstats=tt, pos=pos, annotation=chr22exons,
 ```
 
 # support
-Please do email me (acfrazee@gmail.com) if you encounter problems with the package, and we will do our best to fix the issue quickly! 
-
-
-
-
-
-
-
-
-
-
-
+This version of _derfinder_ is no longer actively maintained, since the official Bioconductor package is much more efficient. Please see [the derfinder GitHub repo](https://github.com/lcolladotor/derfinder) for support on that version.
 
