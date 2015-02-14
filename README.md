@@ -138,6 +138,59 @@ plotRegion(regions, ind=2, tstats=tt, pos=pos, annotation=chr22exons,
   tabname='chr22', chromosome='chr22')
 ```
 
+# reproducing the manuscript's results
+The [DER Finder paper](http://biostatistics.oxfordjournals.org/content/15/3/413) analysis code lives in this repository. To reproduce the analysis fully, you can follow these steps:
+
+1. Clone this repository on to your local machine: `git clone git@github.com:alyssafrazee/derfinder.git` (for cloning over SSH)
+
+2. Change to the `data` subdirectory and index each .bam file using [samtools](http://samtools.sourceforge.net/): e.g. `samtools index orbFrontalF11_Y.bam` (run for all samples).
+
+3. Change back to the root directory (`cd ..`) and run the `countReads.py` script on each file in the data subdirectory. This may take some time. Here is the code:
+
+```
+python countReads.py -f data/orbFrontalF11_Y.bam -o orbFrontalF11_Y_bybp -k 101 -c Y
+```
+
+Again, run for each sample, replacing "orbFrontalF11_Y" with each different sample name.
+
+4. Merge all of the resulting text files together using this R code:
+
+```R
+chr = "Y"
+
+# sample IDs
+samps = c("orbFrontalF1", "orbFrontalF2", "orbFrontalF3", "orbFrontalF11", "orbFrontalF23", "orbFrontalF32", "orbFrontalF33", "orbFrontalF40", "orbFrontalF42", "orbFrontalF43", "orbFrontalF47", "orbFrontalF53", "orbFrontalF55", "orbFrontalF56", "orbFrontalF58")
+
+# read in each sample:
+countlist = list()
+for(s in 1:length(samps)){
+    print(paste("reading: sample",samps[s]))
+    y = read.table(paste0(samps[s], "_Y_bybp"), sep="\t", header=FALSE)
+    print("done reading.")
+    countlist[[s]] = y$V2
+    if(s==1) pos = y$V1
+    if(s>1){
+        if(length(y$V1)>length(pos)) pos = y$V1
+    }
+    rm(y);gc();gc();gc();gc()
+  }
+
+# put samples together and zero-pad as needed:
+thelen = length(pos)
+for(i in 1:length(countlist)){
+    countlist[[i]] = c(countlist[[i]],rep(0,thelen-length(countlist[[i]])))
+}
+names(countlist) = samps
+chr.table = as.data.frame(countlist)
+chr.table = data.frame(pos, chr.table)
+write.table(chr.table, file='tophatY-updated', row.names=FALSE, quote=FALSE, sep="\t")
+```
+
+This may also take some time, but will recreate `tophatY-updated` which is a dependency of the R code for the analysis.
+
+5. Analysis can be run using the code in `analysis_code.R`
+
 # support
 This version of _derfinder_ is no longer actively maintained, since the official Bioconductor package is much more efficient. Please see [the derfinder GitHub repo](https://github.com/lcolladotor/derfinder) for support on that version.
+
 
