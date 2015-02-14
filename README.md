@@ -141,11 +141,11 @@ plotRegion(regions, ind=2, tstats=tt, pos=pos, annotation=chr22exons,
 # reproducing the manuscript's results
 The [DER Finder paper](http://biostatistics.oxfordjournals.org/content/15/3/413) analysis code lives in this repository. To reproduce the analysis fully, you can follow these steps:
 
-1. Clone this repository on to your local machine: `git clone git@github.com:alyssafrazee/derfinder.git` (for cloning over SSH)
+* Clone this repository on to your local machine: `git clone git@github.com:alyssafrazee/derfinder.git` (for cloning over SSH)
 
-2. Change to the `data` subdirectory and index each .bam file using [samtools](http://samtools.sourceforge.net/): e.g. `samtools index orbFrontalF11_Y.bam` (run for all samples).
+* Change to the `data` subdirectory and index each .bam file using [samtools](http://samtools.sourceforge.net/): e.g. `samtools index orbFrontalF11_Y.bam` (run for all samples).
 
-3. Change back to the root directory (`cd ..`) and run the `countReads.py` script on each file in the data subdirectory. This may take some time. Here is the code:
+* Change back to the root directory (`cd ..`) and run the `countReads.py` script on each file in the data subdirectory. This may take some time. Here is the code:
 
 ```
 python countReads.py -f data/orbFrontalF11_Y.bam -o orbFrontalF11_Y_bybp -k 101 -c Y
@@ -153,7 +153,7 @@ python countReads.py -f data/orbFrontalF11_Y.bam -o orbFrontalF11_Y_bybp -k 101 
 
 Again, run for each sample, replacing "orbFrontalF11_Y" with each different sample name.
 
-4. Merge all of the resulting text files together using this R code:
+* Merge all of the resulting text files together using this R code:
 
 ```R
 chr = "Y"
@@ -188,7 +188,7 @@ write.table(chr.table, file='tophatY-updated', row.names=FALSE, quote=FALSE, sep
 
 This may also take some time, but will recreate `tophatY-updated` which is a dependency of the R code for the analysis.
 
-5. Analysis can be run using the code in `analysis_code.R`
+* Analysis can be run using the code in `analysis_code.R`
 
 # support
 This version of _derfinder_ is no longer actively maintained, since the official Bioconductor package is much more efficient. Please see [the derfinder GitHub repo](https://github.com/lcolladotor/derfinder) for support on that version.
