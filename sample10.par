@@ -1,0 +1,8 @@
+REF_FILE_NAME	Homo_sapiens/Ensembl/GRCh37/Annotation/Genes/genes-clean-small.gtf
+GEN_DIR	Homo_sapiens/Ensembl/GRCh37/Sequence/Chromosomes/
+TMP_DIR	/scratch/temp/afrazee/
+ERR_FILE 76
+READ_LENGTH	76
+PAIRED_END	TRUE
+READ_NUMBER	400000
+FASTA	yes
