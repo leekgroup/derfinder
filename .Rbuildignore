@@ -2,7 +2,8 @@
 RCmdCheck.*.txt
 profile-getlimmainput.txt
 profile-nomeds.txt
-*.rda
+tx.sex.cuff-UPDATED.rda
+tx.null.cuff-UPDATED.rda
 countReads.py
 sample10.par
 
