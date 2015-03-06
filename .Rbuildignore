@@ -2,4 +2,8 @@
 RCmdCheck.*.txt
 profile-getlimmainput.txt
 profile-nomeds.txt
+*.rda
+countReads.py
+sample10.par
+
 
